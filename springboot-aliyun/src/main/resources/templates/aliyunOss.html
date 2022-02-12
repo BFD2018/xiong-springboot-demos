@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>aliyun-test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!--引入axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        #app{
+            width: 100vw;
+            height: 100vh;
+        }
+        .aliyun-oss{
+            background-color: #ddd;
+            width: 90%;
+            margin: auto;
+            height: 100%;
+        }
+        .file-table-list{
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="aliyun-oss">
+        <h2>文件上传</h2>
+        <el-upload
+                class="upload-demo"
+                action="/aliyun/oss/upload"
+                :on-success="handleUploadSuccess">
+            <el-button size="small" type="primary">点击上传</el-button>
+        </el-upload>
+
+        <h2>阿里云OSS上传的文件列表</h2>
+        <div class="file-table-list">
+            <el-table
+                    :data="tableData"
+                    border
+                    stripe
+                    style="width: 100%">
+                <el-table-column
+                        label="ID"
+                        width="200">
+                    <template slot-scope="scope">
+                        <span style="margin-left: 10px">{{ scope.row.etag }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        label="文件">
+                    <template slot-scope="scope">
+                        {{ scope.row.key }}
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        width="150"
+                        label="文件大小">
+                    <template slot-scope="scope">
+                        {{ scope.row.size }}
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        label="上传时间">
+                    <template slot-scope="scope">
+                        {{ scope.row.lastModified }}
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-button
+                                size="mini"
+                                type="success"
+                                @click="handleDownload(scope.row)">下载</el-button>
+                        <el-button
+                                size="mini"
+                                type="danger"
+                                @click="handleDelete(scope.$index,scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            imageUrl:"",
+            tableData:[],
+        },
+        methods:{
+            handleUploadSuccess(res, file,fileList) {
+                if(res.data.status === 200){
+                    this.$message.success("文件上传成功");
+                    this.initTableData();
+                }
+            },
+
+            initTableData(){
+                axios.get("/aliyun/oss/list").then(res =>{
+                    console.log(res);
+                    if(res.data.status === 200){
+                        this.tableData.splice(0);
+                        this.tableData.push(...res.data.obj.objectSummaries);
+                    }
+                })
+            },
+            handleDownload(row){
+                window.open("http://xiong-test-srt.oss-cn-shenzhen.aliyuncs.com/" + row.key)
+            },
+            handleDelete(index,row){
+                axios.get("/aliyun/oss/delete?filekey="+row.key).then(res =>{
+                    console.log(res);
+                    if(res.data.status === 200){
+                        this.$message.success("删除成功");
+                        this.tableData.splice(index,1);
+                    }
+                })
+            },
+
+        },
+        created(){
+            this.initTableData();
+        },
+    })
+</script>
+</body>
+</html>

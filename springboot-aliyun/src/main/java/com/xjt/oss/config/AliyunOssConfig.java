@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 // 指定配置文件位置
 //@PropertySource(value = {"classpath:application-aliyun-oss.properties"})
 // 指定配置文件中自定义属性前缀
-@ConfigurationProperties(prefix = "aliyun")
+@ConfigurationProperties(prefix = "aliyun.oss")
 @Data
 @Accessors(chain = true)
 public class AliyunOssConfig {

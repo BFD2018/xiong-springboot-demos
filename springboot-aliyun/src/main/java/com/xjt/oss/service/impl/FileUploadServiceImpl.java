@@ -1,7 +1,9 @@
 package com.xjt.oss.service.impl;
 
+import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
-import com.aliyun.oss.model.ObjectMetadata;
+import com.aliyun.oss.OSSException;
+import com.aliyun.oss.model.*;
 import com.xjt.oss.config.AliyunOssConfig;
 import com.xjt.oss.domain.RespBean;
 import com.xjt.oss.service.FileUploadService;
@@ -24,11 +26,8 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Autowired
     private AliyunOssConfig aliyunOssConfig;// 注入阿里云OSS基本配置类
 
-    // 允许上传文件(图片)的格式
-    private static final String[] IMAGE_TYPE = new String[]{".bmp", ".jpg", ".jpeg", ".gif", ".png"};
-
     @Override
-    public RespBean uploadFile(MultipartFile file) {
+    public RespBean uploadImage(MultipartFile file) {
         // 获取oss的Bucket名称
         String bucketName = aliyunOssConfig.getBucketName();
         // 获取oss的地域节点
@@ -39,6 +38,8 @@ public class FileUploadServiceImpl implements FileUploadService {
         String accessKeyId = aliyunOssConfig.getAccessKeyId();
         // 获取oss目标文件夹
         String filehost = aliyunOssConfig.getFileHost();
+
+        String[] IMAGE_TYPE = new String[]{".bmp", ".jpg", ".jpeg", ".gif", ".png"};
 
         // 返回图片上传后返回的url
         String returnImgeUrl = "";
@@ -59,8 +60,9 @@ public class FileUploadServiceImpl implements FileUploadService {
         // 获取文件类型
         String fileType = originalFilename.substring(originalFilename.lastIndexOf("."));
         // 新文件名称
-        String newFileName = UUID.randomUUID().toString() + fileType;
-        // 构建日期路径, 例如：OSS目标文件夹/2020/10/31/文件名
+        String newFileName = UUID.randomUUID().toString().replace("-","") + fileType;
+
+        // 构建日期路径, 例如：OSS目标文件夹  /2022/10/文件名
         String filePath = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
         // 文件上传的路径地址
         String uploadImgeUrl = filehost + "/" + filePath + "/" + newFileName;
@@ -81,8 +83,21 @@ public class FileUploadServiceImpl implements FileUploadService {
         ObjectMetadata meta = new ObjectMetadata();
         meta.setContentType("image/jpg");
 
-        //文件上传至阿里云OSS
-        ossClient.putObject(bucketName, uploadImgeUrl, inputStream, meta);
+        try {
+            if(!ossClient.doesBucketExist(bucketName)){
+                ossClient.createBucket(bucketName);
+                CreateBucketRequest bucketRequest = new CreateBucketRequest(bucketName);
+                bucketRequest.setCannedACL(CannedAccessControlList.PublicRead);
+                ossClient.createBucket(bucketRequest);
+            }
+            //文件上传至阿里云OSS
+            ossClient.putObject(bucketName, uploadImgeUrl, inputStream, meta);
+        } catch (OSSException e) {
+            e.printStackTrace();
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+
         /**
          * 注意：在实际项目中，文件上传成功后，数据库中存储文件地址
          */
@@ -92,10 +107,8 @@ public class FileUploadServiceImpl implements FileUploadService {
         return RespBean.ok("ok",returnImgeUrl);
     }
 
-
-/*
     @Override
-    public String deleteFile(String fileName) {
+    public RespBean listAllOssFileByBucket() {
         // 获取oss的Bucket名称
         String bucketName = aliyunOssConfig.getBucketName();
         // 获取oss的地域节点
@@ -106,32 +119,87 @@ public class FileUploadServiceImpl implements FileUploadService {
         String accessKeyId = aliyunOssConfig.getAccessKeyId();
         // 获取oss目标文件夹
         String filehost = aliyunOssConfig.getFileHost();
-        // 日期目录
-        // 注意，这里虽然写成这种固定获取日期目录的形式，逻辑上确实存在问题，但是实际上，filePath的日期目录应该是从数据库查询的
-        String filePath = new DateTime().toString("yyyy/MM/dd");
 
+        ObjectListing objectListing = ossClient.listObjects(bucketName);
+
+        return RespBean.ok("ok",objectListing);
+
+    }
+
+    @Override
+    public RespBean uploadFile(MultipartFile file) {
+        // 获取oss的Bucket名称
+        String bucketName = aliyunOssConfig.getBucketName();
+        // 获取oss的地域节点
+        String endpoint = aliyunOssConfig.getEndPoint();
+        // 获取oss的AccessKeySecret
+        String accessKeySecret = aliyunOssConfig.getAccessKeySecret();
+        // 获取oss的AccessKeyId
+        String accessKeyId = aliyunOssConfig.getAccessKeyId();
+        // 获取oss目标文件夹
+        String filehost = aliyunOssConfig.getFileHost();
+
+        // 返回图片上传后返回的url
+        String returnUrl = "";
+
+        // 获取文件原名称
+        String originalFilename = file.getOriginalFilename();
+        // 获取文件类型
+        String fileType = originalFilename.substring(originalFilename.lastIndexOf("."));
+        // 新文件名称
+        String newFileName = UUID.randomUUID().toString().replace("-","") + "-" + originalFilename;
+
+        // 构建日期路径, 例如：OSS目标文件夹  /2022/10/文件名
+        String filePath = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+        // 文件上传的路径地址
+        String uploadUrl = filehost + "/" + filePath + "/" + newFileName;
+
+        // 获取文件输入流
+        InputStream inputStream = null;
         try {
-            *//**
-             * 注意：在实际项目中，不需要删除OSS文件服务器中的文件，
-             * 只需要删除数据库存储的文件路径即可！
-             *//*
-            // 建议在方法中创建OSSClient 而不是使用@Bean注入，不然容易出现Connection pool shut down
-            OSSClient ossClient = new OSSClient(endpoint,
-                    accessKeyId, accessKeySecret);
-            // 根据BucketName,filetName删除文件
-            // 删除目录中的文件，如果是最后一个文件fileoath目录会被删除。
-            String fileKey = filehost + "/" + filePath + "/" + fileName;
-            ossClient.deleteObject(bucketName, fileKey);
-
-            try {
-            } finally {
-                ossClient.shutdown();
-            }
-            System.out.println("文件删除！");
-            return StatusCode.SUCCESS.getMsg();
-        } catch (Exception e) {
+            inputStream = file.getInputStream();
+        } catch (IOException e) {
             e.printStackTrace();
-            return StatusCode.ERROR.getMsg();
         }
-    }*/
+
+        PutObjectResult putObjectResult = null;
+        try {
+            if(!ossClient.doesBucketExist(bucketName)){
+                ossClient.createBucket(bucketName);
+                CreateBucketRequest bucketRequest = new CreateBucketRequest(bucketName);
+                bucketRequest.setCannedACL(CannedAccessControlList.PublicRead);
+                ossClient.createBucket(bucketRequest);
+            }
+            //文件上传至阿里云OSS
+            putObjectResult = ossClient.putObject(bucketName, uploadUrl, inputStream);
+        } catch (OSSException e) {
+            e.printStackTrace();
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+
+        /**
+         * 注意：在实际项目中，文件上传成功后，数据库中存储文件地址
+         */
+        // 获取文件上传后的返回地址
+        returnUrl = "http://" + bucketName + "." + endpoint + "/" + uploadUrl;
+
+        return RespBean.ok("ok",putObjectResult);
+    }
+
+
+    @Override
+    public RespBean deleteFile(String filekey) {
+        String bucketName = aliyunOssConfig.getBucketName();
+        try {
+            ossClient.deleteObject(bucketName, filekey);
+            return RespBean.ok("ok");
+        } catch (OSSException e) {
+            e.printStackTrace();
+            return RespBean.error("error",e.getMessage());
+        } catch (ClientException e) {
+            e.printStackTrace();
+            return RespBean.error("error",e.getMessage());
+        }
+    }
 }
