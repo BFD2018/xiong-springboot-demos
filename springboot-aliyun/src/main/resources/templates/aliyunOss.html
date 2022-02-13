@@ -46,27 +46,27 @@
                     stripe
                     style="width: 100%">
                 <el-table-column
-                        label="ID"
+                        label="etag"
                         width="200">
                     <template slot-scope="scope">
                         <span style="margin-left: 10px">{{ scope.row.etag }}</span>
                     </template>
                 </el-table-column>
                 <el-table-column
-                        label="文件">
+                        label="文件-key">
                     <template slot-scope="scope">
                         {{ scope.row.key }}
                     </template>
                 </el-table-column>
                 <el-table-column
                         width="150"
-                        label="文件大小">
+                        label="文件大小-size">
                     <template slot-scope="scope">
                         {{ scope.row.size }}
                     </template>
                 </el-table-column>
                 <el-table-column
-                        label="上传时间">
+                        label="上传时间-lastModified">
                     <template slot-scope="scope">
                         {{ scope.row.lastModified }}
                     </template>
