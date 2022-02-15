@@ -98,7 +98,8 @@
         },
         methods:{
             handleUploadSuccess(res, file,fileList) {
-                if(res.data.status === 200){
+                console.log(res);
+                if(res.status === 200){
                     this.$message.success("文件上传成功");
                     this.initTableData();
                 }
@@ -115,6 +116,7 @@
             },
             handleDownload(row){
                 window.open("http://xiong-test-srt.oss-cn-shenzhen.aliyuncs.com/" + row.key)
+                // axios.get("/aliyun/oss/download?objectName="+row.key)
             },
             handleDelete(index,row){
                 axios.get("/aliyun/oss/delete?filekey="+row.key).then(res =>{

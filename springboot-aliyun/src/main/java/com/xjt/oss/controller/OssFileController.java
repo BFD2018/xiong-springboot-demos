@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("aliyun")
 public class OssFileController {
@@ -35,7 +37,13 @@ public class OssFileController {
     }
 
     /*下载*/
-    /*上传*/
+    @ResponseBody
+    @GetMapping("/oss/download")
+    private void downloadOssFile(HttpServletResponse response,@RequestParam("objectName") String objectName){
+        fileUploadService.downloadOssFile(response, objectName);
+    }
+
+    /*文件列表*/
     @ResponseBody
     @GetMapping("/oss/list")
     private RespBean listAllOssFileByBucket(){
