@@ -15,12 +15,24 @@
   <artifactId>springboot-parent</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>springboot-parent</name>
+  <description>Spring Boot Parent</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
+  
+  <modules>
+        <module>springboot-hutool</module>
+        <module>springboot-autoconfigration</module>
+        <module>springboot-notwebapp</module>
+        <module>springboot-myinterceptor</module>
+        <module>springboot-javaweb</module>
+        <module>springboot-fdfs</module>
+        <module>springboot-redis</module>
+        <module>springboot-shiro</module>
+    </modules>
 
   <dependencies>
     <dependency>
@@ -51,6 +63,7 @@
     </dependency>
   </dependencies>
 
+  <!--将Springboot项目打包为jar，部署时将jar放到服务器上 运行java -jar xxx.jar才能正常启动-->
   <build>
     <plugins>
       <plugin>

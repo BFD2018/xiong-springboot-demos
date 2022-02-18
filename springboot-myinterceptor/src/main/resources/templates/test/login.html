@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!--引入axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        #app{
+            width: 100vw;
+            height: 100vh;
+        }
+        .login-form{
+            background-color: #ddd;
+            width: 90%;
+            margin: auto;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h2>用户登录</h2>
+    <div class="login-form">
+        <el-form :model="loginForm" label-width="80px">
+            <el-form-item label="用户名">
+                <el-input v-model="loginForm.username"></el-input>
+            </el-form-item>
+            <el-form-item label="密码">
+                <el-input v-model="loginForm.password"></el-input>
+            </el-form-item>
+
+            <el-form-item>
+                <el-button type="success" @click="onSubmit">登录</el-button>
+            </el-form-item>
+        </el-form>
+    </div>
+</div>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            loginForm: {
+                username:"zhangsan",
+                password:"123456",
+            },
+        },
+        methods:{
+            onSubmit(){
+                axios.post("/springboot/doLogin",this.loginForm).then(res =>{
+                    console.log(res);
+                    if(res.status === 200){
+                        this.$message.success("登录成功")
+                    }
+                })
+            }
+        },
+        created(){
+        },
+    })
+</script>
+</body>
+</html>

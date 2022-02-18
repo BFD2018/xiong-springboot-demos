@@ -1,0 +1,2 @@
+name: xiong${random.uuid}
+age: ${random.int}

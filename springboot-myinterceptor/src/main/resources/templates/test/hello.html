@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>测试拦截器</h1>
+    <h2>用户登录之后才可访问的</h2>
+
+    <h3 th:text="${#request.session.getAttribute('login_user')}"></h3>
+</body>
+</html>

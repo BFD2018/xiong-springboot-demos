@@ -1,0 +1,18 @@
+package com.example.notwebapp;
+
+import com.example.notwebapp.service.StudentService;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SpringBootApplication
+public class NotwebappApplication {
+    public static void main(String[] args) {
+        //方式一：SpringApplication.run()方法返回的ConfigurableApplicationContext是Spring容器的实现类
+        ConfigurableApplicationContext context = SpringApplication.run(NotwebappApplication.class, args);
+
+        StudentService studentService = (StudentService) context.getBean("studentServiceImpl");
+        String ss = studentService.sayHello();
+        System.out.println(ss);
+    }
+}

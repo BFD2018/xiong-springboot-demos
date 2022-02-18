@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入Vue-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 引入element-ui -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!--引入axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="index-view">
+        <el-button  @click="handleBtnClick('login')">用户登录</el-button>
+        <el-button  type="info" @click="handleBtnClick('logout')">注销</el-button>
+        <h2>欢迎进入首页</h2>
+        <el-card class="box-card">
+            <div slot="header" class="clearfix">
+                <span>用户操作</span>
+            </div>
+            <div>
+                <el-button  type="success" @click="handleBtnClick('user-list')">用户列表</el-button>
+                <el-button  type="success" @click="handleBtnClick('user-add')">用户增加</el-button>
+                <el-button  type="success" @click="handleBtnClick('user-delete')">用户删除</el-button>
+                <el-button  type="success" @click="handleBtnClick('user-update')">用户修改</el-button>
+            </div>
+        </el-card>
+        <el-card class="box-card">
+            <div slot="header" class="clearfix">
+                <span>路线操作</span>
+            </div>
+            <div>
+                <el-button  type="warning" @click="handleBtnClick('route-list')">路线列表</el-button>
+                <el-button  type="success" @click="handleBtnClick('route-add')">路线增加</el-button>
+                <el-button  type="success" @click="handleBtnClick('route-delete')">路线删除</el-button>
+                <el-button  type="success" @click="handleBtnClick('route-update')">路线修改</el-button>
+            </div>
+        </el-card>
+        <el-card class="box-card">
+            <div slot="header" class="clearfix">
+                <span>管理员后台操作</span>
+            </div>
+            <div>
+                <el-button  type="success" @click="handleBtnClick('admin-index')">管理员首页</el-button>
+                <el-button  type="success" @click="handleBtnClick('admin-user')">管理用户</el-button>
+                <el-button  type="success" @click="handleBtnClick('admin-route')">管理路线</el-button>
+            </div>
+        </el-card>
+    </div>
+</div>
+<script type="application/javascript" th:inline="javascript">
+    const basePath = [[${#httpServletRequest.getScheme() + "://" +
+                    #httpServletRequest.getServerName() + ":" +
+                    #httpServletRequest.getServerPort() +
+                    #httpServletRequest.getContextPath()}]];
+
+    const app = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods:{
+            handleBtnClick(path){
+                switch (path) {
+                    case "login":
+                        window.location.href = basePath + "/view/login";
+                        break;
+                    case "logout":
+                        axios.post("/user/toLogout",this.loginForm).then(res =>{
+                            console.log(res);
+                            if(res.data.status === 200){
+                                this.$notify.success("注销成功");
+                                setTimeout(()=>{
+                                    window.location.href = basePath + "/view/login";
+                                },1500);
+                            }else{
+                                this.$message.error(res.data.msg);
+                            }
+                        })
+                        break;
+                    case "user-list":
+                        window.location.href = basePath + "/view/user/list";
+                        break;
+                    case "user-add":
+                        window.location.href = basePath + "/view/user/add";
+                        break;
+                    case "user-delete":
+                        window.location.href = basePath + "/view/user/delete";
+                        break;
+                    case "user-update":
+                        window.location.href = basePath + "/view/user/update";
+                        break;
+                    case "route-list":
+                        window.location.href = basePath + "/view/route/list"
+                        break;
+                    case "route-add":
+                        window.location.href = basePath + "/view/route/add"
+                        break;
+                    case "route-delete":
+                        window.location.href = basePath + "/view/route/delete"
+                        break;
+                    case "route-update":
+                        window.location.href = basePath + "/view/route/update"
+                        break;
+                    case "admin-index":
+                        window.location.href = basePath + "/view/admin/index"
+                        break;
+                    case "admin-user":
+                        window.location.href = basePath + "/view/admin/user"
+                        break;
+                    case "admin-route":
+                        window.location.href = basePath + "/view/admin/route"
+                        break;
+                }
+            },
+        },
+        created(){
+
+        }
+    })
+</script>
+</body>
+</html>
