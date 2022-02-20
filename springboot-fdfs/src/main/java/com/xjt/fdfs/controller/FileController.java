@@ -27,6 +27,8 @@ public class FileController {
     @Autowired
     private FastFileStorageClient storageClient;
 
+    public final static String server_host = "http://192.168.157.134:8888/";
+
     @ResponseBody
     @ApiOperation(value = "上传文件",httpMethod = "POST")
     @PostMapping("/upload")
@@ -34,7 +36,7 @@ public class FileController {
         StorePath storePath = storageClient.uploadFile(file.getInputStream(),
                 file.getSize(), FilenameUtils.getExtension(file.getOriginalFilename()),null);
 
-        String filepath = "http://192.168.157.129:8888/"+storePath.getFullPath();
+        String filepath = server_host + storePath.getFullPath();
         return "文件上传成功 地址为："+filepath;
     }
 

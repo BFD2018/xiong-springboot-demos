@@ -5,7 +5,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://10.224.4.16:3306/springboot_travel?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/springboot-shiro-test?serverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
   redis:
     port: 6379

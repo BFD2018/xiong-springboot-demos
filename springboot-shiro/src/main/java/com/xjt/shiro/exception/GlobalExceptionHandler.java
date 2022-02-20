@@ -15,7 +15,8 @@ public class GlobalExceptionHandler {
      * @return 返回未授权页面
      */
     @ExceptionHandler(value = AuthorizationException.class)
-    public Object exceptionHandler() {
+    public Object exceptionHandler(Exception e) {
+        e.printStackTrace();
         System.out.println(" = = = = = = = = = = 捕获到授权异常 = = = = = = = = = = ");
         // 跳转相应的页面
         return "unauthorized";
