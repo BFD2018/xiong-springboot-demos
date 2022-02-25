@@ -1,4 +1,4 @@
-# SpringBoot进阶笔记
+# SpringBoot笔记
 
 ### SpringBoot在IDEA中实现热部署
 

@@ -32,6 +32,7 @@
         <module>springboot-fdfs</module>
         <module>springboot-redis</module>
         <module>springboot-shiro</module>
+        <module>springboot-war</module>
     </modules>
 
   <dependencies>
