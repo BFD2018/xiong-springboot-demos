@@ -24,8 +24,6 @@
             <div>
                 <el-button  type="success" @click="handleBtnClick('user-list')">用户列表</el-button>
                 <el-button  type="success" @click="handleBtnClick('user-add')">用户增加</el-button>
-                <el-button  type="success" @click="handleBtnClick('user-delete')">用户删除</el-button>
-                <el-button  type="success" @click="handleBtnClick('user-update')">用户修改</el-button>
             </div>
         </el-card>
         <el-card class="box-card">
@@ -35,8 +33,6 @@
             <div>
                 <el-button  type="warning" @click="handleBtnClick('route-list')">路线列表</el-button>
                 <el-button  type="success" @click="handleBtnClick('route-add')">路线增加</el-button>
-                <el-button  type="success" @click="handleBtnClick('route-delete')">路线删除</el-button>
-                <el-button  type="success" @click="handleBtnClick('route-update')">路线修改</el-button>
             </div>
         </el-card>
         <el-card class="box-card">
@@ -45,8 +41,6 @@
             </div>
             <div>
                 <el-button  type="success" @click="handleBtnClick('admin-index')">管理员首页</el-button>
-                <el-button  type="success" @click="handleBtnClick('admin-user')">管理用户</el-button>
-                <el-button  type="success" @click="handleBtnClick('admin-route')">管理路线</el-button>
             </div>
         </el-card>
     </div>
@@ -87,32 +81,16 @@
                     case "user-add":
                         window.location.href = basePath + "/view/user/add";
                         break;
-                    case "user-delete":
-                        window.location.href = basePath + "/view/user/delete";
-                        break;
-                    case "user-update":
-                        window.location.href = basePath + "/view/user/update";
-                        break;
+
                     case "route-list":
                         window.location.href = basePath + "/view/route/list"
                         break;
                     case "route-add":
                         window.location.href = basePath + "/view/route/add"
                         break;
-                    case "route-delete":
-                        window.location.href = basePath + "/view/route/delete"
-                        break;
-                    case "route-update":
-                        window.location.href = basePath + "/view/route/update"
-                        break;
+
                     case "admin-index":
                         window.location.href = basePath + "/view/admin/index"
-                        break;
-                    case "admin-user":
-                        window.location.href = basePath + "/view/admin/user"
-                        break;
-                    case "admin-route":
-                        window.location.href = basePath + "/view/admin/route"
                         break;
                 }
             },

@@ -72,17 +72,17 @@ public class TUserController {
         return tUserService.addUser(username, password);
     }
 
-//    @PostMapping("/toLogout")
-//    public RespBean logoutHandler() {
-//        try {
-//            Subject subject = SecurityUtils.getSubject();
-//            subject.logout();
-//            return RespBean.success("退出成功");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return RespBean.error("error", e.getMessage());
-//        }
-//    }
+    @PostMapping("/toLogout")
+    public RespBean logoutHandler() {
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            subject.logout();
+            return RespBean.success("退出成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return RespBean.error("error", e.getMessage());
+        }
+    }
 
     @GetMapping("/getCaptcha")
     public void get_captcha(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {

@@ -39,6 +39,13 @@ public class PageController {
         return "/user/list";
 
     }
+    @RequiresPermissions("user:add")     //表示当前Subject需要权限 user:*
+    @GetMapping("/user/add")
+    public String userAddPage(){
+        log.warn("xjt--->{}","进入view.user.add.html");
+
+        return "/user/add";
+    }
 
     @RequiresPermissions("route:*")
     @GetMapping("/route/list")

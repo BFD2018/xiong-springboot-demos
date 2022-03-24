@@ -47,15 +47,12 @@
         </dependency>
         <dependency>
             <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
+            <artifactId>shiro-ehcache</artifactId>
             <version>1.7.1</version>
         </dependency>
-        <!--shiro中使用redis缓存-->
-<!--        <dependency>-->
-<!--            <groupId>org.crazycake</groupId>-->
-<!--            <artifactId>shiro-redis</artifactId>-->
-<!--            <version>3.2.0</version>-->
-<!--        </dependency>-->
+
+
+
 
         <dependency>
             <groupId>com.github.whvcse</groupId>

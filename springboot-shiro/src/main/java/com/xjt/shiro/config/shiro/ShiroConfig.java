@@ -3,6 +3,7 @@ package com.xjt.shiro.config.shiro;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.Authorizer;
 import org.apache.shiro.authz.ModularRealmAuthorizer;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -35,7 +36,7 @@ public class ShiroConfig {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
         map.put("/static/**","anon");   //anon 设置为公共资源
         map.put("/user/**","anon");   //anon 设置为公共资源
-        map.put("/user/toLogout","logout");   //登出过滤器
+        //map.put("/user/toLogout","logout");   //登出过滤器
         map.put("/view/login","anon");   //anon 设置为公共资源
         map.put("/view/register","anon");   //anon 设置为公共资源
         //配置系统受限资源
@@ -67,11 +68,19 @@ public class ShiroConfig {
         hashedCredentialsMatcher.setHashIterations(1024);
         customRealm.setCredentialsMatcher(hashedCredentialsMatcher);
 
-        //开启缓存管理器
+        //开启缓存管理器(使用redis缓存)
 //        customRealm.setCachingEnabled(true);
 //        customRealm.setAuthorizationCachingEnabled(true);
 //        customRealm.setAuthorizationCachingEnabled(true);
 //        customRealm.setCacheManager(new EhCacheManager());
+
+        //开启Ehcache缓存
+        customRealm.setCacheManager(new EhCacheManager());
+        customRealm.setCachingEnabled(true);
+        customRealm.setAuthenticationCachingEnabled(true);
+        customRealm.setAuthenticationCacheName("AuthenticationCache");      //也可以不设置 有默认值
+        customRealm.setAuthorizationCachingEnabled(true);
+        customRealm.setAuthorizationCacheName("AuthorizationCache");
 
         return customRealm;
     }
