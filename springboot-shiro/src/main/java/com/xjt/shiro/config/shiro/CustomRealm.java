@@ -51,7 +51,7 @@ public class CustomRealm extends AuthorizingRealm {
             SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
                     username,
                     tUser.getPassword(),
-                    new SimpleByteSource(tUser.getSalt()),
+                    new MyByteSource(tUser.getSalt()),
                     this.getName());
 
             Session session = SecurityUtils.getSubject().getSession();

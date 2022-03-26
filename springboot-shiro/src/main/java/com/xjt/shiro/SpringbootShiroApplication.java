@@ -12,6 +12,4 @@ public class SpringbootShiroApplication {
         SpringApplication.run(SpringbootShiroApplication.class, args);
     }
 
-
-
 }

@@ -8,11 +8,17 @@ spring:
     url: jdbc:mysql://localhost:3306/springboot-shiro-test?serverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
 
-
   servlet:
     multipart:
       max-file-size: 100MB
       max-request-size: 1000MB
+
+  # 配置 redis
+  redis:
+    port: 6379
+    host: 127.0.0.1
+    database: 0
+    timeout: 3000
 
 mybatis-plus:
   configuration:

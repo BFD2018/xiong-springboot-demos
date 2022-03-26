@@ -3,11 +3,12 @@ package com.xjt.shiro.config.shiro;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.Authorizer;
 import org.apache.shiro.authz.ModularRealmAuthorizer;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.crazycake.shiro.RedisCacheManager;
+import org.crazycake.shiro.RedisManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,7 @@ public class ShiroConfig {
 
     //1.创建shiroFilter  负责拦截所有请求
     @Bean(name = "shiroFilterFactoryBean")
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultWebSecurityManager securityManager){
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier(value = "defaultWebSecurityManager") DefaultWebSecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         //给filter设置安全管理
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -48,11 +49,14 @@ public class ShiroConfig {
     }
 
     //2.创建安全管理器
-    @Bean
-    public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier(value = "customRealm") Realm customRealm){
+    @Bean(name = "defaultWebSecurityManager")
+    public DefaultWebSecurityManager defaultWebSecurityManager(@Qualifier(value = "customRealm") Realm customRealm,
+                                                               @Qualifier(value = "shiroCacheManager") RedisCacheManager redisCacheManager){
         DefaultWebSecurityManager webSecurityManager = new DefaultWebSecurityManager();
         //给安全管理器设置realm
         webSecurityManager.setRealm(customRealm);
+
+        webSecurityManager.setCacheManager(redisCacheManager);   //开启Redis缓存
 
         return webSecurityManager;
     }
@@ -68,21 +72,22 @@ public class ShiroConfig {
         hashedCredentialsMatcher.setHashIterations(1024);
         customRealm.setCredentialsMatcher(hashedCredentialsMatcher);
 
-        //开启缓存管理器(使用redis缓存)
-//        customRealm.setCachingEnabled(true);
-//        customRealm.setAuthorizationCachingEnabled(true);
-//        customRealm.setAuthorizationCachingEnabled(true);
-//        customRealm.setCacheManager(new EhCacheManager());
 
-        //开启Ehcache缓存
-        customRealm.setCacheManager(new EhCacheManager());
-        customRealm.setCachingEnabled(true);
-        customRealm.setAuthenticationCachingEnabled(true);
-        customRealm.setAuthenticationCacheName("AuthenticationCache");      //也可以不设置 有默认值
-        customRealm.setAuthorizationCachingEnabled(true);
-        customRealm.setAuthorizationCacheName("AuthorizationCache");
+        //customRealm.setCacheManager(new EhCacheManager());        //开启Ehcache缓存
+//        customRealm.setCachingEnabled(true);
+//        customRealm.setAuthenticationCachingEnabled(true);
+//        customRealm.setAuthenticationCacheName("AuthenticationCache");      //也可以不设置 有默认值 包名.authenticationCache
+//        customRealm.setAuthorizationCachingEnabled(true);
+//        customRealm.setAuthorizationCacheName("AuthorizationCache");
 
         return customRealm;
+    }
+
+    @Bean(value = "shiroCacheManager")
+    public RedisCacheManager shiroCacheManager() {
+        RedisCacheManager cacheManager = new RedisCacheManager();
+        cacheManager.setRedisManager(new RedisManager());
+        return cacheManager;
     }
 
 
@@ -99,7 +104,5 @@ public class ShiroConfig {
         authorizationAttributeSourceAdvisor.setSecurityManager(defaultWebSecurityManager);
         return authorizationAttributeSourceAdvisor;
     }
-
-
 }
 
