@@ -34,6 +34,7 @@
         <module>springboot-shiro</module>
         <module>springboot-war</module>
         <module>springboot-utils</module>
+        <module>springboot-properties</module>
     </modules>
 
   <dependencies>
