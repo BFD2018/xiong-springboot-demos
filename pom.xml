@@ -38,6 +38,7 @@
         <module>springboot-utils</module>
         <module>springboot-properties</module>
         <module>springboot-conditional</module>
+        <module>springboot-banner</module>
   </modules>
 
   <dependencies>
