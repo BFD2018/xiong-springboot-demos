@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 引入element-ui -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- 引入axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="uploadFile-local">
+        <h1>欢迎用户：${userInfo}</h1>
+        <h2>文件上传</h2>
+        <el-upload
+                class="upload-demo"
+                    action="/files/upload"
+                :data={"user_id":this.userInfo.user_id}
+                :on-success="handleUploadSuccess">
+            <el-button size="small" type="primary">点击上传文件</el-button>
+        </el-upload>
+
+        <h2>用户的文件列表</h2>
+        <div class="file-table-list">
+            <el-table
+                    :data="tableData"
+                    border
+                    stripe
+                    style="width: 100%">
+                <el-table-column
+                        label="ID">
+                    <template slot-scope="scope">
+                        {{ scope.row.id }}
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        width="150"
+                        label="旧文件名">
+                    <template slot-scope="scope">
+                        {{ scope.row.oldFileName }}
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        width="150"
+                        label="新文件名">
+                    <template slot-scope="scope">
+                        {{ scope.row.newFileName }}
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        width="150"
+                        label="文件后缀名">
+                    <template slot-scope="scope">
+                        {{ scope.row.ext }}
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        width="100"
+                        label="文件大小">
+                    <template slot-scope="scope">
+                        {{ scope.row.size }}
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        label="文件存储路径">
+                    <template slot-scope="scope">
+                        {{ scope.row.path }}
+                    </template>
+                </el-table-column>
+
+                <el-table-column
+                        width="100"
+                        label="下载次数">
+                    <template slot-scope="scope">
+                        {{ scope.row.downCounts }}
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        width="100"
+                        label="上传时间">
+                    <template slot-scope="scope">
+                        {{ scope.row.uploadTime }}
+                    </template>
+                </el-table-column>
+
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-button
+                                size="mini"
+                                type="success"
+                                @click="handlePreview(scope.row)">预览</el-button>
+                        <el-button
+                                size="mini"
+                                type="warning"
+                                @click="handleDownload(scope.row)">下载</el-button>
+                        <el-button
+                                size="mini"
+                                type="danger"
+                                @click="handleDelete(scope.$index,scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+    </div>
+</div>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            imageUrl:"",
+            tableData:[],
+            userInfo:{
+                user_id:1,
+                user_name:"xiaoxiong",
+            },
+        },
+        methods:{
+            handleUploadSuccess(res) {
+                console.log(res);
+                if(res.status === 200){
+                    this.$message.success("文件上传成功");
+                    this.initTableData();
+                }
+            },
+
+            initTableData(){
+                axios.get("/files/all?user_id="+this.userInfo.user_id).then(res =>{
+                    console.log(res);
+                    if(res.data.status === 200){
+                        this.tableData.splice(0);
+                        this.tableData.push(...res.data.obj);
+                    }
+                })
+            },
+            //预览
+            handlePreview(row){
+
+            },
+            handleDownload(row){
+                // axios.get("/aliyun/oss/download?objectName="+row.key)
+            },
+            handleDelete(index,row){
+                axios.get("/aliyun/oss/delete?filekey="+row.key).then(res =>{
+                    console.log(res);
+                    if(res.data.status === 200){
+                        this.$message.success("删除成功");
+                        this.tableData.splice(index,1);
+                    }
+                })
+            },
+
+        },
+        created(){
+            this.initTableData();
+        },
+    })
+</script>
+</body>
+</html>
