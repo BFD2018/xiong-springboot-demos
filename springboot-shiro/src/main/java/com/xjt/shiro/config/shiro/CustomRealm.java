@@ -1,7 +1,7 @@
 package com.xjt.shiro.config.shiro;
 
-import com.xjt.shiro.domain.TUser;
-import com.xjt.shiro.service.TUserService;
+import com.xjt.myshiro.domain.TUser;
+import com.xjt.myshiro.service.TUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -9,7 +9,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.SimpleByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 

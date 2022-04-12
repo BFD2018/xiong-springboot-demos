@@ -1,8 +1,8 @@
 package com.xjt.shiro.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xjt.shiro.domain.TPerm;
-import com.xjt.shiro.domain.TUser;
+import com.xjt.myshiro.domain.TPerm;
+import com.xjt.myshiro.domain.TUser;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

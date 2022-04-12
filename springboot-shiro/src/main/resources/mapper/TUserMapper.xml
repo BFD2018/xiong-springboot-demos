@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.xjt.shiro.mapper.TUserMapper">
-	<resultMap id="userMap" type="com.xjt.shiro.domain.TUser">
+	<resultMap id="userMap" type="com.xjt.myshiro.domain.TUser">
 		<id column="user_id" property="user_id"/>
 		<result column="username" property="username"/>
 		<!--角色信息-->
-		<collection property="rolesList" javaType="list" ofType="com.xjt.shiro.domain.TRole">
+		<collection property="rolesList" javaType="list" ofType="com.xjt.myshiro.domain.TRole">
 			<result column="name" property="name"/>
 			<result column="name_zh" property="nameZh"/>
 		</collection>
@@ -29,7 +29,7 @@
 		WHERE u.`username`= #{username}
     </select>
 
-	<select id="findPermsListByRoleId" parameterType="int" resultType="com.xjt.shiro.domain.TPerm">
+	<select id="findPermsListByRoleId" parameterType="int" resultType="com.xjt.myshiro.domain.TPerm">
         SELECT
 		  rp.`role_id`,
 		  p.`perm_id`,

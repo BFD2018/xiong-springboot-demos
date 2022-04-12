@@ -1,8 +1,8 @@
 package com.xjt.shiro.service;
 
-import com.xjt.shiro.domain.TPerm;
-import com.xjt.shiro.domain.TUser;
-import com.xjt.shiro.utils.RespBean;
+import com.xjt.myshiro.domain.TPerm;
+import com.xjt.myshiro.domain.TUser;
+import com.xjt.myshiro.utils.RespBean;
 
 import java.util.List;
 import java.util.Set;

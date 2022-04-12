@@ -1,7 +1,7 @@
 package com.xjt.shiro.controller;
 
-import com.xjt.shiro.service.TUserFileService;
-import com.xjt.shiro.utils.RespBean;
+import com.xjt.myshiro.service.TUserFileService;
+import com.xjt.myshiro.utils.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -2,11 +2,11 @@ package com.xjt.shiro.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.xjt.shiro.domain.TPerm;
-import com.xjt.shiro.domain.TUser;
-import com.xjt.shiro.mapper.TUserMapper;
-import com.xjt.shiro.service.TUserService;
-import com.xjt.shiro.utils.RespBean;
+import com.xjt.myshiro.domain.TPerm;
+import com.xjt.myshiro.domain.TUser;
+import com.xjt.myshiro.mapper.TUserMapper;
+import com.xjt.myshiro.service.TUserService;
+import com.xjt.myshiro.utils.RespBean;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
