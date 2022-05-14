@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 引入element-ui -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- 引入axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        #app{
+            margin: 0 auto;
+            width: 80%;
+            border: 1px solid red;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>上传图片到SM.MS图床</h2>
+        <el-upload
+                class="upload-demo"
+                action="/smms/upload"
+                multiple
+                drag
+                name="smfile"
+                :on-success="handleImagesSuccess">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        </el-upload>
+
+        <h2>SM.MS图床的上传历史记录</h2>
+        <el-table
+                :data="imagesTableData"
+                border
+                stripe
+                style="width: 100%">
+            <el-table-column
+                    label="Hash"
+                    width="150">
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.hash }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    label="文件名"
+                    width="180">
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.filename }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    label="预览"
+                    width="180">
+                <template slot-scope="scope">
+                    <el-image
+                            style="width: 150px; height: auto"
+                            :src="scope.row.url"
+                            fit="fill"></el-image>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    label="Size"
+                    width="100">
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.size }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    label="图片尺寸"
+                    width="120">
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.width}} / {{scope.row.height}}</span>
+                </template>
+            </el-table-column>
+
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button
+                            size="mini"
+                            @click="handleCopyUrl(scope.$index, scope.row)">获取URL</el-button>
+                    <el-button
+                            size="mini"
+                            type="danger"
+                            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data:{
+                imagesTableData:[]
+            },
+            methods:{
+                //处理：图片上传成功
+                handleImagesSuccess(res, file){
+                    if(res.success == true){
+                        this.imagesTableData.push(res.data);
+                        this.$message({
+                            message: "图片:" + row.data.filename + " 上传成功",
+                            type:"success"
+                        });
+                    }
+                },
+
+                handleCopyUrl(index, row){
+                    this.$message({
+                        message:'图片的URL地址为：'+row.url,
+                        type:"success"
+                    });
+                },
+                handleDelete(index, row){
+                    console.log(index);
+                    axios.get("/smms/delete?imghash=" + row.hash).then(res =>{
+                        console.log(res);
+                        if(res.status === 200){
+                            this.imagesTableData.splice(index,1);
+                            this.$message({
+                                message: '图片删除成功',
+                                type: 'success'
+                            });
+                        }
+                    })
+                },
+
+                //请求上传历史
+                _getHistoryUpload() {
+                    console.log("获取历史上传记录...");
+                    axios({
+                        "method": 'get',
+                        "url": "/smms/upload_history",
+                    }).then(res =>{
+                        console.log(res);
+                        if(res.status === 200){
+                            this.imagesTableData.splice(0);
+                            this.imagesTableData.push(...res.data.data);
+                        }
+                    })
+                }
+            },
+            mounted(){
+
+            },
+            created(){
+                this.$nextTick(() =>{
+                    this._getHistoryUpload();
+                })
+            }
+        })
+    </script>
+</body>
+</html>

@@ -40,8 +40,8 @@
         <module>springboot-conditional</module>
         <module>springboot-banner</module>
         <module>springboot-filesupload</module>
+        <module>springboot-httpclient</module>
         <module>springboot-controller-advice</module>
-        <module>springboot-shiro-advanced</module>
     </modules>
 
     <dependencies>

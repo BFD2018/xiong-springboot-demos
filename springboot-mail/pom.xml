@@ -34,6 +34,12 @@
             <artifactId>knife4j-spring-boot-starter</artifactId>
             <version>3.0.3</version>
         </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.7.11</version>
+        </dependency>
     </dependencies>
 
     <build>
