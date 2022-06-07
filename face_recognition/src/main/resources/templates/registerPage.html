@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <style type="text/css">
+        /**解决浏览器兼容性问题**/
+        *{margin: 0;padding: 0;}
+        html,body{width: 100%;height: 100%;}/**/
+        body{background: url("https://xiong-test-srt.oss-cn-shenzhen.aliyuncs.com/typoraimages/cec99a46880411ebb6edd017c2d2eca2.png") no-repeat center;}
+        h1{color: #fff;text-align: center;line-height: 80px;}
+        .media{width: 534px;height: 400px;margin: 40px auto 0;
+        }
+        #register{width: 200px;height:50px;background-color: #2196f3; margin: 60px auto 0;
+            text-align: center;line-height: 50px;color: #fff;border-radius: 10px;}
+        #canvas{display: none;}
+        #shuru{width: 200px;height:50px;background-color: #2196f3; margin: 20px auto 0;}
+    </style>
+</head>
+<body>
+<h1>百度云人脸注册</h1>
+
+<div class="media">
+    <video id="video" width="450" height="300" src="" autoplay></video>
+    <canvas id="canvas" width="450" height="300"></canvas>
+</div>
+<button id="register" >确定注册</button>
+
+<script th:src="@{/myjs/jquery.js}"></script>
+<script type="text/javascript">
+    /**调用摄像头，获取媒体视频流**/
+    var video = document.getElementById('video');
+    //返回画布二维画图环境
+    var userContext = canvas.getContext("2d");
+    var getUserMedia =
+        //浏览器兼容,表示在火狐、Google、IE等浏览器都可正常支持
+        (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia)
+    //getUserMedia.call(要调用的对象，约束条件，调用成功的函数，调用失败的函数)
+    getUserMedia.call(navigator,{video: true,audio: false},function(localMediaStream){
+        //获取摄像头捕捉的视频流
+        video.srcObject=localMediaStream;
+    },function(e){
+        console.log("获取摄像头失败！！")
+    });
+    //点击按钮注册事件
+    var btn = document.getElementById("register");
+    btn.onclick = function () {
+        //点击按钮时拿到登陆者面部信息
+        userContext.drawImage(video,0,0,450,300);
+        var userImgSrc = document.getElementById("canvas").toDataURL("img/png");
+        //拿到bash64格式的照片信息
+        var faceBase = userImgSrc.split(",")[1];
+
+        //ajax异步请求
+        $.ajax({
+            url: "/face/register",
+            type: "post",
+            dataType:"json",
+            data: {
+                "imagebase64": faceBase
+            },
+            success: function(result){
+                if(result.error_code === 0 || result.error_code === '0'){
+                    alert("注册成功！！，点击确认跳转至登录页面");
+                    window.location.href="/face/page/login";
+                }else if(result === '2'){
+                    alert("您已经注册过啦！！");
+                }else{
+                    alert("系统错误！！");
+                }
+
+            }
+        })
+    }
+</script>
+</body>
+</html>
