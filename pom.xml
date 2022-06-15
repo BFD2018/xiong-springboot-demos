@@ -43,6 +43,7 @@
         <module>springboot-httpclient</module>
         <module>springboot-controller-advice</module>
         <module>face_recognition</module>
+        <module>javase</module>
     </modules>
 
     <dependencies>

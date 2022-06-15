@@ -1,0 +1,132 @@
+public E remove(int index) {
+    checkElementIndex(index);
+    return unlink(node(index));
+}
+
+//检查索引有效性
+private void checkElementIndex(int index) {
+    if (!isElementIndex(index))
+        throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+}
+
+//检查索引有效性
+private boolean isElementIndex(int index) {
+    return index >= 0 && index < size;
+}
+
+/**
+ * 返回指定索引位置的节点
+ */
+Node<E> node(int index) {
+    //1、索引位置小于长度的一半
+    if (index < (size >> 1)) {
+        //1.1 把第一个节点赋值为x
+        Node<E> x = first;
+        for (int i = 0; i < index; i++)
+            //1.2 从第一个节点开始向右移动游标到index的左侧
+            x = x.next;
+        //1.3 返回找到的节点
+        return x;
+    } else {    //2、索引大于长度的一半
+        //2.1 把最后一个节点赋值为x
+        Node<E> x = last;
+        for (int i = size - 1; i > index; i--)
+            //2.2 从最后一个节点开始向左移动游标到index的右侧
+            x = x.prev;
+        //2.3 返回找到的节点
+        return x;
+    }
+}
+
+/**
+ * 解开非null的节点 x.
+ */
+E unlink(Node<E> x) {
+    // 获取节点中的元素
+    final E element = x.item;
+    // 获取下一个节点位置
+    final Node<E> next = x.next;
+    // 获取上一个节点位置
+    final Node<E> prev = x.prev;
+
+    if (prev == null) {
+        first = next;
+    } else {
+        prev.next = next;
+        x.prev = null;
+    }
+
+    if (next == null) {
+        last = prev;
+    } else {
+        next.prev = prev;
+        x.next = null;
+    }
+    //把元素置为null
+    x.item = null;
+    //长度--
+    size--;
+    //实际修改次数++
+    modCount++;
+    //返回被删除的元素
+    return element;
+}
+
+不是所有的集合都要优先使用线程安全的？
+    解释：1、方法体中new 的集合属于局部变量 只在当前方法体内有效（即只在当前执行线程有效）不会被其他线程共享使用（增 删 改）
+    我们需要使用集合的高效率 如ArrayList > Vector,所以我们优先使用 ArrayList
+    2、如对某个成员变量只读（所有线程不会执行 增 删 改）也可以优先使用ArrayList
+
+如何复制Arraylist到另一个ArrayList中去？
+    1、使用构造函数。ArrayList有个构造函数，可以传入一个集合
+    2、addAll方法
+    3、实现Cloneable接口 重写clone方法
+    4、使用Collections.copy
+    5、使用steam流
+    6、遍历，然后一个个add 添加到新ArrayList
+
+已知成员变量集合存储了N个用户名称，在多线程环境下，使用迭代器读取集合数据的同时如何保证正常的写入数据到集合？
+    //多线程造成并发修改异常
+    Exception in thread "Thread-1" Exception in thread "Thread-3" java.util.ConcurrentModificationException
+使用读写分离的集合（注意：Junit测试 是单线程的）
+    public class CollectionTask implements Runnable{
+    //    private static ArrayList<String> list = new ArrayList<String>();
+        private static CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<String>();
+
+        static {
+            list.add("zhang");
+            list.add("wang");
+            list.add("zhao");
+        }
+
+        @Override
+        public void run() {
+            for (String s : list) {     //增强for底层使用的是迭代器
+                //读
+                System.out.println(s);
+                //写
+                list.add("xiong"+ RandomUtil.randomInt(1,100));
+            }
+        }
+    }
+
+    public class TestConcurrentTask1 {
+        public static void main(String[] args) {
+            CollectionTask ct = new CollectionTask();
+
+            for (int i = 0; i < 100; i++) {
+                new Thread(ct).start();
+            }
+        }
+    }
+
+ArrayList 和 LinkedList 区别？
+    1、ArrayList：
+        1.1 基于动态数组的数据结构（不断扩容）
+        1.2 对于随机访问的get set ，ArrayList要优于LinkedList
+        1.3 对于随机操作的add 和remove ，ArrayList不一定比LinkedList慢（ArrayList底层是动态数组 因此并不是每次add 和remove都需要创建新数组）
+
+    2、LinkedList
+        2.1 基于链表的数据结构
+        2.2 对于顺序操作，LinkedList不一定比ArrayList慢
+        2.3 对于随机操作，LinkedList效率明显较低
