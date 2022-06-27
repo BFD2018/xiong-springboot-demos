@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<!-- head -->
+<div th:replace="~{/fragment/common-fragment :: head(首页)}"></div>
+
+<body>
+	<div class="wrapper">
+		<!-- Header section -->
+		<div th:replace="~{/fragment/common-fragment :: header}"></div>
+	</div>
+
+	<div th:replace="~{/fragment/common-fragment :: footer}"></div>
+
+	<!-- JavaScript-->
+	<div th:replace="~{/fragment/common-fragment :: script}"></div>
+</body>
+</html>
