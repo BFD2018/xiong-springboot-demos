@@ -43,7 +43,6 @@
         <module>springboot-httpclient</module>
         <module>springboot-controller-advice</module>
         <module>springboot-fastjson</module>
-        <module>face-recognition</module>
     </modules>
 
     <dependencies>
@@ -68,7 +67,6 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

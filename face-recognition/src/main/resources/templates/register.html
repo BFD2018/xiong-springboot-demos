@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{/base/base_page :: head(注册页)}"></div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="register-box">
+        <div class="register-logo">
+            <h1>注册</h1>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">百度云人脸注册</h3>
+            </div>
+            <div class="panel-body">
+                <div class="media">
+                    <video id="video" width="450" height="300" src="" autoplay></video>
+                    <canvas id="canvas" width="450" height="300"></canvas>
+                </div>
+                <button class="btn btn-primary" id="register">确定注册</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.register-box -->
+
+<script type="text/javascript">
+    /**调用摄像头，获取媒体视频流**/
+    var video = document.getElementById('video');
+    //返回画布二维画图环境
+    var userContext = canvas.getContext("2d");
+    var getUserMedia =
+        //浏览器兼容,表示在火狐、Google、IE等浏览器都可正常支持
+        (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia)
+    //getUserMedia.call(要调用的对象，约束条件，调用成功的函数，调用失败的函数)
+    getUserMedia.call(navigator, {video: true, audio: false}, function (localMediaStream) {
+        //获取摄像头捕捉的视频流
+        video.srcObject = localMediaStream;
+    }, function (e) {
+        console.log("获取摄像头失败！！")
+    });
+    //点击按钮注册事件
+    var btn = document.getElementById("register");
+    btn.onclick = function () {
+        //点击按钮时拿到登陆者面部信息
+        userContext.drawImage(video, 0, 0, 450, 300);
+        var userImgSrc = document.getElementById("canvas").toDataURL("img/png");
+        //拿到bash64格式的照片信息
+        var faceBase = userImgSrc.split(",")[1];
+
+        //ajax异步请求
+        $.ajax({
+            url: "/face/register",
+            type: "post",
+            dataType: "json",
+            data: {
+                "imagebase64": faceBase
+            },
+            success: function (result) {
+                if (result.error_code === 0 || result.error_code === '0') {
+                    alert("注册成功！！，点击确认跳转至登录页面");
+                    window.location.href = "/face/page/login";
+                } else if (result === '2') {
+                    alert("您已经注册过啦！！");
+                } else {
+                    alert("系统错误！！");
+                }
+
+            }
+        })
+    }
+</script>
+</body>
+</html>

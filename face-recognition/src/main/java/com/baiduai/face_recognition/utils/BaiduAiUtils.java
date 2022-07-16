@@ -4,7 +4,6 @@ import cn.hutool.core.util.IdUtil;
 import com.baidu.aip.face.AipFace;
 import com.baidu.aip.face.MatchRequest;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -14,29 +13,22 @@ import java.util.HashMap;
 
 @Component
 public class BaiduAiUtils {
-    @Value("${baiduai.face.appId}")
-    private String APP_ID;
-    @Value("${baiduai.face.apiKey}")
-    private String API_KEY;
-    @Value("${baiduai.face.secretKey}")
-    private String SECRET_KEY;
+    private String APP_ID = "15391850";
+    private String API_KEY = "FVnP4fAmGymppljHZZ6leenG";
+    private String SECRET_KEY = "YT1BH5yETk370RoR85xuNoFjiT6bB56Q";
 
-    @Value("baiduai.face.groupId")
-    private String groupID;
-    @Value("baiduai.face.qualityControl")
-    private String Quality_Control;
-    @Value("baiduai.face.imageType")
-    private String Image_Type;
-    @Value("baiduai.face.livenessControl")
-    private String Liveness_Control;
+    private String groupID = "face_recognition_test";
+
+    private String Quality_Control = "NONE";
+    private String Image_Type = "BASE64";
+    private String Liveness_Control = "NONE";
 
     private AipFace client;
 
-    private HashMap<String,String> map = new HashMap<>();
 
     @PostConstruct
     public void initAipFace(){
-        client = new AipFace(APP_ID, API_KEY, SECRET_KEY);
+        client = new AipFace("15391850", "FVnP4fAmGymppljHZZ6leenG", "YT1BH5yETk370RoR85xuNoFjiT6bB56Q");
     }
 
     /**
@@ -54,7 +46,7 @@ public class BaiduAiUtils {
         }
         JSONObject jsonObject = client.addUser(image, Image_Type, groupID, userid, options);
 
-        return RespBean.ok("ok",jsonObject);
+        return RespBean.ok("ok",jsonObject.toString());
     }
 
     /**
@@ -71,7 +63,7 @@ public class BaiduAiUtils {
         }
         JSONObject jsonObject = client.updateUser(image, Image_Type, groupID, userId, options);
 
-        return RespBean.ok("ok",jsonObject);
+        return RespBean.ok("ok",jsonObject.toString());
     }
 
     /**
@@ -81,7 +73,7 @@ public class BaiduAiUtils {
      */
     public RespBean faceDelete(String userId){
         JSONObject jsonObject = client.deleteUser(groupID, userId, null);
-        return RespBean.ok("ok",jsonObject);
+        return RespBean.ok("ok",jsonObject.toString());
     }
 
     /**
@@ -90,9 +82,23 @@ public class BaiduAiUtils {
      * @return
      */
     public RespBean faceSearch(String imagebase64){
-        JSONObject jsonObject = client.search(imagebase64, Image_Type,groupID, null);
+        imagebase64 = imagebase64.substring(imagebase64.indexOf(",") + 1, imagebase64.length());
 
-        return RespBean.ok("ok",jsonObject);
+        JSONObject jsonObject = client.search(imagebase64, Image_Type,groupID, null);
+        System.out.println("imagebase64----------->");
+        System.out.println(imagebase64);
+        System.out.println("jsonObject----------->");
+        System.out.println(jsonObject);
+
+        return RespBean.ok("ok",jsonObject.toString());
+    }
+
+    public RespBean faceSearch(String imgUrl,String image_Type){
+        JSONObject jsonObject = client.search(imgUrl, image_Type,groupID, null);
+        System.out.println("jsonObject----------->");
+        System.out.println(jsonObject);
+
+        return RespBean.ok("ok",jsonObject.toString());
     }
 
     /**
@@ -104,7 +110,7 @@ public class BaiduAiUtils {
         MatchRequest matchRequest = new MatchRequest(imagebase64, Image_Type);
         JSONObject jsonObject = client.match(Arrays.asList(matchRequest));
 
-        return RespBean.ok("ok",jsonObject);
+        return RespBean.ok("ok",jsonObject.toString());
     }
 
     /**
@@ -114,7 +120,6 @@ public class BaiduAiUtils {
      */
     public RespBean faceDetect(String imagebase64){
         JSONObject jsonObject = client.detect(imagebase64, Image_Type, null);
-
-        return RespBean.ok("ok",jsonObject);
+        return RespBean.ok("ok",jsonObject.toString());
     }
 }

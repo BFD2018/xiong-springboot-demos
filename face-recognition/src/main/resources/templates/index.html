@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
-<!-- head -->
-<div th:replace="~{/fragment/common-fragment :: head(首页)}"></div>
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{/base/base_page :: head(首页)}"></div>
 <body>
-	<div class="wrapper">
-		<!-- Header section -->
-		<div th:replace="~{/fragment/common-fragment :: header}"></div>
-	</div>
+<div th:replace="base/base_page::header"></div>
 
-	<div th:replace="~{/fragment/common-fragment :: footer}"></div>
+<div class="container">
+  <h1>首页</h1>
+</div>
 
-	<!-- JavaScript-->
-	<div th:replace="~{/fragment/common-fragment :: script}"></div>
+<div th:replace="base/base_page::footer"></div>
+
 </body>
 </html>
