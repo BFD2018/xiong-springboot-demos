@@ -1,6 +1,27 @@
 # SpringBoot笔记
 
-### SpringBoot在IDEA中实现热部署
+## 概述
+
+### 环境要求
+
+- Java8及以上
+- Maven 3.3及以上
+
+- springboot 2.2.9+ ，大部分案例采用 2.4.3版本
+- IDEA2020
+
+### 学习资料
+
+- [Spring Boot官网](https://spring.io/projects/spring-boot)
+- [Spring Boot官方文档](https://docs.spring.io/spring-boot/docs/)
+- [我的文档语雀地址](https://www.yuque.com/yuquexiongjt/qh2h6g/hf9ttt)
+
+- [B站尚硅谷雷丰阳视频地址](https://www.bilibili.com/video/BV19K4y1L7MT?p=1)
+- [狂神说Java](https://space.bilibili.com/95256449/)
+- [编程不良人](https://space.bilibili.com/352224540/)
+- [江南一点雨](https://space.bilibili.com/49484631/?spm_id_from=333.999.0.0)
+
+## 在IDEA中实现SpringBoot项目热部署
 
 #### 1、开启IDEA的自动编译（静态）
 
@@ -40,7 +61,7 @@ PS：网上极少有人提到compile.document.save.trigger.delay 它主要是针
 
 ![image-20220208150746909](typora-assets/image-20220208150746909.png)
 
-### springboot加载顺序
+## SpringBoot加载顺序
 
 ![image-20220208110646867](typora-assets/image-20220208110646867.png)
 
@@ -70,21 +91,9 @@ The Runner start to initialize ...
 The service has started.
 ```
 
-### SpringBoot自动装配原理
-
-https://www.cnblogs.com/hellokuangshen/p/12468522.html
-
-https://blog.csdn.net/qq_42025798/article/details/122058013
+## SpringBoot自动装配原理
 
 
-
-【狂神说Java】SpringBoot最新教程IDEA版通俗易懂
-
-https://blog.csdn.net/qq_42025798/article/details/121974573
-
-【狂神说Java笔记】Java后端开发工程师学习笔记
-
-https://blog.csdn.net/qq_42025798/article/details/119192030
 
 
 
@@ -102,7 +111,7 @@ springboot项目不上传的文件和文件夹
 
 ![image-20220208154200362](typora-assets/image-20220208154200362.png)
 
-### Springboot事务管理
+## SpringBoot事务管理
 
 SpringBoot 使用事务非常简单，底层依然采用的是Spring本身提供的事务管理
 
@@ -205,7 +214,7 @@ IDEA控制台
 
 ![image-20220214111249369](typora-assets/image-20220214111249369.png)
 
-### SpringBoot中SpringMVC注解
+## SpringBoot中SpringMVC注解
 
 参考：https://www.cnblogs.com/cjeandailynotes/p/10469377.html
 
@@ -906,7 +915,7 @@ public String addUserInfo(@RequestBody UserModel user){
 > 使用时机：
 >  返回的数据不是html标签的页面，而是其他某种格式的数据时（如json、xml等）使用；
 
-### Springboot集成Redis缓存
+## SpringBoot集成Redis缓存
 
 http://www.bjpowernode.com/tutorial_springboot/831.html
 
@@ -957,11 +966,11 @@ public RespBean getAllStudent() {
 }
 ```
 
-### SpringBoot集成Dubbo
+## SpringBoot集成Dubbo
 
 http://www.bjpowernode.com/tutorial_springboot/832.html
 
-### 获取Spring容器并自动执行
+## 获取Spring容器
 
 #### 1、SpringApplication.run()方法返回的Spring容器对象
 
@@ -1011,7 +1020,7 @@ public class NotwebappApplication implements CommandLineRunner {
 }
 ```
 
-### SpringBoot使用拦截器
+## SpringBoot拦截器
 
 参考：http://www.bjpowernode.com/tutorial_springboot/838.html
 
@@ -1097,7 +1106,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 执行MyInterceptor.afterCompletion++++++++++++++++++++++++>
 ```
 
-### Springboot请求转发和重定向
+## SpringMVC请求转发和重定向
 
 参考：https://www.icode9.com/content-4-825109.html
 
@@ -1143,11 +1152,11 @@ public void test(@PathVariable String name, HttpServletResponse response) throws
 
 *使用API进行重定向时，一般会在url之前加上：request.getContextPath()*
 
-### SpringBoot整合Servlet的两种方式
+## SpringBoot整合Servlet的两种方式
 
 http://www.bjpowernode.com/tutorial_springboot/839.html
 
-### SpringBoot项目打war包
+## SpringBoot项目打war包
 
 #### jar包和war包的介绍和区别
 
@@ -1272,7 +1281,7 @@ http://localhost:[tomcat端口]/[war包名]/jsp/blog/list
 
 http://localhost:8080/springboot-jsp/jsp/blog/list
 
-### Springboot集成JSP
+## SpringBoot集成JSP
 
 maven依赖
 
@@ -1366,11 +1375,11 @@ demo示例：
 
 ![image-20220216152751388](typora-assets/image-20220216152751388.png)
 
-### Springboot集成Shiro
+## SpringBoot集成Shiro
 
-#### Shiro注解
+### Shiro注解
 
 https://www.cnblogs.com/pingxin/p/p00115.html
 
-### Springboot集成SpringSecurity
+## SpringBoot集成SpringSecurity
 
