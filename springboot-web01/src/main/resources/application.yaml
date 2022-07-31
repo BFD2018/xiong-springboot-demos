@@ -1,0 +1,21 @@
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+    contentnegotiation:
+      favor-parameter: true
+
+#    static-path-pattern: /res/**
+
+
+  resources:
+    static-locations: [classpath:/haha/]      #已废弃 推荐使用 spring.mvc.static-path-pattern:
+    add-mappings: true
+    cache:
+      period: 11000
+
+#server:
+#  servlet:
+#    context-path: /world
+

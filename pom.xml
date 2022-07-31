@@ -43,6 +43,7 @@
         <module>springboot-httpclient</module>
         <module>springboot-controller-advice</module>
         <module>springboot-fastjson</module>
+        <module>springboot-web01</module>
     </modules>
 
     <dependencies>
