@@ -44,6 +44,7 @@
         <module>springboot-controller-advice</module>
         <module>springboot-fastjson</module>
         <module>springboot-web01</module>
+        <module>springboot-elasticsearch</module>
     </modules>
 
     <dependencies>

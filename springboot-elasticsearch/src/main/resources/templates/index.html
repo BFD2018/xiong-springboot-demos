@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>狂神说Java-ES仿京东实战</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script crossorigin="anonymous" integrity="sha512-XdUZ5nrNkVySQBnnM5vzDqHai823Spoq1W3pJoQwomQja+o4Nw0Ew1ppxo5bhF2vMug6sfibhKWcNJsG8Vj9tg==" src="https://lib.baomitu.com/vue/2.6.14/vue.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+
+<body class="pg">
+<div class="page" id="app">
+    <div id="mallPage" class=" mallist tmall- page-not-market ">
+        <!-- 头部搜索 -->
+        <div id="header" class=" header-list-app">
+            <div class="headerLayout">
+                <div class="headerCon ">
+                    <!-- Logo-->
+                    <h1 id="mallLogo">
+                        <img th:src="@{/images/jdlogo.png}" alt="">
+                    </h1>
+
+                    <div class="header-extra">
+
+                        <!--搜索-->
+                        <div id="mallSearch" class="mall-search">
+                            <form name="searchTop" class="mallSearch-form clearfix">
+                                <fieldset>
+                                    <legend>天猫搜索</legend>
+                                    <div class="mallSearch-input clearfix">
+                                        <div class="s-combobox" id="s-combobox-685">
+                                            <div class="s-combobox-input-wrap">
+                                                <input type="text" autocomplete="off"  v-model="keyword" id="mq"
+                                                       class="s-combobox-input" aria-haspopup="true">
+                                            </div>
+                                        </div>
+                                        <button type="submit" id="searchbtn" @click.prevent="searchKey">搜索</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                            <ul class="relKeyTop">
+                                <li><a>狂神说Java</a></li>
+                                <li><a>狂神说前端</a></li>
+                                <li><a>狂神说Linux</a></li>
+                                <li><a>狂神说大数据</a></li>
+                                <li><a>狂神聊理财</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 商品详情页面 -->
+        <div id="content">
+            <div class="main">
+                <!-- 品牌分类 -->
+                <form class="navAttrsForm">
+                    <div class="attrs j_NavAttrs" style="display:block">
+                        <div class="brandAttr j_nav_brand">
+                            <div class="j_Brand attr">
+                                <div class="attrKey">
+                                    品牌
+                                </div>
+                                <div class="attrValues">
+                                    <ul class="av-collapse row-2">
+                                        <li><a href="#"> 狂神说 </a></li>
+                                        <li><a href="#"> Java </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- 排序规则 -->
+                <div class="filter clearfix">
+                    <a class="fSort fSort-cur">综合<i class="f-ico-arrow-d"></i></a>
+                    <a class="fSort">人气<i class="f-ico-arrow-d"></i></a>
+                    <a class="fSort">新品<i class="f-ico-arrow-d"></i></a>
+                    <a class="fSort">销量<i class="f-ico-arrow-d"></i></a>
+                    <a class="fSort">价格<i class="f-ico-triangle-mt"></i><i class="f-ico-triangle-mb"></i></a>
+                </div>
+
+                <!-- 商品详情 -->
+                <div class="view grid-nosku">
+
+                    <div class="product" v-for="(item,index) in results" :key="index">
+                        <div class="product-iWrap">
+                            <!--商品封面-->
+                            <div class="productImg-wrap">
+                                <a class="productImg">
+                                    <img :src="item.img">
+                                </a>
+                            </div>
+                            <!--价格-->
+                            <p class="productPrice">
+                                <em><b>¥</b>{{item.price}}</em>
+                            </p>
+                            <!--标题-->
+                            <p class="productTitle">
+                                <a v-html="item.name" src=""> </a>
+                            </p>
+                            <!-- 店铺名 -->
+                            <div class="productShop">
+                                <span>店铺： 狂神说Java </span>
+                            </div>
+                            <!-- 成交信息 -->
+                            <p class="productStatus">
+                                <span>月成交<em>999笔</em></span>
+                                <span>评价 <a>3</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const vue = new Vue({
+        el:"#app",
+        data:{
+            "keyword": '', // 搜索的关键字
+            "results":[] // 后端返回的结果
+        },
+        methods:{
+            searchKey(){
+                var keyword = this.keyword;
+                console.log(keyword);
+                axios.get('/h_search/'+keyword+'/0/20').then(response=>{
+                    console.log(response.data);
+                    this.results=response.data;
+                })
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
