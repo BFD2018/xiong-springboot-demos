@@ -29,6 +29,7 @@ public class IndexController {
 
     @GetMapping("/main.html")
     public String mainPage(HttpSession session,Model model){
+        /* //使用拦截器后
         Object loginUser = session.getAttribute("loginUser");
         if(loginUser != null){
             return "main";
@@ -36,7 +37,9 @@ public class IndexController {
             //回到登录页面
             model.addAttribute("msg","请重新登录");
             return "login";
-        }
+        }*/
+
+        return "main";
     }
 
 }
