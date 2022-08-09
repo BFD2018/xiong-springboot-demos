@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class MyLoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info("目标方法执行前 请求URL===>{}",request.getRequestURI());
+        //log.info("目标方法执行前 请求URL===>{}",request.getRequestURI());
         Object loginUser = request.getSession().getAttribute("loginUser");
         if(loginUser == null){
             request.setAttribute("msg","请先登录");
@@ -24,11 +24,11 @@ public class MyLoginInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        log.info("目标方法执行后 ModelAndView===>{}",modelAndView);
+        //log.info("目标方法执行后 ModelAndView===>{}",modelAndView);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        log.info("页面渲染以后,handler===>{},exception===>{}",handler,ex);
+        //log.info("页面渲染以后,handler===>{},exception===>{}",handler,ex);
     }
 }
