@@ -45,6 +45,7 @@
         <module>springboot-fastjson</module>
         <module>springboot-web01</module>
         <module>springboot-elasticsearch</module>
+        <module>springboot-mybatisplus</module>
     </modules>
 
     <dependencies>
