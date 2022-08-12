@@ -24,7 +24,7 @@ public class AliyunOssConfig {
     private String urlPrefix;       // Bucket 域名
     private String fileHost;        // 目标文件夹
 
-    // 将OSS 客户端交给Spring容器托管
+    // 将OSS客户端交给Spring容器托管
     @Bean
     public OSS getOssClient() {
         OSSClient ossClient = new OSSClient(endPoint, accessKeyId, accessKeySecret);

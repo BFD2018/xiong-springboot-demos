@@ -52,7 +52,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">增加User</button>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -64,6 +64,7 @@
                                         <th>name</th>
                                         <th>age</th>
                                         <th>email</th>
+                                        <th>avatar</th>
                                         <th>X</th>
                                     </tr>
                                     </thead>
@@ -75,7 +76,10 @@
                                         <td th:text="${user.age}">Trident</td>
                                         <td th:text="${user.email}">Trident</td>
                                         <td>
-                                            <a th:href="@{/user/delete(useid=${user.id})}" type="button"
+                                            <img th:src="@{${user.avatar}}" style="height: 120px;width: auto" class="img-fluid mb-2" alt="black sample">
+                                        </td>
+                                        <td>
+                                            <a th:href="@{/user/delete(userid=${user.id},page=${usersPage.current})}" type="button"
                                                class="btn btn-danger btn-sm">删除</a>
                                         </td>
 
@@ -121,6 +125,57 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="modal-default">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">新增User</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form enctype="multipart/form-data" method="post" th:action="@{/user/add}">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="exampleInputName">name</label>
+                                            <input type="text" class="form-control" name="name" id="exampleInputName" placeholder="Enter name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputAge">age</label>
+                                            <input type="text" name="age" class="form-control" id="exampleInputAge" placeholder="age">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail">email</label>
+                                            <input type="email" name="email" class="form-control" id="exampleInputEmail" placeholder="email">
+                                        </div>
+                                        <div class="form-group">
+                                            <!-- <label for="customFile">Custom File</label> -->
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="avatar" id="customFile">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">提交</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
             </div>
             <!-- /.container-fluid -->
         </section>
@@ -154,26 +209,19 @@
 <script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!--&lt;!&ndash; SweetAlert2 &ndash;&gt;-->
+<!--<script src="/plugins/sweetalert2/sweetalert2.min.js"></script>-->
+<!--&lt;!&ndash; Toastr &ndash;&gt;-->
+<!--<script src="/plugins/toastr/toastr.min.js"></script>-->
+
 <!-- AdminLTE App -->
 <script src="/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/dist/js/demo.js"></script>
+<!--<script src="/dist/js/demo.js"></script>-->
 <!-- Page specific script -->
 <script>
     $(function () {
-        $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+
     });
 </script>
 </body>
