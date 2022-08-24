@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>用户登录</h1>
+<form method="post" th:action="@{/doLogin}">
+    <p>
+        用户名: <input name="username" type="text">
+    </p>
+    <p>
+        密码: <input name="password" type="text">
+    </p>
+    <p>
+        验证码: <input name="captchaImg" type="text"> <img alt="" th:src="@{/captcha}">
+    </p>
+    <p>
+        <input type="submit" value="登录">
+    </p>
+</form>
+
+<h2>显示信息</h2>
+<h4>request作用域：</h4>
+<p th:text="${SPRING_SECURITY_LAST_EXCEPTION}"></p>
+<h4>session作用域：</h4>
+<p th:text="${session.SPRING_SECURITY_LAST_EXCEPTION}"></p>
+</body>
+</html>

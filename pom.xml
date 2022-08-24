@@ -46,6 +46,7 @@
         <module>springboot-web01</module>
         <module>springboot-elasticsearch</module>
         <module>springboot-mybatisplus</module>
+        <module>security-mysql</module>
     </modules>
 
     <dependencies>
