@@ -1,4 +1,4 @@
-package com.xjt.springbootswagger2.config;
+package com.xjt.source.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

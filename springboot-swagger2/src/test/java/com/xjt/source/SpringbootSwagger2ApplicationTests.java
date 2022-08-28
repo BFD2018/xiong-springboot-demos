@@ -1,4 +1,4 @@
-package com.xjt.springbootswagger2;
+package com.xjt.source;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

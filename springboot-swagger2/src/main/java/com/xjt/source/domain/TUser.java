@@ -1,4 +1,4 @@
-package com.xjt.springbootswagger2.domain;
+package com.xjt.source.domain;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

@@ -1,4 +1,4 @@
-package com.xjt.springbootswagger2;
+package com.xjt.source;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

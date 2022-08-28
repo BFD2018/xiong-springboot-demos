@@ -47,6 +47,9 @@
         <module>springboot-elasticsearch</module>
         <module>springboot-mybatisplus</module>
         <module>security-mysql</module>
+        <module>springsecurity-16authorize</module>
+        <module>springsecurity-17authority</module>
+        <module>springboot-sourcecode</module>
     </modules>
 
     <dependencies>

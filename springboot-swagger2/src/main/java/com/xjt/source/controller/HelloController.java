@@ -1,6 +1,6 @@
-package com.xjt.springbootswagger2.controller;
+package com.xjt.source.controller;
 
-import com.xjt.springbootswagger2.domain.TUser;
+import com.xjt.source.domain.TUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 
