@@ -9,7 +9,7 @@ import java.io.IOException;
 public class MyServletConf extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("hello springboot MyServletConf===>");
+        System.out.println("MyServletConf===>doGet");
         resp.getWriter().println("hello springboot MyServletConf");
         resp.getWriter().flush();
         resp.getWriter().close();
