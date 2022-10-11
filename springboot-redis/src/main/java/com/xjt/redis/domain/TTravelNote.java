@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -25,5 +26,6 @@ public class TTravelNote implements Serializable {
     private String viewCount;
     private Integer up;
     private Boolean type;       //true-热门游记  false-最新发布
-    private LocalDateTime createTime;
+
+    private Date createTime;
 }
