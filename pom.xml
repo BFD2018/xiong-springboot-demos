@@ -57,6 +57,7 @@
         <module>springboot-sourcecode</module>
         <module>springsecurity-demos</module>
         <module>springboot-alipay-sandbox</module>
+        <module>springboot-cache</module>
     </modules>
 
     <!-- 依赖声明 -->
