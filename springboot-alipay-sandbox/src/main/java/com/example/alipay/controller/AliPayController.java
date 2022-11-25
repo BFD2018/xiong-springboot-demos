@@ -65,7 +65,7 @@ public class AliPayController {
             e.printStackTrace();
         }
         httpResponse.setContentType("text/html;charset=" + CHARSET);
-        httpResponse.getWriter().write(form);// 直接将完整的表单html输出到页面
+        httpResponse.getWriter().write(form);           // 直接将完整的表单html输出到页面
         httpResponse.getWriter().flush();
         httpResponse.getWriter().close();
     }
@@ -90,6 +90,7 @@ public class AliPayController {
             String sign = params.get("sign");
             String content = AlipaySignature.getSignCheckContentV1(params);
             boolean checkSignature = AlipaySignature.rsa256CheckContent(content, sign, aliPayConfig.getAlipayPublicKey(), "UTF-8"); // 验证签名
+            System.out.println("checkSignature===" + checkSignature);
             // 支付宝验签
             if (checkSignature) {
                 // 验签通过
