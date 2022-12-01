@@ -1,7 +1,7 @@
 package com.xjt.shiro.config.shiro;
 
-import com.xjt.myshiro.domain.TUser;
-import com.xjt.myshiro.service.TUserService;
+import com.xjt.shiro.domain.TUser;
+import com.xjt.shiro.service.TUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

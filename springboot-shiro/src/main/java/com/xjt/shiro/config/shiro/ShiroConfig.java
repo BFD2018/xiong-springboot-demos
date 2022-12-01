@@ -1,6 +1,6 @@
 package com.xjt.shiro.config.shiro;
 
-import com.xjt.myshiro.config.shiro.CustomRealm;
+import com.xjt.shiro.config.shiro.CustomRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.Authorizer;
 import org.apache.shiro.authz.ModularRealmAuthorizer;
@@ -65,7 +65,7 @@ public class ShiroConfig {
     //3.创建自定义的realm
     @Bean(name = "customRealm")
     public Realm customRealm(){
-        com.xjt.myshiro.config.shiro.CustomRealm customRealm = new CustomRealm();
+        com.xjt.shiro.config.shiro.CustomRealm customRealm = new CustomRealm();
 
         //加盐
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();

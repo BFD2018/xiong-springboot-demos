@@ -33,7 +33,7 @@ public class HtmlParseUtil {
         List<JDContent> contents = new ArrayList<JDContent>();
         for (Element li : lis) {
             // 由于网站图片使用懒加载，将src属性替换为data-lazy-img
-            String img = li.getElementsByTag("img").eq(0).attr("data-lazy-img");// 获取li下 第一张图片
+            String img = li.getElementsByTag("img").eq(0).attr("data-lazy-img");        // 获取li下 第一张图片
             String name = li.getElementsByClass("p-name").eq(0).text();
             String price = li.getElementsByClass("p-price").eq(0).text();
             // 封装为对象

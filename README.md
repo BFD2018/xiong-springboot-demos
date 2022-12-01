@@ -41,6 +41,15 @@
 - [x] 拦截器
 - [x] httpclient
 - [x] springboot配置文件
+- [x] springboot-elasticsearch
+> springboot集成elasticsearch
+> 1. 索引增删改查
+> 2. 文档
+> 3. 映射
+> 4. 高级查询
+> 5. 综合案例：爬虫jsoup（京东图书页面） + elasticsearch搜索
+
+
 - [x] javaweb相关
 - [x] 异常处理
   - [x] springmvc全局异常处理

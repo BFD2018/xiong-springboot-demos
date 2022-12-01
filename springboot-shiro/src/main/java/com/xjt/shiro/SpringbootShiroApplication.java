@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringbootShiroApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(com.xjt.myshiro.SpringbootShiroApplication.class, args);
+        SpringApplication.run(com.xjt.shiro.SpringbootShiroApplication.class, args);
     }
 
 }

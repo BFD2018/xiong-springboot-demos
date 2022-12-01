@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.atguigu</groupId>
-    <artifactId>boot-05-web-01</artifactId>
+    <artifactId>springboot-web01</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>boot-05-web-01</name>
     <description>Demo project for Spring Boot</description>
