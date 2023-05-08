@@ -1,0 +1,45 @@
+server:
+  port: 8880
+  tomcat:
+    accept-count: 3
+    max-connections: 6
+    threads:
+      max: 10
+    basedir: ./target/
+
+#fastdfs配置
+fdfs:
+  so-timeout: 15000
+  connect-timeout: 1500
+  tracker-list:
+    - 192.168.157.129:22122
+  thumb-image:
+    height: 150
+    width: 150
+  web-server-url: http://192.168.157.129:8888/
+  pool:
+    #从池中借出的对象的最大数目（配置为-1表示不限制）
+    max-total: -1
+    #获取连接时的最大等待毫秒数(默认配置为5秒)
+    max-wait-millis: 5000
+    #每个key最大连接数
+    max-total-per-key: 50
+    #每个key对应的连接池最大空闲连接数
+    max-idle-per-key: 10
+    #每个key对应的连接池最小空闲连接数
+    min-idle-per-key: 5
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart.max-file-size: 1000MB
+    multipart.max-request-size: 1000MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xiong-springboot-demos?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    password: root
+    username: root
+
+#mysql配置

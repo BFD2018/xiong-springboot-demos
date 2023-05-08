@@ -60,6 +60,14 @@
         <module>springboot-cache</module>
         <module>springboot-shardingsphere</module>
         <module>springboot-docker-compose</module>
+        <module>springboot-thymeleaf-admin</module>
+        <module>springboot-swagger2</module>
+        <module>springboot-sourcecode</module>
+        <module>springboot-mail</module>
+        <module>springboot-exception</module>
+        <module>springboot-aliyun</module>
+        <module>free-api</module>
+        <module>face-recognition</module>
     </modules>
 
     <!-- 依赖声明 -->

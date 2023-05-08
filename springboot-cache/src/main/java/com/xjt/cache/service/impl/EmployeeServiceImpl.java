@@ -14,13 +14,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeMapper employeeMapper;
 
-    @Cacheable(cacheNames = {"emp"})
+    @Cacheable(cacheNames = {"emp"})        //先从缓存中拿数据 如果有就不执行目标方法
     @Override
     public Employee getEmpById(Integer id) {
         return employeeMapper.getEmpById(id);
     }
 
-    @CachePut(value = "emp",key = "#id")
+    @CachePut(value = "emp",key = "#id")            //先调用目标方法，将目标方法的结果缓存起来
     @Override
     public Employee updateEmp(int id){
         //先通过id查询

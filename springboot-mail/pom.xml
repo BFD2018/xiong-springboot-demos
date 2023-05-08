@@ -7,9 +7,11 @@
         <artifactId>springboot-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>springboot-mail</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <name>springboot-mail</name>
     <description>Demo project for Spring Boot</description>
     <properties>

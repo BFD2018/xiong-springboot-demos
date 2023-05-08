@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xjt.mapper.InformationMapper">
+
+    <sql id="baseColumnList">
+        id,
+        data_info,
+        type,
+        create_time,
+        update_time
+    </sql>
+
+    <sql id="listSql">
+        select
+        <include refid="baseColumnList"/>
+        from
+        information
+        <where>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="title != null">
+                and data_info ->> '$.title' like concat('%', #{title}, '%')
+            </if>
+            <if test="content != null">
+                and data_info ->> '$.content' like concat('%', #{content}, '%')
+            </if>
+            <if test="createTime != null" >
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null" >
+                and update_time = #{updateTime}
+            </if>
+        </where>
+
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into information(data_info,type)
+        values (#{dataInfo},#{type})
+    </insert>
+
+
+    <update id="update">
+        update information
+        <set>
+            <if test="dataInfo != null">
+                data_info = #{dataInfo},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete">
+        delete from information
+        where id in <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+    </delete>
+
+
+    <select id="list" resultType="com.example.tourismmanagement.entity.Information">
+        <include refid="listSql"/>
+
+    </select>
+</mapper>

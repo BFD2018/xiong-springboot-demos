@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>FastDfs文件上传下载Demo</h1>
+    <el-button type="primary">上传</el-button>
+    <el-button type="primary">下载</el-button>
+    <el-button type="primary">主要按钮</el-button>
+
+    <h2>文件列表</h2>
+    <el-row :gutter="20">
+        <el-col :span="6" v-for="(item,index) in fileList">
+            <el-card class="box-card">
+                <div>
+                    <el-image
+                            style="width: 300px; height: 300px"
+                            :src="item.url"
+                            :fit="fit"></el-image>
+                </div>
+            </el-card>
+        </el-col>
+    </el-row>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            fileList:[]
+        },
+        methods:{
+            initGetImages(){
+
+            }
+        },
+        created:{
+
+        }
+    })
+</script>
+</body>
+</html>

@@ -7,8 +7,9 @@
 		<artifactId>springboot-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
     </parent>
+
     <groupId>com.xjt</groupId>
-    <artifactId>controller-advice</artifactId>
+    <artifactId>springboot-controller-advice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>

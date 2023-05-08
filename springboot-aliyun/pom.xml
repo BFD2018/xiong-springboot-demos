@@ -9,8 +9,9 @@
     </parent>
 
     <groupId>com.xjt.oss</groupId>
-    <artifactId>aliyun-oss</artifactId>
+    <artifactId>springboot-aliyun</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <name>aliyun-oss</name>
     <description>Demo project for Spring Boot</description>
     <properties>
