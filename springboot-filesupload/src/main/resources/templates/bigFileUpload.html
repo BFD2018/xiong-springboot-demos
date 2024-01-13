@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/webuploader/0.1.1/webuploader.js"></script>
+</head>
+<body>
+    <div id="upload-container">
+        <h1>上传</h1>
+    </div>
+
+    <div>文件列表</div>
+    <div id="upload-list"></div>
+
+    <button id="picker" type="button">点击上传</button>
+</body>
+<script>
+    $("#picker").find('input').click();
+
+    $('#upload-container').click(function (event){
+        console.log(event)
+        var uploader = WebUploader.create({
+            auto: true,
+            swf : 'Uploader.swf', //swf文件路径
+            server: 'http://localhost:8080/bigfile/up',
+            dnd: '#upload-container',
+            pick: '#picker',  //内部根据当前运行创建
+            multiple: true,     //选择多个
+            chunked: true,      //开启分片
+            threads: 20,        //并发数
+            method: 'POST',
+            fileSizeLimit: 1024*1024*1024*10, //单个文件大小限制
+            fileSingleSizeLimit: 1024*1024*1024,  //总文件大小
+            fileVal: 'upload'
+        });
+        uploader.on("beforeFileQueued",function (file){
+            console.log(file); //获取文件后缀
+        });
+        uploader.on('fileQueued',function (file){
+            //选中文件要做的事
+            console.log(file.ext);
+            console.log(file.size);
+            console.log(file.name);
+            var html = '<div class="upload-item"><span>文件名：'+file.name+'</span><span data-file_id="'+file.id+'"class="btn-delete">删除</span><span data-file_id="'+file.id+'"class="btn-retry">重试</span><div class="percentage '+file.id+'" style="width: 0%;"></div></div>'
+            $('#upload-list').append(html);
+            uploader.md5File(file)      //给文件定义唯一的md5值，当再次上传相同文件时，就不用传了  大文件秒传实际上是没传，直接拷贝之前文件地址
+                //显示进度
+                .progress(function (percentage){
+                    console.log('Percentage:',percentage);
+                })
+                //完成
+                .then(function (val){
+                    console.log('md5 result',val);
+                });
+        });
+    });
+
+</script>
+</html>

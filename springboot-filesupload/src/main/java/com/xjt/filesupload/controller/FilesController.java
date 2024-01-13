@@ -1,6 +1,5 @@
 package com.xjt.filesupload.controller;
 
-import cn.hutool.core.date.DateUtil;
 import com.xjt.filesupload.domain.TUserFile;
 import com.xjt.filesupload.service.TUserFilesService;
 import com.xjt.filesupload.utils.RespBean;
@@ -8,8 +7,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.UUID;
 
 @RestController
@@ -43,7 +41,7 @@ public class FilesController {
         long size = file.getSize();
 
         // 根据日期动态的生成目录
-        String uploadDir = System.getProperty("user.dir") + "/springboot-filesupload/src/main/resources/static/filesContainer/" + DateUtil.today();
+        String uploadDir = System.getProperty("user.dir") + "/springboot-filesupload/src/main/resources/static/filesContainer/" + new Date().getTime();
         System.out.println(new File("").getAbsolutePath());
         System.out.println("uploadDir---------->");
         System.out.println(uploadDir);

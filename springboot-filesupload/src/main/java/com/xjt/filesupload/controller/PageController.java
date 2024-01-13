@@ -11,4 +11,9 @@ public class PageController {
     public String toUserFilesPage(){
         return "user-files";
     }
+
+    @GetMapping("/bigfile")
+    public String bigFilesPage(){
+        return "bigFileUpload";
+    }
 }
