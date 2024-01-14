@@ -21,7 +21,7 @@ public class MyUserDetailService implements UserDetailsService, UserDetailsPassw
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //1.根据用户查询用户
         QueryWrapper<TUser> wrapper = new QueryWrapper<>();
-        wrapper.eq("username",username);
+        wrapper.eq("username", username);
         TUser user = tUserMapper.selectOne(wrapper);
         if (ObjectUtils.isEmpty(user)) throw new UsernameNotFoundException("用户名不存在");
 
@@ -34,8 +34,8 @@ public class MyUserDetailService implements UserDetailsService, UserDetailsPassw
     @Override
     public UserDetails updatePassword(UserDetails user, String newPassword) {
         int update = tUserMapper.updatePasswordByUsername(user.getUsername(), newPassword);
-        if(update>0){
-            ((TUser)user).setPassword(newPassword);
+        if (update > 0) {
+            ((TUser) user).setPassword(newPassword);
         }
 
         return user;

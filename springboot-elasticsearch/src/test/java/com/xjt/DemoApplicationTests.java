@@ -125,7 +125,7 @@ class DemoApplicationTests {
     public void testDocumentUpadte() throws IOException {
         UpdateRequest request = new UpdateRequest("xiong_index", "1");
         User new_user = new User("张无忌", 22);
-        request.doc(JSON.toJSONString(new_user),XContentType.JSON);
+        request.doc(JSON.toJSONString(new_user), XContentType.JSON);
         UpdateResponse updateResponse = client.update(request, RequestOptions.DEFAULT);
         System.out.println(updateResponse);
         System.out.println(updateResponse.status());
@@ -133,7 +133,7 @@ class DemoApplicationTests {
 
     //4、搜索文档
     @Test
-    public void testSearch(){
+    public void testSearch() {
         SearchRequest searchRequest = new SearchRequest("xiong_index");
         SearchSourceBuilder builder = new SearchSourceBuilder();
         MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("name", "张无忌");
@@ -183,9 +183,9 @@ class DemoApplicationTests {
     @Test
     public void test() throws IOException {
         IndexRequest request = new IndexRequest("xiong_index");        // 没有id会自动生成一个随机ID
-        request.source(JSON.toJSONString(new User("liu",1)),XContentType.JSON);
-        request.source(JSON.toJSONString(new User("min",2)),XContentType.JSON);
-        request.source(JSON.toJSONString(new User("kai",3)),XContentType.JSON);
+        request.source(JSON.toJSONString(new User("liu", 1)), XContentType.JSON);
+        request.source(JSON.toJSONString(new User("min", 2)), XContentType.JSON);
+        request.source(JSON.toJSONString(new User("kai", 3)), XContentType.JSON);
         IndexResponse index = client.index(request, RequestOptions.DEFAULT);
         System.out.println(index.status());// created
     }
@@ -196,19 +196,19 @@ class DemoApplicationTests {
         BulkRequest bulkRequest = new BulkRequest();
         bulkRequest.timeout("10s");
         ArrayList<User> users = new ArrayList<>();
-        users.add(new User("liuyou-1",1));
-        users.add(new User("liuyou-2",2));
-        users.add(new User("liuyou-3",3));
-        users.add(new User("liuyou-4",4));
-        users.add(new User("liuyou-5",5));
-        users.add(new User("liuyou-6",6));
+        users.add(new User("liuyou-1", 1));
+        users.add(new User("liuyou-2", 2));
+        users.add(new User("liuyou-3", 3));
+        users.add(new User("liuyou-4", 4));
+        users.add(new User("liuyou-5", 5));
+        users.add(new User("liuyou-6", 6));
         // 批量请求处理
         for (int i = 0; i < users.size(); i++) {
             bulkRequest.add(
                     // 这里是数据信息
                     new IndexRequest("xiong_index")
-                            .id(""+(i + 1))         // 没有设置id 会自定生成一个随机id
-                            .source(JSON.toJSONString(users.get(i)),XContentType.JSON)
+                            .id("" + (i + 1))         // 没有设置id 会自定生成一个随机id
+                            .source(JSON.toJSONString(users.get(i)), XContentType.JSON)
             );
         }
         BulkResponse bulk = client.bulk(bulkRequest, RequestOptions.DEFAULT);

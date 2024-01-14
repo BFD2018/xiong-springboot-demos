@@ -1,6 +1,6 @@
 package com.xjt.domain;
 
-public class Noodles implements Food{
+public class Noodles implements Food {
 
     @Override
     public String showName() {

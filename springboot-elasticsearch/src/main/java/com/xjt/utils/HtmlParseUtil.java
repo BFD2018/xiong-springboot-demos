@@ -37,7 +37,7 @@ public class HtmlParseUtil {
             String name = li.getElementsByClass("p-name").eq(0).text();
             String price = li.getElementsByClass("p-price").eq(0).text();
             // 封装为对象
-            JDContent content = new JDContent(name,img,price);
+            JDContent content = new JDContent(name, img, price);
             // 添加到list中
             contents.add(content);
         }

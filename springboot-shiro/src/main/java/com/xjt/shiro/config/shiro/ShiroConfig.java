@@ -20,13 +20,13 @@ import java.util.LinkedHashMap;
 @Configuration
 public class ShiroConfig {
     @Bean
-    public Authorizer authorizer(){
+    public Authorizer authorizer() {
         return new ModularRealmAuthorizer();
     }
 
     //1.创建shiroFilter  负责拦截所有请求
     @Bean(name = "shiroFilterFactoryBean")
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier(value = "defaultWebSecurityManager") DefaultWebSecurityManager securityManager){
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier(value = "defaultWebSecurityManager") DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         //给filter设置安全管理
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -36,13 +36,13 @@ public class ShiroConfig {
 
         //配置系统公共资源
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
-        map.put("/static/**","anon");   //anon 设置为公共资源
-        map.put("/user/**","anon");   //anon 设置为公共资源
+        map.put("/static/**", "anon");   //anon 设置为公共资源
+        map.put("/user/**", "anon");   //anon 设置为公共资源
         //map.put("/user/toLogout","logout");   //登出过滤器
-        map.put("/view/login","anon");   //anon 设置为公共资源
-        map.put("/view/register","anon");   //anon 设置为公共资源
+        map.put("/view/login", "anon");   //anon 设置为公共资源
+        map.put("/view/register", "anon");   //anon 设置为公共资源
         //配置系统受限资源
-        map.put("/**","authc");     //authc 请求该资源需要认证和授权
+        map.put("/**", "authc");     //authc 请求该资源需要认证和授权
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
 
@@ -52,7 +52,7 @@ public class ShiroConfig {
     //2.创建安全管理器
     @Bean(name = "defaultWebSecurityManager")
     public DefaultWebSecurityManager defaultWebSecurityManager(@Qualifier(value = "customRealm") Realm customRealm,
-                                                               @Qualifier(value = "shiroCacheManager") RedisCacheManager redisCacheManager){
+                                                               @Qualifier(value = "shiroCacheManager") RedisCacheManager redisCacheManager) {
         DefaultWebSecurityManager webSecurityManager = new DefaultWebSecurityManager();
         //给安全管理器设置realm
         webSecurityManager.setRealm(customRealm);
@@ -64,7 +64,7 @@ public class ShiroConfig {
 
     //3.创建自定义的realm
     @Bean(name = "customRealm")
-    public Realm customRealm(){
+    public Realm customRealm() {
         com.xjt.shiro.config.shiro.CustomRealm customRealm = new CustomRealm();
 
         //加盐
@@ -99,6 +99,7 @@ public class ShiroConfig {
         advisorAutoProxyCreator.setProxyTargetClass(true);
         return advisorAutoProxyCreator;
     }
+
     //开启aop注解支持
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier(value = "defaultWebSecurityManager") DefaultWebSecurityManager defaultWebSecurityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();

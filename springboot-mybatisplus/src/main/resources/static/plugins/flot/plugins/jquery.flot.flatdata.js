@@ -38,7 +38,7 @@ You can use series.step to specify the interval between consecutive indexes of t
     }
 
     $.plot.plugins.push({
-        init: function(plot) {
+        init: function (plot) {
             plot.hooks.processRawData.push(process1DRawData);
         },
         name: 'flatdata',

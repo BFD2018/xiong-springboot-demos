@@ -25,10 +25,10 @@
             <if test="content != null">
                 and data_info ->> '$.content' like concat('%', #{content}, '%')
             </if>
-            <if test="createTime != null" >
+            <if test="createTime != null">
                 and create_time = #{createTime}
             </if>
-            <if test="updateTime != null" >
+            <if test="updateTime != null">
                 and update_time = #{updateTime}
             </if>
         </where>
@@ -61,9 +61,10 @@
     </update>
     <delete id="delete">
         delete from information
-        where id in <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
-        #{item}
-    </foreach>
+        where id in
+        <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </delete>
 
 

@@ -56,7 +56,6 @@
                 '<span class="irs-slider to"></span>';
 
 
-
             return this.each(function () {
                 var settings = $.extend({
                     min: 10,
@@ -77,7 +76,6 @@
                 }, options);
 
 
-
                 var slider = $(this),
                     self = this;
 
@@ -88,7 +86,6 @@
 
                 pluginCount += 1;
                 this.pluginCount = pluginCount;
-
 
 
                 // check default values
@@ -207,7 +204,6 @@
                 }
 
 
-
                 // public methods
                 this.updateData = function (options) {
                     firstStart = true;
@@ -223,9 +219,6 @@
                     slider.data("isActive", false);
                     slider.show();
                 };
-
-
-
 
 
                 // private methods

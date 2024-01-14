@@ -19,7 +19,7 @@ import java.util.Map;
 public class MyTest {
 
     @Test
-    void test01(){
+    void test01() {
         // 获取token地址
         String authHost = "https://aip.baidubce.com/oauth/2.0/token?";
         String getAccessTokenUrl = authHost
@@ -62,9 +62,9 @@ public class MyTest {
     }
 
     @Test
-    void test02(){
+    void test02() {
         AipFace client = new AipFace("15391850", "FVnP4fAmGymppljHZZ6leenG", "YT1BH5yETk370RoR85xuNoFjiT6bB56Q");
-        JSONObject jsonObject = client.search("https://xiong-test-srt.oss-cn-shenzhen.aliyuncs.com/typoraimages/20220629223736.png", "URL","face_recognition_test", null);
+        JSONObject jsonObject = client.search("https://xiong-test-srt.oss-cn-shenzhen.aliyuncs.com/typoraimages/20220629223736.png", "URL", "face_recognition_test", null);
         System.out.println(jsonObject);
     }
 
@@ -72,7 +72,7 @@ public class MyTest {
     private BaiduAiUtils baiduAiUtils;
 
     @Test
-    void test03(){
+    void test03() {
         RespBean respBean = baiduAiUtils.faceSearch("https://xiong-test-srt.oss-cn-shenzhen.aliyuncs.com/typoraimages/20220629223736.png", "URL");
         System.out.println(respBean);
     }

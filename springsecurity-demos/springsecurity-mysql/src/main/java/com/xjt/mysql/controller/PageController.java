@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PageController {
-    @GetMapping({"/login.html","login"})
-    public String toLogin(){
+    @GetMapping({"/login.html", "login"})
+    public String toLogin() {
         return "login";
     }
 
-    @GetMapping({"/home","/"})
-    public String toHome(){
+    @GetMapping({"/home", "/"})
+    public String toHome() {
         return "home";
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ServletConfig {
     @Bean
-    public ServletRegistrationBean servletRegistrationBean(){
+    public ServletRegistrationBean servletRegistrationBean() {
         ServletRegistrationBean<MyServletConf> servletRegistrationBean = new ServletRegistrationBean<>(new MyServletConf(), "/xxoo", "/serv");
         return servletRegistrationBean;
     }

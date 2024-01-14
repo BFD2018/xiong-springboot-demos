@@ -32,6 +32,7 @@ public class ApiRequestController {
     //创建连接池管理器
     PoolingHttpClientConnectionManager cm = null;
     CloseableHttpClient httpClient = null;
+
     {
         //创建连接池管理器
         cm = new PoolingHttpClientConnectionManager();
@@ -52,9 +53,9 @@ public class ApiRequestController {
         CloseableHttpResponse response = null;
         String responseStr = "";
         try {
-            httpPost.setHeader("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
-            httpPost.setHeader("referer","https://sm.ms/");
-            httpPost.setHeader("Authorization","CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
+            httpPost.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
+            httpPost.setHeader("referer", "https://sm.ms/");
+            httpPost.setHeader("Authorization", "CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
             MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
 
             for (MultipartFile multipartFile : multipartFiles) {
@@ -82,7 +83,7 @@ public class ApiRequestController {
 
     @GetMapping("/upload_history")
     @ResponseBody
-    public Object getImgUploadHistory(){
+    public Object getImgUploadHistory() {
         System.out.println("httpClient----------->");
         System.out.println(httpClient);
 
@@ -93,10 +94,10 @@ public class ApiRequestController {
         String ret = "";
 
         try {
-            httpGet.setHeader("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
-            httpGet.setHeader("referer","https://sm.ms/");
-            httpGet.setHeader("Authorization","CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
-            httpGet.setHeader("Content-Type","multipart/form-data");
+            httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
+            httpGet.setHeader("referer", "https://sm.ms/");
+            httpGet.setHeader("Authorization", "CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
+            httpGet.setHeader("Content-Type", "multipart/form-data");
 
             // 设置配置请求参数
             RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(35000)// 连接主机服务超时时间
@@ -108,14 +109,14 @@ public class ApiRequestController {
 
             response = httpClient.execute(httpGet);
 
-            ret = EntityUtils.toString(response.getEntity(),"utf-8");
+            ret = EntityUtils.toString(response.getEntity(), "utf-8");
 
             System.out.println(ret);
             System.out.println(JSONObject.parse(ret));
 
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             HttpClientUtils.closeQuietly(response);
         }
 
@@ -123,11 +124,9 @@ public class ApiRequestController {
     }
 
 
-
-
     @GetMapping("/delete")
     @ResponseBody
-    public Object deleteImage(@RequestParam("imghash") String imghash){
+    public Object deleteImage(@RequestParam("imghash") String imghash) {
         //CloseableHttpClient httpClient = HttpClientBuilder.create().build();;
         HttpGet httpGet = new HttpGet("https://sm.ms/api/v2/delete/" + imghash);
         CloseableHttpResponse response = null;
@@ -135,22 +134,22 @@ public class ApiRequestController {
         String ret = "";
 
         try {
-            httpGet.setHeader("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
-            httpGet.setHeader("referer","https://sm.ms/");
-            httpGet.setHeader("Authorization","CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
+            httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
+            httpGet.setHeader("referer", "https://sm.ms/");
+            httpGet.setHeader("Authorization", "CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
 
             response = httpClient.execute(httpGet);
 
-            ret = EntityUtils.toString(response.getEntity(),"utf-8");
+            ret = EntityUtils.toString(response.getEntity(), "utf-8");
 
             System.out.println(ret);
 
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             HttpClientUtils.closeQuietly(response);
         }
 
-        return  ret;
+        return ret;
     }
 }

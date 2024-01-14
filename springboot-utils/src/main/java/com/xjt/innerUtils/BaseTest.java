@@ -9,7 +9,7 @@ public class BaseTest {
     private RedisTemplate redisTemplate;
 
     @Test
-    public void testRedis(){
+    public void testRedis() {
         System.out.println(redisTemplate);
     }
 }

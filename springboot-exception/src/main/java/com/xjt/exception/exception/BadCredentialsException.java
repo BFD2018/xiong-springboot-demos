@@ -26,15 +26,15 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
  * 统一异常处理
  */
 @Getter
-public class BadCredentialsException extends RuntimeException{
+public class BadCredentialsException extends RuntimeException {
 
     private Integer status = BAD_REQUEST.value();
 
-    public BadCredentialsException(String msg){
+    public BadCredentialsException(String msg) {
         super(msg);
     }
 
-    public BadCredentialsException(HttpStatus status, String msg){
+    public BadCredentialsException(HttpStatus status, String msg) {
         super(msg);
         this.status = status.value();
     }

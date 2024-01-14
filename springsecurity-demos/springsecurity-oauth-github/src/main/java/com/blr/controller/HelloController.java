@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @GetMapping("/hello")
-    public DefaultOAuth2User hello(){
+    public DefaultOAuth2User hello() {
         System.out.println("hello ");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (DefaultOAuth2User) authentication.getPrincipal();

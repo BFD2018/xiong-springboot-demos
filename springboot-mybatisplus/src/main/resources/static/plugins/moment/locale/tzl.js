@@ -4,11 +4,12 @@
 //! author : Iustì Canun
 
 ;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined'
+    && typeof require === 'function' ? factory(require('../moment')) :
+        typeof define === 'function' && define.amd ? define(['../moment'], factory) :
+            factory(global.moment)
+}(this, (function (moment) {
+    'use strict';
 
     //! moment.js locale configuration
 
@@ -91,8 +92,8 @@
         return isFuture
             ? format[key][0]
             : withoutSuffix
-            ? format[key][0]
-            : format[key][1];
+                ? format[key][0]
+                : format[key][1];
     }
 
     return tzl;

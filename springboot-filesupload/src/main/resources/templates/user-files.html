@@ -18,7 +18,7 @@
         <h2>文件上传</h2>
         <el-upload
                 class="upload-demo"
-                    action="/files/upload"
+                action="/files/upload"
                 :data={"user_id":this.userInfo.user_id}
                 :on-success="handleUploadSuccess">
             <el-button size="small" type="primary">点击上传文件</el-button>
@@ -92,15 +92,18 @@
                         <el-button
                                 size="mini"
                                 type="success"
-                                @click="handlePreview(scope.row)">预览</el-button>
+                                @click="handlePreview(scope.row)">预览
+                        </el-button>
                         <el-button
                                 size="mini"
                                 type="warning"
-                                @click="handleDownload(scope.row)">下载</el-button>
+                                @click="handleDownload(scope.row)">下载
+                        </el-button>
                         <el-button
                                 size="mini"
                                 type="danger"
-                                @click="handleDelete(scope.$index,scope.row)">删除</el-button>
+                                @click="handleDelete(scope.$index,scope.row)">删除
+                        </el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -112,50 +115,50 @@
     const app = new Vue({
         el: '#app',
         data: {
-            imageUrl:"",
-            tableData:[],
-            userInfo:{
-                user_id:1,
-                user_name:"xiaoxiong",
+            imageUrl: "",
+            tableData: [],
+            userInfo: {
+                user_id: 1,
+                user_name: "xiaoxiong",
             },
         },
-        methods:{
+        methods: {
             handleUploadSuccess(res) {
                 console.log(res);
-                if(res.status === 200){
+                if (res.status === 200) {
                     this.$message.success("文件上传成功");
                     this.initTableData();
                 }
             },
 
-            initTableData(){
-                axios.get("/files/all?user_id="+this.userInfo.user_id).then(res =>{
+            initTableData() {
+                axios.get("/files/all?user_id=" + this.userInfo.user_id).then(res => {
                     console.log(res);
-                    if(res.data.status === 200){
+                    if (res.data.status === 200) {
                         this.tableData.splice(0);
                         this.tableData.push(...res.data.obj);
                     }
                 })
             },
             //预览
-            handlePreview(row){
+            handlePreview(row) {
 
             },
-            handleDownload(row){
+            handleDownload(row) {
                 // axios.get("/aliyun/oss/download?objectName="+row.key)
             },
-            handleDelete(index,row){
-                axios.get("/aliyun/oss/delete?filekey="+row.key).then(res =>{
+            handleDelete(index, row) {
+                axios.get("/aliyun/oss/delete?filekey=" + row.key).then(res => {
                     console.log(res);
-                    if(res.data.status === 200){
+                    if (res.data.status === 200) {
                         this.$message.success("删除成功");
-                        this.tableData.splice(index,1);
+                        this.tableData.splice(index, 1);
                     }
                 })
             },
 
         },
-        created(){
+        created() {
             this.initTableData();
         },
     })

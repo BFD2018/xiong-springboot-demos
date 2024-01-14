@@ -3,6 +3,7 @@ package com.xjt.mysql.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -17,7 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author testjava
@@ -25,7 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="TUser对象", description="")
+@ApiModel(value = "TUser对象", description = "")
 @TableName("t_user")
 public class TUser implements Serializable, UserDetails {
 

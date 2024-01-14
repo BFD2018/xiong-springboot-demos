@@ -31,7 +31,7 @@ import java.util.*;
 public class WebConfig /*implements WebMvcConfigurer*/ {
 
     @Bean
-    public HiddenHttpMethodFilter hiddenHttpMethodFilter(){
+    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
         HiddenHttpMethodFilter methodFilter = new HiddenHttpMethodFilter();
         methodFilter.setMethodParam("_m");
         return methodFilter;
@@ -40,7 +40,7 @@ public class WebConfig /*implements WebMvcConfigurer*/ {
 
     //1、WebMvcConfigurer定制化SpringMVC的功能
     @Bean
-    public WebMvcConfigurer webMvcConfigurer(){
+    public WebMvcConfigurer webMvcConfigurer() {
         return new WebMvcConfigurer() {
 
             /**
@@ -51,16 +51,16 @@ public class WebConfig /*implements WebMvcConfigurer*/ {
             public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
                 //Map<String, MediaType> mediaTypes
                 Map<String, MediaType> mediaTypes = new HashMap<>();
-                mediaTypes.put("json",MediaType.APPLICATION_JSON);
-                mediaTypes.put("xml",MediaType.APPLICATION_XML);
-                mediaTypes.put("gg",MediaType.parseMediaType("application/x-guigu"));
+                mediaTypes.put("json", MediaType.APPLICATION_JSON);
+                mediaTypes.put("xml", MediaType.APPLICATION_XML);
+                mediaTypes.put("gg", MediaType.parseMediaType("application/x-guigu"));
                 //指定支持解析哪些参数对应的哪些媒体类型
                 ParameterContentNegotiationStrategy parameterStrategy = new ParameterContentNegotiationStrategy(mediaTypes);
 //                parameterStrategy.setParameterName("ff");
 
                 HeaderContentNegotiationStrategy headeStrategy = new HeaderContentNegotiationStrategy();
 
-                configurer.strategies(Arrays.asList(parameterStrategy,headeStrategy));
+                configurer.strategies(Arrays.asList(parameterStrategy, headeStrategy));
             }
 
             @Override
@@ -83,7 +83,7 @@ public class WebConfig /*implements WebMvcConfigurer*/ {
                     @Override
                     public Pet convert(String source) {
                         // 啊猫,3
-                        if(!StringUtils.isEmpty(source)){
+                        if (!StringUtils.isEmpty(source)) {
                             Pet pet = new Pet();
                             String[] split = source.split(",");
                             pet.setName(split[0]);

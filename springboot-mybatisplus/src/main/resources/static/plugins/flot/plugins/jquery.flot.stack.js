@@ -37,7 +37,7 @@ charts or filled areas).
 
 (function ($) {
     var options = {
-        series: { stack: null } // or number/string
+        series: {stack: null} // or number/string
     };
 
     function init(plot) {
@@ -54,7 +54,7 @@ charts or filled areas).
             return res;
         }
 
-        function addBottomPoints (s, datapoints) {
+        function addBottomPoints(s, datapoints) {
             var formattedPoints = [];
             for (var i = 0; i < datapoints.points.length; i += 2) {
                 formattedPoints.push(datapoints.points[i]);

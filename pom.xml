@@ -68,6 +68,7 @@
         <module>springboot-aliyun</module>
         <module>free-api</module>
         <module>face-recognition</module>
+        <module>springboot-filepreview</module>
     </modules>
 
     <!-- 依赖声明 -->

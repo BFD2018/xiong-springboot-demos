@@ -6,7 +6,7 @@ spring:
     contentnegotiation:
       favor-parameter: true
 
-#    static-path-pattern: /res/**
+  #    static-path-pattern: /res/**
 
 
   resources:

@@ -27,7 +27,7 @@ public class FileUtil {
         byte[] bbuf = new byte[10240];
         // 用于保存实际读取的字节数
         int hasRead = 0;
-        while ( (hasRead = fis.read(bbuf)) > 0 ) {
+        while ((hasRead = fis.read(bbuf)) > 0) {
             sb.append(new String(bbuf, 0, hasRead));
         }
         fis.close();

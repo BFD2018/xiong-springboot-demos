@@ -113,7 +113,7 @@ The plugin allso adds the following methods to the plot object:
             if (selection.active) {
                 updateSelection(e);
 
-                plot.getPlaceholder().trigger("plotselecting", [ getSelection() ]);
+                plot.getPlaceholder().trigger("plotselecting", [getSelection()]);
             }
         }
 
@@ -131,11 +131,15 @@ The plugin allso adds the following methods to the plot object:
             // prevent text selection and drag in old-school browsers
             if (document.onselectstart !== undefined && savedhandlers.onselectstart == null) {
                 savedhandlers.onselectstart = document.onselectstart;
-                document.onselectstart = function () { return false; };
+                document.onselectstart = function () {
+                    return false;
+                };
             }
             if (document.ondrag !== undefined && savedhandlers.ondrag == null) {
                 savedhandlers.ondrag = document.ondrag;
-                document.ondrag = function () { return false; };
+                document.ondrag = function () {
+                    return false;
+                };
             }
 
             setSelectionPos(selection.first, e);
@@ -161,8 +165,8 @@ The plugin allso adds the following methods to the plot object:
                 triggerSelectedEvent();
             } else {
                 // this counts as a clear
-                plot.getPlaceholder().trigger("plotunselected", [ ]);
-                plot.getPlaceholder().trigger("plotselecting", [ null ]);
+                plot.getPlaceholder().trigger("plotunselected", []);
+                plot.getPlaceholder().trigger("plotselecting", [null]);
             }
 
             return false;
@@ -190,7 +194,7 @@ The plugin allso adds the following methods to the plot object:
             $.each(plot.getAxes(), function (name, axis) {
                 if (axis.used) {
                     var p1 = axis.c2p(c1[axis.direction]), p2 = axis.c2p(c2[axis.direction]);
-                    r[name] = { from: Math.min(p1, p2), to: Math.max(p1, p2) };
+                    r[name] = {from: Math.min(p1, p2), to: Math.max(p1, p2)};
                 }
             });
             return r;
@@ -199,11 +203,16 @@ The plugin allso adds the following methods to the plot object:
         function triggerSelectedEvent() {
             var r = getSelection();
 
-            plot.getPlaceholder().trigger("plotselected", [ r ]);
+            plot.getPlaceholder().trigger("plotselected", [r]);
 
             // backwards-compat stuff, to be removed in future
             if (r.xaxis && r.yaxis) {
-                plot.getPlaceholder().trigger("selected", [ { x1: r.xaxis.from, y1: r.yaxis.from, x2: r.xaxis.to, y2: r.yaxis.to } ]);
+                plot.getPlaceholder().trigger("selected", [{
+                    x1: r.xaxis.from,
+                    y1: r.yaxis.from,
+                    x2: r.xaxis.to,
+                    y2: r.yaxis.to
+                }]);
             }
         }
 
@@ -271,7 +280,7 @@ The plugin allso adds the following methods to the plot object:
                 selection.currentMode = '';
                 plot.triggerRedrawOverlay();
                 if (!preventEvent) {
-                    plot.getPlaceholder().trigger("plotunselected", [ ]);
+                    plot.getPlaceholder().trigger("plotunselected", []);
                 }
             }
         }
@@ -311,7 +320,7 @@ The plugin allso adds the following methods to the plot object:
                 to = tmp;
             }
 
-            return { from: from, to: to, axis: axis };
+            return {from: from, to: to, axis: axis};
         }
 
         function setSelection(ranges, preventEvent) {
@@ -352,7 +361,7 @@ The plugin allso adds the following methods to the plot object:
         plot.setSelection = setSelection;
         plot.getSelection = getSelection;
 
-        plot.hooks.bindEvents.push(function(plot, eventHolder) {
+        plot.hooks.bindEvents.push(function (plot, eventHolder) {
             var o = plot.getOptions();
             if (o.selection.mode != null) {
                 plot.addEventHandler("dragstart", onDragStart, eventHolder, 0);

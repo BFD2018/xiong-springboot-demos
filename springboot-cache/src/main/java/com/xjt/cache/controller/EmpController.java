@@ -15,17 +15,17 @@ public class EmpController {
     EmployeeService employeeService;
 
     @GetMapping("/getEmp/{id}")
-    public Employee getEmp(@PathVariable("id") Integer id){
+    public Employee getEmp(@PathVariable("id") Integer id) {
         return employeeService.getEmpById(id);
     }
 
     @RequestMapping("/updateEmp/{id}")
-    public Employee updateEmp(@PathVariable("id") Integer id){
+    public Employee updateEmp(@PathVariable("id") Integer id) {
         return employeeService.updateEmp(id);
     }
 
     @RequestMapping("/delEmp/{id}")
-    public void delEmp(@PathVariable("id") Integer id){
+    public void delEmp(@PathVariable("id") Integer id) {
         employeeService.delEmp(id);
     }
 }

@@ -19,7 +19,7 @@ public class TUserServiceImpl implements TUserService {
     @Override
     public RespBean toLogin(String username, String password) {
         QueryWrapper<TUser> wrapper = new QueryWrapper<>();
-        wrapper.eq("username",username);
+        wrapper.eq("username", username);
         TUser user = null;
         try {
             user = userMapper.selectOne(wrapper);
@@ -27,11 +27,11 @@ public class TUserServiceImpl implements TUserService {
             throw new BadConfigurationException("查询数据库异常");
         }
         if (user == null) {
-            throw new EntityNotFoundException(user.getClass(),"没有找到该用户","");
+            throw new EntityNotFoundException(user.getClass(), "没有找到该用户", "");
         }
-        if(!user.getPassword().equals(password)){
+        if (!user.getPassword().equals(password)) {
             throw new BadCredentialsException("密码错误");
         }
-        return RespBean.success("ok",user);
+        return RespBean.success("ok", user);
     }
 }

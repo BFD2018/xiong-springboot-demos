@@ -3,16 +3,17 @@
 //! author : JC Franco : https://github.com/jcfranco
 
 ;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined'
+    && typeof require === 'function' ? factory(require('../moment')) :
+        typeof define === 'function' && define.amd ? define(['../moment'], factory) :
+            factory(global.moment)
+}(this, (function (moment) {
+    'use strict';
 
     //! moment.js locale configuration
 
     var monthsShortDot = 'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
-            '_'
+        '_'
         ),
         monthsShort = 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_'),
         monthsParse = [

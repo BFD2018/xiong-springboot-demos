@@ -76,8 +76,7 @@ THE SOFTWARE.
                 if (originalValue !== null) {
                     if (growing.stepDirection === 'up') {
                         dataj.data[i][growing.valueIndex] = originalValue * percentage;
-                    }
-                    else if (growing.stepDirection === 'down') {
+                    } else if (growing.stepDirection === 'down') {
                         dataj.data[i][growing.valueIndex] = originalValue + (dataj.yaxis.max - originalValue) * (1 - percentage);
                     }
                 } else {
@@ -88,8 +87,8 @@ THE SOFTWARE.
         maximum: function (dataj, timePassed, growing, growPhase) {
             var percentage = Math.min(timePassed / dataj.grow.duration, 1);
 
-            var upMax   = dataj.yaxis.max * percentage,
-                upMin   = dataj.yaxis.min * percentage,
+            var upMax = dataj.yaxis.max * percentage,
+                upMin = dataj.yaxis.min * percentage,
                 downMax = dataj.yaxis.max * (1 - percentage),
                 downMin = dataj.yaxis.min * (1 - percentage);
             for (var i = 0, djdatalen = dataj.data.length; i < djdatalen; i++) {
@@ -102,8 +101,7 @@ THE SOFTWARE.
                         } else {
                             dataj.data[i][growing.valueIndex] = Math.max(originalValue, upMin);
                         }
-                    }
-                    else if (growing.stepDirection === 'down') {
+                    } else if (growing.stepDirection === 'down') {
                         if (originalValue >= 0) {
                             dataj.data[i][growing.valueIndex] = Math.max(originalValue, downMax);
                         } else {
@@ -165,7 +163,7 @@ THE SOFTWARE.
             if (opt.series.grow.active === true) {
                 var reanimate = false;
                 var j = 0;
-                
+
                 if (opt.series.grow.reanimate && growPhase === GrowPhase.PLOTTED_LAST_FRAME) {
                     // reset animation state
                     processSeriesDone = false;
@@ -260,7 +258,8 @@ THE SOFTWARE.
                     if (isReAnimation && growing.reanimate !== 'reinit') {
                         if (typeof growing.reanimate === 'function') {
                             func = growing.reanimate;
-                        } if (growing.reanimate === 'continue') {
+                        }
+                        if (growing.reanimate === 'continue') {
                             func = growFunctions.reanimate;
                         } else {// if (growing.reanimate === 'none')
                             func = growFunctions.none;
@@ -336,17 +335,17 @@ THE SOFTWARE.
 
         var lastTime = +new Date();
         var vendors = ['ms', 'moz', 'webkit', 'o'];
-        for(var x = 0; x < vendors.length && !rAF; ++x) {
-            rAF = window[vendors[x]+'RequestAnimationFrame'];
+        for (var x = 0; x < vendors.length && !rAF; ++x) {
+            rAF = window[vendors[x] + 'RequestAnimationFrame'];
 
-            cAF = window[vendors[x]+'CancelAnimationFrame'] ||
-                  window[vendors[x]+'CancelRequestAnimationFrame'];
+            cAF = window[vendors[x] + 'CancelAnimationFrame'] ||
+                window[vendors[x] + 'CancelRequestAnimationFrame'];
         }
         if (!rAF) {
-            rAF = function(callback, element) {
+            rAF = function (callback, element) {
                 var currTime = +new Date();
                 var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-                var id = window.setTimeout(function() {
+                var id = window.setTimeout(function () {
                     callback(currTime + timeToCall);
                 }, timeToCall);
                 lastTime = currTime + timeToCall;
@@ -354,7 +353,7 @@ THE SOFTWARE.
             };
         }
         if (!cAF) {
-            cAF = function(id) {
+            cAF = function (id) {
                 clearTimeout(id);
             };
         }

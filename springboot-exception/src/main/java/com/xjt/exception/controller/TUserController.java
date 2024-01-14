@@ -16,16 +16,16 @@ public class TUserController {
 
     @ResponseBody
     @PostMapping("toLogin")
-    private RespBean toLogin(@RequestBody HashMap<String,String> map){
-        System.out.println("map================>{}"+map);
+    private RespBean toLogin(@RequestBody HashMap<String, String> map) {
+        System.out.println("map================>{}" + map);
         String username = map.get("username");
         String password = map.get("password");
-        return userService.toLogin(username,password);
+        return userService.toLogin(username, password);
     }
 
     @GetMapping("view/login")
-    private String loginPage(){
-        int ret = 1/0;
+    private String loginPage() {
+        int ret = 1 / 0;
         return "login";
     }
 }

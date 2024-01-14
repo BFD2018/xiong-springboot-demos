@@ -15,7 +15,7 @@ public class MyFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         System.out.println("您已进入filter过滤器 doFilter，您的请求正常，请继续遵循规则....");
-        chain.doFilter(request,response);
+        chain.doFilter(request, response);
     }
 
     @Override

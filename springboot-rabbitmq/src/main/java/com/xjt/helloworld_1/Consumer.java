@@ -25,7 +25,7 @@ public class Consumer {
         //参数1：消费哪个队列的消息，队列名称
         //参数2：消息的自动确认机制
         //参数3：消费时的回调接口
-        channel.basicConsume("hello",true,new DefaultConsumer(channel) {
+        channel.basicConsume("hello", true, new DefaultConsumer(channel) {
             //重写处理消息的方法
             //最后一个参数是 队列中取出的消息
             @Override

@@ -13,29 +13,29 @@ public class HelloController {
     private HelloService helloServicel;
 
     @ResponseBody
-    @RequestMapping(value = "/hello",method = RequestMethod.POST)
-    private String toHello(){
+    @RequestMapping(value = "/hello", method = RequestMethod.POST)
+    private String toHello() {
 
         return "hello world!";
     }
 
     @RequestMapping(value = "/testmodel")
     @ModelAttribute
-    private String testmodel(){
+    private String testmodel() {
 
         return "hello";
     }
 
     @ResponseBody
     @GetMapping("/shiwu")
-    private RespBean toMysqlShiwu(){
+    private RespBean toMysqlShiwu() {
         return helloServicel.testShiwu();
     }
 
     @GetMapping("/person")
-    private String toPerson(Model model){
-        model.addAttribute("name","xiong");
-        model.addAttribute("age",22);
+    private String toPerson(Model model) {
+        model.addAttribute("name", "xiong");
+        model.addAttribute("age", 22);
 
         return "person";
     }

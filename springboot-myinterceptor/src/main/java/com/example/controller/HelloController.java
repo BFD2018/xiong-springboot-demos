@@ -18,12 +18,12 @@ import java.util.HashMap;
 @RequestMapping("springboot")
 public class HelloController {
     @GetMapping("hello")
-    private String toHelloPage(){
+    private String toHelloPage() {
         return "/test/hello";
     }
 
     @GetMapping("/login")
-    private String toLoginPage(){
+    private String toLoginPage() {
         return "/test/login";
     }
 
@@ -32,11 +32,11 @@ public class HelloController {
         String username = tUser.getUsername().trim();
         String password = tUser.getPassword().trim();
 
-        if(username.equalsIgnoreCase("zhangsan") && password.equalsIgnoreCase("123456")){
+        if (username.equalsIgnoreCase("zhangsan") && password.equalsIgnoreCase("123456")) {
             HashMap<String, String> map = new HashMap<>();
-            map.put("username",username);
-            map.put("password",password);
-            session.setAttribute("login_user",map);
+            map.put("username", username);
+            map.put("password", password);
+            session.setAttribute("login_user", map);
         }
     }
 }

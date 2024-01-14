@@ -40,12 +40,12 @@ public class CustomRealm extends AuthorizingRealm {
         //AuthenticationToken是UsernamePasswordToken的父类
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
         String username = usernamePasswordToken.getUsername();
-        System.out.println("====用户名===="+username);
+        System.out.println("====用户名====" + username);
 
         //从数据库查询
         TUser tUser = tUserService.findByUsername(username);
 
-        if (!ObjectUtils.isEmpty(tUser)){
+        if (!ObjectUtils.isEmpty(tUser)) {
             //1、用户名为username的用户存在
             SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
                     username,
@@ -54,10 +54,10 @@ public class CustomRealm extends AuthorizingRealm {
                     this.getName());
 
             Session session = SecurityUtils.getSubject().getSession();
-            session.setAttribute("USER_SESSION",tUser);
+            session.setAttribute("USER_SESSION", tUser);
 
             return simpleAuthenticationInfo;
-        }else{
+        } else {
             //2、用户不存在
             return null;
         }

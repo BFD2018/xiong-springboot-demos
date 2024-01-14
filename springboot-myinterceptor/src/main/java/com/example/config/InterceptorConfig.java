@@ -7,12 +7,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
     //定义需要拦截的路径
-    String [] addPathPatterns = {
+    String[] addPathPatterns = {
             "/springboot/**"
     };
 
     //定义不需要拦截的路径
-    String [] excludePathPatterns = {
+    String[] excludePathPatterns = {
             "/test/**",
             "/springboot/login",
             "/springboot/doLogin",

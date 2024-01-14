@@ -13,10 +13,10 @@ public class MyLoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //log.info("目标方法执行前 请求URL===>{}",request.getRequestURI());
         Object loginUser = request.getSession().getAttribute("loginUser");
-        if(loginUser == null){
-            request.setAttribute("msg","请先登录");
+        if (loginUser == null) {
+            request.setAttribute("msg", "请先登录");
             //请求转发（request域中的值能使用）
-            request.getRequestDispatcher("/").forward(request,response);
+            request.getRequestDispatcher("/").forward(request, response);
             return false;
         }
         return true;

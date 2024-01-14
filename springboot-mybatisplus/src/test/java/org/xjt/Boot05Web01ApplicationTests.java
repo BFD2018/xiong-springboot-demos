@@ -13,10 +13,10 @@ class SpringbootApplicationTests {
 
     @Test
     void contextLoads() throws FileNotFoundException {
-        String property = System.getProperty("user.dir") + "\\src\\main\\resources\\myupload" ;
+        String property = System.getProperty("user.dir") + "\\src\\main\\resources\\myupload";
         System.out.println(property);
 
-        String basePath= ClassUtils.getDefaultClassLoader().getResource("").getPath();
+        String basePath = ClassUtils.getDefaultClassLoader().getResource("").getPath();
         System.out.println(basePath);
 
         String path = ResourceUtils.getURL("classpath:").getPath();

@@ -52,7 +52,9 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">增加User</button>
+                                <button type="button" class="btn btn-success" data-toggle="modal"
+                                        data-target="#modal-default">增加User
+                                </button>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -76,10 +78,12 @@
                                         <td th:text="${user.age}">Trident</td>
                                         <td th:text="${user.email}">Trident</td>
                                         <td>
-                                            <img th:src="@{${user.avatar}}" style="height: 120px;width: auto" class="img-fluid mb-2" alt="black sample">
+                                            <img th:src="@{${user.avatar}}" style="height: 120px;width: auto"
+                                                 class="img-fluid mb-2" alt="black sample">
                                         </td>
                                         <td>
-                                            <a th:href="@{/user/delete(userid=${user.id},page=${usersPage.current})}" type="button"
+                                            <a th:href="@{/user/delete(userid=${user.id},page=${usersPage.current})}"
+                                               type="button"
                                                class="btn btn-danger btn-sm">删除</a>
                                         </td>
 
@@ -98,7 +102,7 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
                         <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
-                          总记录数 [[${usersPage.getTotal()}]] ，总页数 [[${usersPage.getPages()}]]
+                            总记录数 [[${usersPage.getTotal()}]] ，总页数 [[${usersPage.getPages()}]]
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-7">
@@ -106,20 +110,24 @@
                             <ul class="pagination">
                                 <li class="paginate_button page-item previous" id="example2_previous"><a
                                         href="#" aria-controls="example2" data-dt-idx="0" tabindex="0"
-                                        class="page-link" th:class="${usersPage.hasPrevious() == true?'paginate_button page-item previous':'paginate_button page-item previous disabled'}"> 上一页 </a></li>
+                                        class="page-link"
+                                        th:class="${usersPage.hasPrevious() == true?'paginate_button page-item previous':'paginate_button page-item previous disabled'}">
+                                    上一页 </a></li>
 
                                 <li class="paginate_button page-item"
                                     th:class="${usersPage.getCurrent() == num ?'paginate_button page-item active':'paginate_button page-item'}"
                                     th:each="num : ${#numbers.sequence(1,usersPage.getPages())}">
                                     <a th:href="@{/pages/tables/data(page=${num})}" aria-controls="example2"
-                                                                                data-dt-idx="1" tabindex="0"
-                                                                                class="page-link">[[${num}]]</a></li>
+                                       data-dt-idx="1" tabindex="0"
+                                       class="page-link">[[${num}]]</a></li>
 
-                                <li class="paginate_button page-item next" th:class="${usersPage.hasNext() == true?'':'disabled'}" id="example2_next"><a href="#"
-                                                                                                 aria-controls="example2"
-                                                                                                 data-dt-idx="7"
-                                                                                                 tabindex="0"
-                                                                                                 class="page-link"> 下一页 </a>
+                                <li class="paginate_button page-item next"
+                                    th:class="${usersPage.hasNext() == true?'':'disabled'}" id="example2_next"><a
+                                        href="#"
+                                        aria-controls="example2"
+                                        data-dt-idx="7"
+                                        tabindex="0"
+                                        class="page-link"> 下一页 </a>
                                 </li>
                             </ul>
                         </div>
@@ -140,20 +148,24 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="exampleInputName">name</label>
-                                            <input type="text" class="form-control" name="name" id="exampleInputName" placeholder="Enter name">
+                                            <input type="text" class="form-control" name="name" id="exampleInputName"
+                                                   placeholder="Enter name">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputAge">age</label>
-                                            <input type="text" name="age" class="form-control" id="exampleInputAge" placeholder="age">
+                                            <input type="text" name="age" class="form-control" id="exampleInputAge"
+                                                   placeholder="age">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail">email</label>
-                                            <input type="email" name="email" class="form-control" id="exampleInputEmail" placeholder="email">
+                                            <input type="email" name="email" class="form-control" id="exampleInputEmail"
+                                                   placeholder="email">
                                         </div>
                                         <div class="form-group">
                                             <!-- <label for="customFile">Custom File</label> -->
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" name="avatar" id="customFile">
+                                                <input type="file" class="custom-file-input" name="avatar"
+                                                       id="customFile">
                                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                             </div>
                                         </div>

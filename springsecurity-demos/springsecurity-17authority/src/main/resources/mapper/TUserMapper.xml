@@ -12,11 +12,10 @@
     <select id="getUserRoleByUid" resultType="com.xjt.authority.entity.TRole">
         select r.*
         from t_role r,
-             t_user_role ur
+        t_user_role ur
         where ur.uid = #{uid}
-          and ur.rid = r.id
+        and ur.rid = r.id
     </select>
-
 
 
 </mapper>

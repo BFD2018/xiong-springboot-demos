@@ -14,16 +14,16 @@
 <body>
 <div id="app">
     <div class="index-view">
-        <el-button  @click="handleBtnClick('login')">用户登录</el-button>
-        <el-button  type="info" @click="handleBtnClick('logout')">注销</el-button>
+        <el-button @click="handleBtnClick('login')">用户登录</el-button>
+        <el-button type="info" @click="handleBtnClick('logout')">注销</el-button>
         <h2>欢迎进入首页</h2>
         <el-card class="box-card">
             <div slot="header" class="clearfix">
                 <span>用户操作</span>
             </div>
             <div>
-                <el-button  type="success" @click="handleBtnClick('user-list')">用户列表</el-button>
-                <el-button  type="success" @click="handleBtnClick('user-add')">用户增加</el-button>
+                <el-button type="success" @click="handleBtnClick('user-list')">用户列表</el-button>
+                <el-button type="success" @click="handleBtnClick('user-add')">用户增加</el-button>
             </div>
         </el-card>
         <el-card class="box-card">
@@ -31,8 +31,8 @@
                 <span>路线操作</span>
             </div>
             <div>
-                <el-button  type="warning" @click="handleBtnClick('route-list')">路线列表</el-button>
-                <el-button  type="success" @click="handleBtnClick('route-add')">路线增加</el-button>
+                <el-button type="warning" @click="handleBtnClick('route-list')">路线列表</el-button>
+                <el-button type="success" @click="handleBtnClick('route-add')">路线增加</el-button>
             </div>
         </el-card>
         <el-card class="box-card">
@@ -40,7 +40,7 @@
                 <span>管理员后台操作</span>
             </div>
             <div>
-                <el-button  type="success" @click="handleBtnClick('admin-index')">管理员首页</el-button>
+                <el-button type="success" @click="handleBtnClick('admin-index')">管理员首页</el-button>
             </div>
         </el-card>
     </div>
@@ -52,25 +52,23 @@
                     #httpServletRequest.getContextPath()}]];
 
     const app = new Vue({
-        el:"#app",
-        data:{
-
-        },
-        methods:{
-            handleBtnClick(path){
+        el: "#app",
+        data: {},
+        methods: {
+            handleBtnClick(path) {
                 switch (path) {
                     case "login":
                         window.location.href = basePath + "/view/login";
                         break;
                     case "logout":
-                        axios.post("/user/toLogout",this.loginForm).then(res =>{
+                        axios.post("/user/toLogout", this.loginForm).then(res => {
                             console.log(res);
-                            if(res.data.status === 200){
+                            if (res.data.status === 200) {
                                 this.$notify.success("注销成功");
-                                setTimeout(()=>{
+                                setTimeout(() => {
                                     window.location.href = basePath + "/view/login";
-                                },1500);
-                            }else{
+                                }, 1500);
+                            } else {
                                 this.$message.error(res.data.msg);
                             }
                         })
@@ -95,7 +93,7 @@
                 }
             },
         },
-        created(){
+        created() {
 
         }
     })

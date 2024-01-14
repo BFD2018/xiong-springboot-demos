@@ -48,7 +48,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         loginCatpchaFilter.setAuthenticationManager(authenticationManagerBean());
 
         //4.指定成功时处理器
-        loginCatpchaFilter.setAuthenticationSuccessHandler((res,resp,authentication) ->{
+        loginCatpchaFilter.setAuthenticationSuccessHandler((res, resp, authentication) -> {
             Map<String, Object> result = new HashMap<String, Object>();
             result.put("msg", "登录成功");
             result.put("用户信息", authentication.getPrincipal());
@@ -59,7 +59,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         });
 
         //5.认证失败处理器
-        loginCatpchaFilter.setAuthenticationFailureHandler((res,resp,ex) ->{
+        loginCatpchaFilter.setAuthenticationFailureHandler((res, resp, ex) -> {
             Map<String, Object> result = new HashMap<String, Object>();
             result.put("msg", "登录失败: " + ex.getMessage());
             resp.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());

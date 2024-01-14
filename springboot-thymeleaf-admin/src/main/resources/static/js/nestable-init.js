@@ -11,7 +11,6 @@ var Nestable = function () {
     };
 
 
-
     // activate Nestable for list 1
     $('#nestable_list_1').nestable({
         group: 1
@@ -40,7 +39,6 @@ var Nestable = function () {
     });
 
     $('#nestable_list_3').nestable();
-
 
 
 }();

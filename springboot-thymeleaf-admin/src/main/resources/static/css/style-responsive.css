@@ -75,12 +75,12 @@
     .sticky-left-side .custom-nav {
         margin-top: -5px;
     }
+
     .stepy-error {
         bottom: 50px;
     }
 
     /*----------*/
-
     .left-side-collapsed .left-side {
         left: 0;
         top: 50px;
@@ -94,6 +94,7 @@
     .left-side-collapsed .logo-icon {
         display: none;
     }
+
     .left-side-collapsed .logo {
         display: block;
     }
@@ -116,7 +117,7 @@
     }
 
     .searchform input {
-        background:#fff;
+        background: #fff;
     }
 
     .notification-menu li:nth-child(4) {
@@ -145,11 +146,12 @@
     .media-gal .item {
         width: 100%;
     }
+
     .media-filter {
         margin: 25px 0;
     }
 
-    .media-filter + .pull-right, .media-filter + .pull-right + .btn  {
+    .media-filter + .pull-right, .media-filter + .pull-right + .btn {
         float: left !important;
     }
 
@@ -191,9 +193,10 @@
 
 @media screen and (max-width: 480px) {
     /*form wizard steps*/
-    .widget-container .stepy-titles li , .stepy-titles li{
+    .widget-container .stepy-titles li, .stepy-titles li {
         width: 100%;
     }
+
     .directory-list li {
         display: inline-block;
         float: left;
@@ -202,7 +205,7 @@
 
     .directory-list li a {
         display: block;
-        padding:5px 10px;
+        padding: 5px 10px;
         margin-bottom: 1px;
     }
 }
@@ -213,16 +216,20 @@
     .fc-button-inner, .fc-button-content {
         padding: 0;
     }
+
     .fc-header-title h2 {
-        font-size: 12px!important;
+        font-size: 12px !important;
     }
+
     .fc .fc-header-space {
         padding-left: 0;
     }
+
     .fc-state-active, .fc-state-active .fc-button-inner, .fc-state-active, .fc-button-today .fc-button-inner, .fc-state-hover, .fc-state-hover .fc-button-inner {
         background: none repeat scroll 0 0 #FFFFFF !important;
         color: #32323A !important;
     }
+
     .fc-state-default, .fc-state-default .fc-button-inner {
         background: none repeat scroll 0 0 #FFFFFF !important;
     }
@@ -230,8 +237,9 @@
     .error-wrapper h1 img {
         width: 100%;
     }
+
     /*form wizard steps*/
-    .widget-container .stepy-titles li , .stepy-titles li{
+    .widget-container .stepy-titles li, .stepy-titles li {
         width: 100%;
     }
 
@@ -244,13 +252,12 @@
 
     .directory-list li a {
         display: block;
-        padding:5px 10px;
+        padding: 5px 10px;
         margin-bottom: 1px;
     }
 }
 
 @media screen and (max-width: 360px) {
-
 
 
     .notification-menu li:first-child .dropdown-menu {
@@ -270,13 +277,16 @@
         display: block;
         width: auto;
     }
+
     .lock-wrapper {
         margin: 40% auto;
         max-width: 300px;
     }
+
     .lock-wrapper input, .lock-wrapper input:focus {
         width: 80% !important;
     }
+
     .lock-wrapper .locked {
         right: 70px;
     }
@@ -294,6 +304,7 @@
     .lock-wrapper input, .lock-wrapper input:focus {
         width: 80% !important;
     }
+
     .lock-wrapper .locked {
         right: 70px;
     }

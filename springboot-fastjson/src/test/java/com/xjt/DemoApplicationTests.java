@@ -32,7 +32,7 @@ class DemoApplicationTests {
         User user = JSON.parseObject(s, User.class);
         System.out.println("json字符串变为对象" + user);
 
-        JSONObject jsonObject = (JSONObject)JSON.toJSON(user1);
+        JSONObject jsonObject = (JSONObject) JSON.toJSON(user1);
         System.out.println("java对象变为json对象" + jsonObject);
         User user3 = JSON.toJavaObject(jsonObject, User.class);
         System.out.println("json对象变为java对象" + user3);
@@ -60,7 +60,7 @@ class DemoApplicationTests {
     }
 
     @Test
-    void testHttpClient1(){
+    void testHttpClient1() {
         CloseableHttpClient httpClient = null;
         HttpGet httpGet = null;
         CloseableHttpResponse response = null;
@@ -86,13 +86,13 @@ class DemoApplicationTests {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 if (response != null) {
                     response.close();
                 }
 
-                if (httpClient != null){
+                if (httpClient != null) {
                     httpClient.close();
                 }
             } catch (IOException e) {

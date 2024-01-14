@@ -13,9 +13,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig{
+public class SwaggerConfig {
     @Bean
-    public Docket createRestApi(){
+    public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .pathMapping("/")
                 .select()
@@ -30,7 +30,7 @@ public class SwaggerConfig{
     }
 
     @Bean
-    public UiConfiguration uiConfiguration(){
+    public UiConfiguration uiConfiguration() {
         return UiConfigurationBuilder.builder()
                 .defaultModelsExpandDepth(-1)
                 .build();

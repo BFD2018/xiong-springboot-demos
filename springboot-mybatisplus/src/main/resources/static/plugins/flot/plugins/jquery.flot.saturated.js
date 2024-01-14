@@ -12,7 +12,7 @@
 
             return a;
         },
-        delta: function(min, max, noTicks) {
+        delta: function (min, max, noTicks) {
             return ((max - min) / noTicks) === Infinity ? (max / noTicks - min / noTicks) : (max - min) / noTicks
         },
         multiply: function (a, b) {
@@ -34,7 +34,7 @@
             }
         },
         // round to nearby lower multiple of base
-        floorInBase: function(n, base) {
+        floorInBase: function (n, base) {
             return base * Math.floor(n / base);
         }
     };

@@ -15,16 +15,16 @@
 
     <select id="getAllMenu" resultMap="MenuResultMap">
         SELECT
-          m.`id`,m.`pattern`,
-          r.id AS rid,
-          r.name AS rname,
-          r.name_zh AS rnameZh
+        m.`id`,m.`pattern`,
+        r.id AS rid,
+        r.name AS rname,
+        r.name_zh AS rnameZh
         FROM
-          t_menu m
-          LEFT JOIN t_role_menu mr
-            ON m.`id` = mr.`mid`
-          LEFT JOIN t_role r
-            ON r.`id` = mr.`rid`
+        t_menu m
+        LEFT JOIN t_role_menu mr
+        ON m.`id` = mr.`mid`
+        LEFT JOIN t_role r
+        ON r.`id` = mr.`rid`
     </select>
 
 </mapper>

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Service
-public class FdfsServiceImpl extends ServiceImpl<FdfsMapper,FastdfsFile> implements FdfsService {
+public class FdfsServiceImpl extends ServiceImpl<FdfsMapper, FastdfsFile> implements FdfsService {
 
     @Autowired
     private FdfsMapper fdfsMapper;
@@ -44,7 +44,7 @@ public class FdfsServiceImpl extends ServiceImpl<FdfsMapper,FastdfsFile> impleme
             byte[] bytes = storageClient.downloadFile(storePath.getGroup(), storePath.getPath(), new DownloadByteArray());
             response.getOutputStream().write(bytes);
 
-            FileUtil.writeBytes(bytes,FileUtil.file(storePath.getPath()));
+            FileUtil.writeBytes(bytes, FileUtil.file(storePath.getPath()));
 
             return 1;
 
@@ -58,7 +58,7 @@ public class FdfsServiceImpl extends ServiceImpl<FdfsMapper,FastdfsFile> impleme
     public Object uploadFile(MultipartFile file) {
         StorePath storePath = null;
         try {
-            storePath = storageClient.uploadFile(file.getInputStream(), file.getSize(), FilenameUtils.getExtension(file.getOriginalFilename()),null);
+            storePath = storageClient.uploadFile(file.getInputStream(), file.getSize(), FilenameUtils.getExtension(file.getOriginalFilename()), null);
             String group = storePath.getGroup();
             String fullPath = storePath.getFullPath();
             String path = storePath.getPath();
@@ -85,7 +85,7 @@ public class FdfsServiceImpl extends ServiceImpl<FdfsMapper,FastdfsFile> impleme
     public Object uploadImage(MultipartFile file, String size) {
         StorePath storePath;
         FastdfsFile fastdfsFile = new FastdfsFile();
-        if(StringUtils.hasLength(size)){
+        if (StringUtils.hasLength(size)) {
             try {
                 storePath = storageClient.uploadImageAndCrtThumbImage(file.getInputStream(), file.getSize(), FileUtil.getSuffix(file.getOriginalFilename()), null);
 

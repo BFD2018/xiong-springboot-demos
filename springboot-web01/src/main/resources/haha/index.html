@@ -37,7 +37,7 @@
 </ul>
 
 /cars/{path}?xxx=xxx&aaa=ccc queryString 查询字符串。@RequestParam；<br/>
-/cars/sell;low=34;brand=byd,audi,yd  ；矩阵变量 <br/>
+/cars/sell;low=34;brand=byd,audi,yd ；矩阵变量 <br/>
 页面开发，cookie禁用了，session里面的内容怎么使用；
 session.set(a,b)---> jsessionid ---> cookie ----> 每次发请求携带。
 url重写：/abc;jsesssionid=xxxx 把cookie的值使用矩阵变量的方式进行传递.
@@ -67,14 +67,15 @@ url重写：/abc;jsesssionid=xxxx 把cookie的值使用矩阵变量的方式进�
 测试原生API：
 <a href="/testapi">测试原生API</a>
 <hr/>
-测试复杂类型：<hr/>
+测试复杂类型：
+<hr/>
 测试封装POJO；
 <form action="/saveuser" method="post">
     姓名： <input name="userName" value="zhangsan"/> <br/>
     年龄： <input name="age" value="18"/> <br/>
     生日： <input name="birth" value="2019/12/10"/> <br/>
-<!--    宠物姓名：<input name="pet.name" value="阿猫"/><br/>-->
-<!--    宠物年龄：<input name="pet.age" value="5"/>-->
+    <!--    宠物姓名：<input name="pet.name" value="阿猫"/><br/>-->
+    <!--    宠物年龄：<input name="pet.age" value="5"/>-->
     宠物： <input name="pet" value="啊猫,3"/>
     <input type="submit" value="保存"/>
 </form>

@@ -2,8 +2,8 @@ package com.xjt.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xjt.domain.TCart;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface HelloMapper extends BaseMapper<TCart> {
 }

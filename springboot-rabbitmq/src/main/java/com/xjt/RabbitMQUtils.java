@@ -10,7 +10,8 @@ public class RabbitMQUtils {
 
     private static ConnectionFactory connectionFactory;
     private static Properties properties;
-    static{
+
+    static {
         //重量级资源  类加载执行之执行一次
         connectionFactory = new ConnectionFactory();
         connectionFactory.setHost("192.168.157.135");
@@ -42,8 +43,8 @@ public class RabbitMQUtils {
     //关闭通道和关闭连接工具方法
     public static void closeConnectionAndChanel(Channel channel, Connection conn) {
         try {
-            if(channel!=null) channel.close();
-            if(conn!=null)   conn.close();
+            if (channel != null) channel.close();
+            if (conn != null) conn.close();
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -53,8 +54,8 @@ public class RabbitMQUtils {
     //关闭通道和关闭连接工具方法
     public static void closeConnectionAndChanel(Channel channel) {
         try {
-            if(channel!=null) channel.close();
-            if(getConnection()!=null)   getConnection().close();
+            if (channel != null) channel.close();
+            if (getConnection() != null) getConnection().close();
         } catch (Exception e) {
             e.printStackTrace();
 

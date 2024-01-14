@@ -5,7 +5,9 @@
     <title>狂神说Java-ES仿京东实战</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <script th:src="@{/js/jquery.min.js}"></script>
-    <script crossorigin="anonymous" integrity="sha512-XdUZ5nrNkVySQBnnM5vzDqHai823Spoq1W3pJoQwomQja+o4Nw0Ew1ppxo5bhF2vMug6sfibhKWcNJsG8Vj9tg==" src="https://lib.baomitu.com/vue/2.6.14/vue.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha512-XdUZ5nrNkVySQBnnM5vzDqHai823Spoq1W3pJoQwomQja+o4Nw0Ew1ppxo5bhF2vMug6sfibhKWcNJsG8Vj9tg=="
+            src="https://lib.baomitu.com/vue/2.6.14/vue.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
 </head>
 
@@ -31,7 +33,7 @@
                                     <div class="mallSearch-input clearfix">
                                         <div class="s-combobox" id="s-combobox-685">
                                             <div class="s-combobox-input-wrap">
-                                                <input type="text" autocomplete="off"  v-model="keyword" id="mq"
+                                                <input type="text" autocomplete="off" v-model="keyword" id="mq"
                                                        class="s-combobox-input" aria-haspopup="true">
                                             </div>
                                         </div>
@@ -121,18 +123,18 @@
 
 <script>
     const vue = new Vue({
-        el:"#app",
-        data:{
+        el: "#app",
+        data: {
             "keyword": '', // 搜索的关键字
-            "results":[] // 后端返回的结果
+            "results": [] // 后端返回的结果
         },
-        methods:{
-            searchKey(){
+        methods: {
+            searchKey() {
                 var keyword = this.keyword;
                 console.log(keyword);
-                axios.get('/h_search/'+keyword+'/0/20').then(response=>{
+                axios.get('/h_search/' + keyword + '/0/20').then(response => {
                     console.log(response.data);
-                        this.results=response.data;
+                    this.results = response.data;
                 })
             }
         }

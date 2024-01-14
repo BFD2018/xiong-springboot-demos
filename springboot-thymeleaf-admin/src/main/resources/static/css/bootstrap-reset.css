@@ -32,6 +32,7 @@
 .dropdown-menu {
     box-shadow: none;
 }
+
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
     background-color: #424F63;
     color: #FFFFFF;
@@ -88,8 +89,7 @@
 .pagination > li > span:focus,
 .pagination > li.active > a,
 .pagination > li.active > a:hover,
-
-.pager li > a:hover, .pager li > a:focus{
+.pager li > a:hover, .pager li > a:focus {
     background-color: #65CEA7;
     border-color: #65CEA7;
     color: #fff;
@@ -137,6 +137,7 @@
     color: #fff;
     opacity: .5;
 }
+
 .modal-header .close:hover {
     opacity: 1;
 }
@@ -164,7 +165,7 @@
 
 .has-success .form-control:focus,
 .has-warning .form-control:focus,
-.has-error .form-control:focus{
+.has-error .form-control:focus {
     box-shadow: none;
 }
 

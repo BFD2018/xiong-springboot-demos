@@ -14,7 +14,7 @@ class SpringbootRedisApplicationTests {
     void contextLoads() {
         System.out.println("===========>");
 
-        redisTemplate.opsForHash().put("student","name","xiong");
+        redisTemplate.opsForHash().put("student", "name", "xiong");
 
         System.out.println(redisTemplate.hasKey("student"));
     }

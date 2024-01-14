@@ -16,14 +16,14 @@ public class OssFileController {
     private FileUploadService fileUploadService;
 
     @GetMapping("/page/test")
-    private String testAliyunPage(){
+    private String testAliyunPage() {
         return "aliyunOss";
     }
 
     /*上传*/
     @ResponseBody
     @PostMapping("/oss/upload/image")
-    private RespBean ossImageUpload(MultipartFile file){
+    private RespBean ossImageUpload(MultipartFile file) {
         System.out.println(file.getOriginalFilename());
         return fileUploadService.uploadImage(file);
     }
@@ -31,7 +31,7 @@ public class OssFileController {
     /*上传文件*/
     @ResponseBody
     @PostMapping("/oss/upload")
-    private RespBean ossFileUpload(MultipartFile file){
+    private RespBean ossFileUpload(MultipartFile file) {
         System.out.println(file.getOriginalFilename());
         return fileUploadService.uploadFile(file);
     }
@@ -39,14 +39,14 @@ public class OssFileController {
     /*下载*/
     @ResponseBody
     @GetMapping("/oss/download")
-    private void downloadOssFile(HttpServletResponse response,@RequestParam("objectName") String objectName){
+    private void downloadOssFile(HttpServletResponse response, @RequestParam("objectName") String objectName) {
         fileUploadService.downloadOssFile(response, objectName);
     }
 
     /*文件列表*/
     @ResponseBody
     @GetMapping("/oss/list")
-    private RespBean listAllOssFileByBucket(){
+    private RespBean listAllOssFileByBucket() {
         System.out.println("===>搜索出bucket所有文件");
         return fileUploadService.listAllOssFileByBucket();
     }
@@ -54,8 +54,8 @@ public class OssFileController {
     /*删除*/
     @ResponseBody
     @GetMapping("/oss/delete")
-    private RespBean ossFileDelete(@RequestParam("filekey") String filekey){
-        System.out.println("filekey========>"+filekey);
+    private RespBean ossFileDelete(@RequestParam("filekey") String filekey) {
+        System.out.println("filekey========>" + filekey);
         return fileUploadService.deleteFile(filekey);
     }
 }

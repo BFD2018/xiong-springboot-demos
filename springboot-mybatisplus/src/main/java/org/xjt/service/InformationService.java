@@ -27,6 +27,7 @@ public interface InformationService {
 
     /**
      * 删除资讯信息
+     *
      * @param ids ids
      */
     int delete(List<Integer> ids);

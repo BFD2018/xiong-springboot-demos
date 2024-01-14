@@ -28,21 +28,15 @@ import java.util.Map;
 public class FileController {
     /**
      * Field generateStorageClient in com.xjt.fdfs.controller.FileController required a single bean, but 3 were found:
-     * 	- defaultAppendFileStorageClient: defined in URL [jar:file:/D:/softwares/maven_repository/com/github/tobato/fastdfs-client/1.27.2/fastdfs-client-1.27.2.jar!/com/github/tobato/fastdfs/service/DefaultAppendFileStorageClient.class]
-     * 	- defaultFastFileStorageClient: defined in URL [jar:file:/D:/softwares/maven_repository/com/github/tobato/fastdfs-client/1.27.2/fastdfs-client-1.27.2.jar!/com/github/tobato/fastdfs/service/DefaultFastFileStorageClient.class]
-     * 	- defaultGenerateStorageClient: defined in URL [jar:file:/D:/softwares/maven_repository/com/github/tobato/fastdfs-client/1.27.2/fastdfs-client-1.27.2.jar!/com/github/tobato/fastdfs/service/DefaultGenerateStorageClient.class]
-     *     // 注意：这几个方法类似 都是单例bean  不能同时注入
-     *     @Autowired
-     *     private FastFileStorageClient storageClient;
+     * - defaultAppendFileStorageClient: defined in URL [jar:file:/D:/softwares/maven_repository/com/github/tobato/fastdfs-client/1.27.2/fastdfs-client-1.27.2.jar!/com/github/tobato/fastdfs/service/DefaultAppendFileStorageClient.class]
+     * - defaultFastFileStorageClient: defined in URL [jar:file:/D:/softwares/maven_repository/com/github/tobato/fastdfs-client/1.27.2/fastdfs-client-1.27.2.jar!/com/github/tobato/fastdfs/service/DefaultFastFileStorageClient.class]
+     * - defaultGenerateStorageClient: defined in URL [jar:file:/D:/softwares/maven_repository/com/github/tobato/fastdfs-client/1.27.2/fastdfs-client-1.27.2.jar!/com/github/tobato/fastdfs/service/DefaultGenerateStorageClient.class]
+     * // 注意：这几个方法类似 都是单例bean  不能同时注入
      *
-     *     @Autowired
-     *     private TrackerClient trackerClient;
-     *
-     *     @Autowired
-     *     private AppendFileStorageClient appendFileStorageClient;
-     *
-     *     @Autowired
-     *     private GenerateStorageClient generateStorageClient;
+     * @Autowired private FastFileStorageClient storageClient;
+     * @Autowired private TrackerClient trackerClient;
+     * @Autowired private AppendFileStorageClient appendFileStorageClient;
+     * @Autowired private GenerateStorageClient generateStorageClient;
      */
     @Autowired
     private FastFileStorageClient storageClient;
@@ -55,7 +49,7 @@ public class FileController {
 
 
     @GetMapping("fileinfo")
-    public R getFileInfo(){
+    public R getFileInfo() {
         // TODO 获取文件信息
 //        List<GroupState> groupStates = trackerClient.listGroups();
 //
@@ -74,36 +68,36 @@ public class FileController {
         return null;
     }
 
-    @ApiOperation(value = "上传文件",httpMethod = "POST")
+    @ApiOperation(value = "上传文件", httpMethod = "POST")
     @PostMapping("/upload")
     public R uploadFile(@ApiParam("文件") MultipartFile file) throws IOException {
         Object o = fdfsService.uploadFile(file);
 
-        if(o != null){
+        if (o != null) {
             return R.ok(o);
         }
 
         return R.fail();
     }
 
-    @ApiOperation(value = "上传图片",httpMethod = "POST")
+    @ApiOperation(value = "上传图片", httpMethod = "POST")
     @PostMapping("/uploadImg")
-    public R uploadImage(@ApiParam("上传图片") MultipartFile file,@RequestParam(value = "size",required = false) String size) throws IOException {
-        Object o = fdfsService.uploadImage(file,size);
+    public R uploadImage(@ApiParam("上传图片") MultipartFile file, @RequestParam(value = "size", required = false) String size) throws IOException {
+        Object o = fdfsService.uploadImage(file, size);
 
-        if(o != null){
+        if (o != null) {
             return R.ok(o);
         }
 
         return R.fail();
     }
 
-    @ApiOperation(value = "删除文件",httpMethod = "POST")
+    @ApiOperation(value = "删除文件", httpMethod = "POST")
     @PostMapping("/delete")
-    public R deleteFile(@RequestParam(value = "id",required = false) String fileId,@RequestParam(value = "fileUrl",required = false) String fileUrl){
+    public R deleteFile(@RequestParam(value = "id", required = false) String fileId, @RequestParam(value = "fileUrl", required = false) String fileUrl) {
         if (StringUtils.hasLength(fileId) && StringUtils.hasLength(fileUrl)) {
             return R.fail("文件路径或id不能为空");
-        }else if(StringUtils.hasLength(fileId)){
+        } else if (StringUtils.hasLength(fileId)) {
             //按id删除
             try {
                 FastdfsFile fastdfsFile = fdfsService.getById(fileId);
@@ -116,12 +110,12 @@ public class FileController {
                 e.printStackTrace();
                 return R.fail(e.getMessage());
             }
-        }else{
+        } else {
             try {
                 StorePath storePath = StorePath.parseFromUrl(fileUrl);
                 storageClient.deleteFile(storePath.getGroup(), storePath.getPath());
                 Map<String, Object> map = new HashMap<>();
-                map.put("url",fileUrl);
+                map.put("url", fileUrl);
                 fdfsService.removeByMap(map);
 
                 return R.ok();
@@ -134,16 +128,16 @@ public class FileController {
 
     }
 
-    @ApiOperation(value = "根据文件绝对路径下载",httpMethod = "POST")
+    @ApiOperation(value = "根据文件绝对路径下载", httpMethod = "POST")
     @PostMapping("/download")
-    public R downloadFileByURl(HttpServletResponse response,@RequestParam(value = "fileUrl") String fileUrl){
+    public R downloadFileByURl(HttpServletResponse response, @RequestParam(value = "fileUrl") String fileUrl) {
         try {
             StorePath storePath = StorePath.parseFromUrl(fileUrl);
 
             byte[] bytes = storageClient.downloadFile(storePath.getGroup(), storePath.getPath(), new DownloadByteArray());
             response.getOutputStream().write(bytes);
 
-            FileUtil.writeBytes(bytes,FileUtil.file(storePath.getPath()));
+            FileUtil.writeBytes(bytes, FileUtil.file(storePath.getPath()));
 
             return R.ok();
         } catch (Exception e) {
@@ -152,16 +146,14 @@ public class FileController {
     }
 
 
-
-
-    @ApiOperation(value = "根据文件id下载",httpMethod = "POST")
+    @ApiOperation(value = "根据文件id下载", httpMethod = "POST")
     @PostMapping("/download/{id}")
-    public R downloadFileById(@PathVariable("id") String id){
-         int i = fdfsService.downloadFileByFileId(id);
-         if(i>0){
-             return R.ok();
-         }
+    public R downloadFileById(@PathVariable("id") String id) {
+        int i = fdfsService.downloadFileByFileId(id);
+        if (i > 0) {
+            return R.ok();
+        }
 
-         return R.fail();
+        return R.fail();
     }
 }

@@ -26,7 +26,7 @@ public class TUserServiceImpl implements TUserService {
 
     @Override
     public TUser findByUsername(String principal) {
-        return tUserMapper.selectOne(new QueryWrapper<TUser>().eq("username",principal));
+        return tUserMapper.selectOne(new QueryWrapper<TUser>().eq("username", principal));
     }
 
     @Override
@@ -39,10 +39,10 @@ public class TUserServiceImpl implements TUserService {
         tUser.setSalt(salt);
         int insert = tUserMapper.insert(tUser);
 
-        if(insert < 0){
+        if (insert < 0) {
             return RespBean.error("error");
-        }else{
-            return RespBean.success("ok",tUser);
+        } else {
+            return RespBean.success("ok", tUser);
         }
     }
 

@@ -27,6 +27,7 @@ public interface InformationMapper {
 
     /**
      * 删除资讯信息
+     *
      * @param ids
      */
     int delete(@Param("ids") List<Integer> ids);

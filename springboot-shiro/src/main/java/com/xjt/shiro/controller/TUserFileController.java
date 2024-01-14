@@ -14,7 +14,7 @@ public class TUserFileController {
     private TUserFileService userFileService;
 
     @GetMapping("all")
-    private RespBean getAllFile(){
+    private RespBean getAllFile() {
         return userFileService.getAllFile();
     }
 }

@@ -55,7 +55,7 @@ More detail and specific examples can be found in the included HTML file.
 
 */
 
-(function($) {
+(function ($) {
     // Maximum redraw attempts when fitting labels within the plot
 
     var REDRAW_ATTEMPTS = 10;
@@ -80,7 +80,7 @@ More detail and specific examples can be found in the included HTML file.
 
         // add hook to determine if pie plugin in enabled, and then perform necessary operations
 
-        plot.hooks.processOptions.push(function(plot, options) {
+        plot.hooks.processOptions.push(function (plot, options) {
             if (options.series.pie.show) {
                 options.grid.show = false;
 
@@ -114,7 +114,7 @@ More detail and specific examples can be found in the included HTML file.
             }
         });
 
-        plot.hooks.bindEvents.push(function(plot, eventHolder) {
+        plot.hooks.bindEvents.push(function (plot, eventHolder) {
             var options = plot.getOptions();
             if (options.series.pie.show) {
                 if (options.grid.hoverable) {
@@ -134,21 +134,21 @@ More detail and specific examples can be found in the included HTML file.
             highlights = [];
         });
 
-        plot.hooks.processDatapoints.push(function(plot, series, data, datapoints) {
+        plot.hooks.processDatapoints.push(function (plot, series, data, datapoints) {
             var options = plot.getOptions();
             if (options.series.pie.show) {
                 processDatapoints(plot, series, data, datapoints);
             }
         });
 
-        plot.hooks.drawOverlay.push(function(plot, octx) {
+        plot.hooks.drawOverlay.push(function (plot, octx) {
             var options = plot.getOptions();
             if (options.series.pie.show) {
                 drawOverlay(plot, octx);
             }
         });
 
-        plot.hooks.draw.push(function(plot, newCtx) {
+        plot.hooks.draw.push(function (plot, newCtx) {
             var options = plot.getOptions();
             if (options.series.pie.show) {
                 draw(plot, newCtx);
@@ -551,7 +551,7 @@ More detail and specific examples can be found in the included HTML file.
         function isPointInPoly(poly, pt) {
             for (var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i) {
                 ((poly[i][1] <= pt[1] && pt[1] < poly[j][1]) ||
-                (poly[j][1] <= pt[1] && pt[1] < poly[i][1])) &&
+                    (poly[j][1] <= pt[1] && pt[1] < poly[i][1])) &&
                 (pt[0] < (poly[j][0] - poly[i][0]) * (pt[1] - poly[i][1]) / (poly[j][1] - poly[i][1]) + poly[i][0]) &&
                 (c = !c);
             }
@@ -656,7 +656,7 @@ More detail and specific examples can be found in the included HTML file.
 
             // trigger any hover bind events
 
-            var pos = { pageX: e.pageX, pageY: e.pageY };
+            var pos = {pageX: e.pageX, pageY: e.pageY};
             target.trigger(eventname, [pos, item]);
         }
 
@@ -668,7 +668,7 @@ More detail and specific examples can be found in the included HTML file.
             var i = indexOfHighlight(s);
 
             if (i === -1) {
-                highlights.push({ series: s, auto: auto });
+                highlights.push({series: s, auto: auto});
                 plot.triggerRedrawOverlay();
             } else if (!auto) {
                 highlights[i].auto = false;
@@ -762,7 +762,7 @@ More detail and specific examples can be found in the included HTML file.
                 },
                 label: {
                     show: "auto",
-                    formatter: function(label, slice) {
+                    formatter: function (label, slice) {
                         return "<div style='font-size:x-small;text-align:center;padding:2px;color:" + slice.color + ";'>" + label + "<br/>" + Math.round(slice.percent) + "%</div>";
                     },    // formatter function
                     radius: 1,    // radius at which to place the labels (based on full calculated radius if <=1, or hard pixel value)

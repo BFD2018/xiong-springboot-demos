@@ -11,11 +11,12 @@
     <!--引入axios-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
-        #app{
+        #app {
             width: 100vw;
             height: 100vh;
         }
-        .login-form{
+
+        .login-form {
             background-color: #ddd;
             width: 90%;
             margin: auto;
@@ -47,21 +48,21 @@
         el: '#app',
         data: {
             loginForm: {
-                username:"zhangsan",
-                password:"123456",
+                username: "zhangsan",
+                password: "123456",
             },
         },
-        methods:{
-            onSubmit(){
-                axios.post("/springboot/doLogin",this.loginForm).then(res =>{
+        methods: {
+            onSubmit() {
+                axios.post("/springboot/doLogin", this.loginForm).then(res => {
                     console.log(res);
-                    if(res.status === 200){
+                    if (res.status === 200) {
                         this.$message.success("登录成功")
                     }
                 })
             }
         },
-        created(){
+        created() {
         },
     })
 </script>

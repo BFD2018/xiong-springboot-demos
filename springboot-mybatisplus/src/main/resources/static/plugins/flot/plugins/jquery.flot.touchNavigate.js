@@ -1,6 +1,6 @@
 /* global jQuery */
 
-(function($) {
+(function ($) {
     'use strict';
 
     var options = {
@@ -27,8 +27,8 @@
                 zoomEnable: false,
                 prevDistance: null,
                 prevTapTime: 0,
-                prevPanPosition: { x: 0, y: 0 },
-                prevTapPosition: { x: 0, y: 0 }
+                prevPanPosition: {x: 0, y: 0},
+                prevTapPosition: {x: 0, y: 0}
             },
             navigationState = {
                 prevTouchedAxis: 'none',
@@ -73,7 +73,7 @@
         }
 
         pan = {
-            start: function(e) {
+            start: function (e) {
                 presetNavigationState(e, 'pan', gestureState);
                 updateData(e, 'pan', gestureState, navigationState);
 
@@ -83,7 +83,7 @@
                 }
             },
 
-            drag: function(e) {
+            drag: function (e) {
                 presetNavigationState(e, 'pan', gestureState);
 
                 if (useSmartPan) {
@@ -102,7 +102,7 @@
                 }
             },
 
-            end: function(e) {
+            end: function (e) {
                 presetNavigationState(e, 'pan', gestureState);
 
                 if (useSmartPan) {
@@ -117,7 +117,7 @@
 
         var pinchDragTimeout;
         pinch = {
-            start: function(e) {
+            start: function (e) {
                 if (pinchDragTimeout) {
                     clearTimeout(pinchDragTimeout);
                     pinchDragTimeout = null;
@@ -127,11 +127,11 @@
                 updateData(e, 'pinch', gestureState, navigationState);
             },
 
-            drag: function(e) {
+            drag: function (e) {
                 if (pinchDragTimeout) {
                     return;
                 }
-                pinchDragTimeout = setTimeout(function() {
+                pinchDragTimeout = setTimeout(function () {
                     presetNavigationState(e, 'pinch', gestureState);
                     plot.pan({
                         left: -delta(e, 'pinch', gestureState).x,
@@ -152,7 +152,7 @@
                 }, 1000 / 60);
             },
 
-            end: function(e) {
+            end: function (e) {
                 if (pinchDragTimeout) {
                     clearTimeout(pinchDragTimeout);
                     pinchDragTimeout = null;
@@ -163,7 +163,7 @@
         };
 
         doubleTap = {
-            recenterPlot: function(e) {
+            recenterPlot: function (e) {
                 if (e && e.detail && e.detail.type === 'touchstart') {
                     // only do not recenter for touch start;
                     recenterPlotOnDoubleTap(plot, e, gestureState, navigationState);
@@ -200,12 +200,12 @@
             (navigationState.currentTouchedAxis === 'none' && navigationState.prevTouchedAxis === 'none')) {
             var event;
 
-            plot.recenter({ axes: navigationState.touchedAxis });
+            plot.recenter({axes: navigationState.touchedAxis});
 
             if (navigationState.touchedAxis) {
-                event = new $.Event('re-center', { detail: { axisTouched: navigationState.touchedAxis } });
+                event = new $.Event('re-center', {detail: {axisTouched: navigationState.touchedAxis}});
             } else {
-                event = new $.Event('re-center', { detail: e });
+                event = new $.Event('re-center', {detail: e});
             }
             plot.getPlaceholder().trigger(event);
         }
@@ -328,7 +328,7 @@
                 break;
             case 'axisConstrained':
                 gestureState.prevPanPosition[navigationState.currentTouchedAxis] =
-                point[navigationState.currentTouchedAxis];
+                    point[navigationState.currentTouchedAxis];
                 break;
             default:
                 break;

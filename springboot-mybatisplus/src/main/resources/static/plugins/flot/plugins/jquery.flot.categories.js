@@ -71,12 +71,12 @@ as "categories" on the axis object, e.g. plot.getAxes().xaxis.categories.
             // FIXME: auto-detection should really not be defined here
             var s = series;
             format = [];
-            format.push({ x: true, number: true, required: true, computeRange: true});
-            format.push({ y: true, number: true, required: true, computeRange: true });
+            format.push({x: true, number: true, required: true, computeRange: true});
+            format.push({y: true, number: true, required: true, computeRange: true});
 
             if (s.bars.show || (s.lines.show && s.lines.fill)) {
                 var autoScale = !!((s.bars.show && s.bars.zero) || (s.lines.show && s.lines.zero));
-                format.push({ y: true, number: true, required: false, defaultValue: 0, computeRange: autoScale });
+                format.push({y: true, number: true, required: false, defaultValue: 0, computeRange: autoScale});
                 if (s.bars.horizontal) {
                     delete format[format.length - 1].y;
                     format[format.length - 1].x = true;
@@ -119,7 +119,9 @@ as "categories" on the axis object, e.g. plot.getAxes().xaxis.categories.
             }
         }
 
-        res.sort(function (a, b) { return a[0] - b[0]; });
+        res.sort(function (a, b) {
+            return a[0] - b[0];
+        });
 
         return res;
     }

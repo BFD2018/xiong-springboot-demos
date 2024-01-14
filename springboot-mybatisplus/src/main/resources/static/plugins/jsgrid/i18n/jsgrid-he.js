@@ -1,4 +1,4 @@
-(function(jsGrid) {
+(function (jsGrid) {
 
     jsGrid.locales.he = {
         grid: {
@@ -32,14 +32,14 @@
         },
 
         validators: {
-            required: { message: "שדה נדרש" },
-            rangeLength: { message: "אורכו של הערך הוא מחוץ לטווח המוגדר" },
-            minLength: { message: "אורכו של הערך קצר מדי" },
-            maxLength: { message: "אורכו של הערך ארוך מדי" },
-            pattern: { message: "אורכו של הערך ארוך מדי" },
-            range: { message: "ערך מחוץ לטווח" },
-            min: { message: "ערך נמוך מדי" },
-            max: { message: "גבוה מדי" }
+            required: {message: "שדה נדרש"},
+            rangeLength: {message: "אורכו של הערך הוא מחוץ לטווח המוגדר"},
+            minLength: {message: "אורכו של הערך קצר מדי"},
+            maxLength: {message: "אורכו של הערך ארוך מדי"},
+            pattern: {message: "אורכו של הערך ארוך מדי"},
+            range: {message: "ערך מחוץ לטווח"},
+            min: {message: "ערך נמוך מדי"},
+            max: {message: "גבוה מדי"}
         }
     };
 

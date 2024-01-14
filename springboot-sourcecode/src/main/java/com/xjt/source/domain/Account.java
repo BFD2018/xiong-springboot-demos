@@ -14,8 +14,8 @@ public class Account implements InitializingBean, DisposableBean {
         return name;
     }
 
-    public Account(String name){
-        this.name=name;
+    public Account(String name) {
+        this.name = name;
     }
 
     @Override

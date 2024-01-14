@@ -8,63 +8,65 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.opensource.org/licenses/GPL-2.0
  */
-(function($, document) {
+(function ($, document) {
 
-	var pluses = /\+/g;
-	function raw(s) {
-		return s;
-	}
-	function decoded(s) {
-		return decodeURIComponent(s.replace(pluses, ' '));
-	}
+    var pluses = /\+/g;
 
-	$.cookie = function(key, value, options) {
+    function raw(s) {
+        return s;
+    }
 
-		// key and at least value given, set cookie...
-		if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
-			options = $.extend({}, $.cookie.defaults, options);
+    function decoded(s) {
+        return decodeURIComponent(s.replace(pluses, ' '));
+    }
 
-			if (value == null) {
-				options.expires = -1;
-			}
+    $.cookie = function (key, value, options) {
 
-			if (typeof options.expires === 'number') {
-				var days = options.expires, t = options.expires = new Date();
-				t.setDate(t.getDate() + days);
-			}
+        // key and at least value given, set cookie...
+        if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+            options = $.extend({}, $.cookie.defaults, options);
 
-			value = String(value);
+            if (value == null) {
+                options.expires = -1;
+            }
 
-			return (document.cookie = [
-				encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
-				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
-				options.path    ? '; path=' + options.path : '',
-				options.domain  ? '; domain=' + options.domain : '',
-				options.secure  ? '; secure' : ''
-			].join(''));
-		}
+            if (typeof options.expires === 'number') {
+                var days = options.expires, t = options.expires = new Date();
+                t.setDate(t.getDate() + days);
+            }
 
-		// key and possibly options given, get cookie...
-		options = value || $.cookie.defaults || {};
-		var decode = options.raw ? raw : decoded;
-		var cookies = document.cookie.split('; ');
-		for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
-			if (decode(parts.shift()) === key) {
-				return decode(parts.join('='));
-			}
-		}
-		return null;
-	};
+            value = String(value);
 
-	$.cookie.defaults = {};
-	
-	$.removeCookie = function (key, options) {
-		if ($.cookie(key) !== undefined) {
-			// Must not alter options, thus extending a fresh object...
-			$.cookie(key, '', $.extend({}, options, { expires: -1 }));
-			return true;
-		}
-		return false;
-	};
+            return (document.cookie = [
+                encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
+                options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+                options.path ? '; path=' + options.path : '',
+                options.domain ? '; domain=' + options.domain : '',
+                options.secure ? '; secure' : ''
+            ].join(''));
+        }
+
+        // key and possibly options given, get cookie...
+        options = value || $.cookie.defaults || {};
+        var decode = options.raw ? raw : decoded;
+        var cookies = document.cookie.split('; ');
+        for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
+            if (decode(parts.shift()) === key) {
+                return decode(parts.join('='));
+            }
+        }
+        return null;
+    };
+
+    $.cookie.defaults = {};
+
+    $.removeCookie = function (key, options) {
+        if ($.cookie(key) !== undefined) {
+            // Must not alter options, thus extending a fresh object...
+            $.cookie(key, '', $.extend({}, options, {expires: -1}));
+            return true;
+        }
+        return false;
+    };
 
 })(jQuery, document);

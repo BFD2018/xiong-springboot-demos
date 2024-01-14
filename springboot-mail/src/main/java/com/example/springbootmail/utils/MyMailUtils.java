@@ -11,12 +11,12 @@ public class MyMailUtils {
         String code = RandomUtil.randomString(4);
         String content = "您正在登陆小熊的空间，确认验证码为：" + "【" + code + "】";
 
-        MailUtil.sendText(to,"这是一封测试邮件",content);
+        MailUtil.sendText(to, "这是一封测试邮件", content);
     }
 
 
     @Test
-    public void test01(){
+    public void test01() {
         System.out.println(RandomUtil.randomString(4));
 
         System.out.println(RandomUtil.randomNumbers(4));

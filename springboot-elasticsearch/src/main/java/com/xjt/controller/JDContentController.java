@@ -27,6 +27,6 @@ public class JDContentController {
     public List<Map<String, Object>> highlightParse(@PathVariable("keyword") String keyword,
                                                     @PathVariable("pageIndex") Integer pageIndex,
                                                     @PathVariable("pageSize") Integer pageSize) throws IOException {
-        return jdContentService.highlightSearch(keyword,pageIndex,pageSize);
+        return jdContentService.highlightSearch(keyword, pageIndex, pageSize);
     }
 }

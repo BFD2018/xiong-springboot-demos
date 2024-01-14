@@ -299,8 +299,8 @@
             self.$map.html(self.initialMapHTMLContent);
 
             // Empty legend containers and replace initial HTML content
-            $.each(self.legends, function(legendType) {
-                $.each(self.legends[legendType], function(legendIndex) {
+            $.each(self.legends, function (legendType) {
+                $.each(self.legends[legendType], function (legendIndex) {
                     var legend = self.legends[legendType][legendIndex];
                     legend.container.empty();
                     legend.container.html(legend.initialHTMLContent);
@@ -332,7 +332,7 @@
             var resizeTO = null;
 
             // Function that actually handle the resizing
-            var handleResize = function(isInit) {
+            var handleResize = function (isInit) {
                 var containerWidth = self.$map.width();
 
                 if (self.paper.width !== containerWidth) {
@@ -348,7 +348,7 @@
                 }
             };
 
-            self.onResizeEvent = function() {
+            self.onResizeEvent = function () {
                 // Clear any previous setTimeout (avoid too much triggering)
                 clearTimeout(resizeTO);
                 // setTimeout to wait for the user to finish its resizing
@@ -393,19 +393,19 @@
          *  mousemove
          *  mouseout
          */
-        initDelegatedMapEvents: function() {
+        initDelegatedMapEvents: function () {
             var self = this;
 
             // Mapping between data-type value and the corresponding elements array
             // Note: legend-elem and legend-label are not in this table because
             //       they need a special processing
             var dataTypeToElementMapping = {
-                'area'  : self.areas,
-                'area-text' : self.areas,
-                'plot' : self.plots,
-                'plot-text' : self.plots,
-                'link' : self.links,
-                'link-text' : self.links
+                'area': self.areas,
+                'area-text': self.areas,
+                'plot': self.plots,
+                'plot-text': self.plots,
+                'link': self.links,
+                'link-text': self.links
             };
 
             /* Attach mouseover event delegation
@@ -415,7 +415,7 @@
             self.$container.on("mouseover." + pluginName, "[data-id]", function () {
                 var elem = this;
                 clearTimeout(mapMouseOverTimeoutID);
-                mapMouseOverTimeoutID = setTimeout(function() {
+                mapMouseOverTimeoutID = setTimeout(function () {
                     var $elem = $(elem);
                     var id = $elem.attr('data-id');
                     var type = $elem.attr('data-type');
@@ -437,7 +437,7 @@
             self.$container.on("mousemove." + pluginName, "[data-id]", function (event) {
                 var elem = this;
                 clearTimeout(mapMouseMoveTimeoutID);
-                mapMouseMoveTimeoutID = setTimeout(function() {
+                mapMouseMoveTimeoutID = setTimeout(function () {
                     var $elem = $(elem);
                     var id = $elem.attr('data-id');
                     var type = $elem.attr('data-type');
@@ -494,10 +494,10 @@
         /*
          * Init all delegated custom events
          */
-        initDelegatedCustomEvents: function() {
+        initDelegatedCustomEvents: function () {
             var self = this;
 
-            $.each(self.customEventHandlers, function(eventName) {
+            $.each(self.customEventHandlers, function (eventName) {
                 // Namespace the custom event
                 // This allow to easily unbound only custom events and not regular ones
                 var fullEventName = eventName + '.' + pluginName + ".custom";
@@ -508,8 +508,7 @@
 
                     if (!self.panning &&
                         self.customEventHandlers[eventName][type] !== undefined &&
-                        self.customEventHandlers[eventName][type][id] !== undefined)
-                    {
+                        self.customEventHandlers[eventName][type][id] !== undefined) {
                         // Get back related elem
                         var elem = self.customEventHandlers[eventName][type][id];
                         // Run callback provided by user
@@ -608,7 +607,7 @@
             });
 
             // init zoom buttons
-            $.each(zoomOptions.buttons, function(type, opt) {
+            $.each(zoomOptions.buttons, function (type, opt) {
                 if (fnZoomButtons[type] === undefined) throw new Error("Unknown zoom button '" + type + "'");
                 // Create div with classes, contents and title (for tooltip)
                 var $button = $("<div>").addClass(opt.cssClass)
@@ -671,7 +670,7 @@
             }
 
             // When the user drag the map, prevent to move the clicked element instead of dragging the map (behaviour seen with Firefox)
-            self.$map.on("dragstart", function() {
+            self.$map.on("dragstart", function () {
                 return false;
             });
 
@@ -769,7 +768,7 @@
          * @param pageY: mouse client coordinate on Y
          * @return map coordinate {x, y}
          */
-        mapPagePositionToXY: function(pageX, pageY) {
+        mapPagePositionToXY: function (pageX, pageY) {
             var self = this;
             var offset = self.$map.offset();
             var initFactor = (self.options.map.width) ? (self.mapConf.width / self.options.map.width) : (self.mapConf.width / self.$map.width());
@@ -841,7 +840,7 @@
                 // Compute a new absolute zoomLevel value (inverse of relative -> absolute)
                 // Take the min between zoomLevel on width vs. height to be able to see the whole area
                 zoomLevel = Math.min(Math.floor((self.mapConf.width / areaFullWidth - 1) / self.options.map.zoom.step),
-                                     Math.floor((self.mapConf.height / areaFullHeight - 1) / self.options.map.zoom.step));
+                    Math.floor((self.mapConf.height / areaFullHeight - 1) / self.options.map.zoom.step));
 
             } else {
 
@@ -970,7 +969,7 @@
          *      }
          *  }
          */
-        onShowElementsInRange: function(e, opt) {
+        onShowElementsInRange: function (e, opt) {
             var self = this;
 
             // set animDuration to default if not defined
@@ -1009,7 +1008,7 @@
          * @hiddenOpacity: the opacity when hidden
          * @animDuration: the animation duration
          */
-        showElemByRange: function(ranges, elems, hiddenOpacity, animDuration) {
+        showElemByRange: function (ranges, elems, hiddenOpacity, animDuration) {
             var self = this;
             // Hold the final opacity value for all elements consolidated after applying each ranges
             // This allow to set the opacity only once for each elements
@@ -1062,7 +1061,7 @@
          * @param opacity the opacity to apply
          * @param animDuration the animation duration to use
          */
-        setElementOpacity: function(elem, opacity, animDuration) {
+        setElementOpacity: function (elem, opacity, animDuration) {
             var self = this;
 
             // Ensure no animation is running
@@ -1104,7 +1103,7 @@
         onUpdateEvent: function (e, opt) {
             var self = this;
             // Abort if opt is undefined
-            if (typeof opt !== "object")  return;
+            if (typeof opt !== "object") return;
 
             var i = 0;
             var animDuration = (opt.animDuration) ? opt.animDuration : 0;
@@ -1232,7 +1231,7 @@
             // Update plots attributes and tooltips
             $.each(self.plots, function (id) {
                 // Avoid updating unchanged elements
-                if ((typeof opt.mapOptions ==="object" &&
+                if ((typeof opt.mapOptions === "object" &&
                     (
                         (typeof opt.mapOptions.map === "object" && typeof opt.mapOptions.map.defaultPlot === "object") ||
                         (typeof opt.mapOptions.plots === "object" && typeof opt.mapOptions.plots[id] === "object") ||
@@ -1273,10 +1272,10 @@
 
             // Update legends
             if (opt.mapOptions && (
-                    (typeof opt.mapOptions.legend === "object") ||
-                    (typeof opt.mapOptions.map === "object" && typeof opt.mapOptions.map.defaultArea === "object") ||
-                    (typeof opt.mapOptions.map === "object" && typeof opt.mapOptions.map.defaultPlot === "object")
-                )) {
+                (typeof opt.mapOptions.legend === "object") ||
+                (typeof opt.mapOptions.map === "object" && typeof opt.mapOptions.map.defaultArea === "object") ||
+                (typeof opt.mapOptions.map === "object" && typeof opt.mapOptions.map.defaultPlot === "object")
+            )) {
                 // Show all elements on the map before updating the legends
                 $("[data-type='legend-elem']", self.$container).each(function (id, elem) {
                     if ($(elem).attr('data-hidden') === "1") {
@@ -1336,7 +1335,7 @@
          * Set plot coordinates
          * @param plot object plot element
          */
-        setPlotCoords: function(plot) {
+        setPlotCoords: function (plot) {
             var self = this;
 
             if (plot.options.x !== undefined && plot.options.y !== undefined) {
@@ -1360,7 +1359,7 @@
          * Note: for SVG, plot.mapElem needs to exists beforehand
          * @param plot object plot element
          */
-        setPlotAttributes: function(plot) {
+        setPlotAttributes: function (plot) {
             if (plot.options.type === "square") {
                 plot.options.attrs.width = plot.options.size;
                 plot.options.attrs.height = plot.options.size;
@@ -1388,9 +1387,9 @@
                 // The base transform will resize the SVG path to the one specified by width/height
                 // and also move the path to the actual coordinates
                 plot.mapElem.baseTransform = "m" + (plot.options.width / plot.mapElem.originalBBox.width) + ",0,0," +
-                                                   (plot.options.height / plot.mapElem.originalBBox.height) + "," +
-                                                   (plot.coords.x - plot.options.width / 2) + "," +
-                                                   (plot.coords.y - plot.options.height / 2);
+                    (plot.options.height / plot.mapElem.originalBBox.height) + "," +
+                    (plot.coords.x - plot.options.width / 2) + "," +
+                    (plot.coords.y - plot.options.height / 2);
 
                 plot.options.attrs.transform = plot.mapElem.baseTransform + plot.options.attrs.transform;
 
@@ -1433,8 +1432,7 @@
                         x: p1BBox.cx,
                         y: p1BBox.cy
                     };
-                }
-                else if (p1.latitude !== undefined && p1.longitude !== undefined) {
+                } else if (p1.latitude !== undefined && p1.longitude !== undefined) {
                     coordsP1 = self.mapConf.getCoords(p1.latitude, p1.longitude);
                 } else {
                     coordsP1.x = p1.x;
@@ -1447,8 +1445,7 @@
                         x: p2BBox.cx,
                         y: p2BBox.cy
                     };
-                }
-                else if (p2.latitude !== undefined && p2.longitude !== undefined) {
+                } else if (p2.latitude !== undefined && p2.longitude !== undefined) {
                     coordsP2 = self.mapConf.getCoords(p2.latitude, p2.longitude);
                 } else {
                     coordsP2.x = p2.x;
@@ -1511,7 +1508,7 @@
         /*
          * Check wether newAttrs object bring modifications to originalAttrs object
          */
-        isAttrsChanged: function(originalAttrs, newAttrs) {
+        isAttrsChanged: function (originalAttrs, newAttrs) {
             for (var key in newAttrs) {
                 if (newAttrs.hasOwnProperty(key) && typeof originalAttrs[key] === 'undefined' || newAttrs[key] !== originalAttrs[key]) {
                     return true;
@@ -1919,7 +1916,7 @@
          *          hideOtherElems boolean, if other elems shall be hidden
          *          animDuration duration of animation
          */
-        handleClickOnLegendElem: function(elem, id, legendIndex, legendType, opts) {
+        handleClickOnLegendElem: function (elem, id, legendIndex, legendType, opts) {
             var self = this;
             var legendOptions;
             opts = opts || {};
@@ -1937,7 +1934,7 @@
             var sliceOptions = legendOptions.slices[id];
             var mapElems = legendType === 'area' ? self.areas : self.plots;
             // Check animDuration: if not set, this is a regular click, use the value specified in options
-            var animDuration = opts.animDuration !== undefined ? opts.animDuration : legendOptions.hideElemsOnClick.animDuration ;
+            var animDuration = opts.animDuration !== undefined ? opts.animDuration : legendOptions.hideElemsOnClick.animDuration;
 
             var hidden = $legendElem.attr('data-hidden');
             var hiddenNewAttr = (hidden === '0') ? {"data-hidden": '1'} : {"data-hidden": '0'};
@@ -1988,7 +1985,7 @@
             $legendElem.attr(hiddenNewAttr);
             $legendLabel.attr(hiddenNewAttr);
 
-            if ((opts.hideOtherElems === undefined || opts.hideOtherElems === true) && legendOptions.exclusive === true ) {
+            if ((opts.hideOtherElems === undefined || opts.hideOtherElems === true) && legendOptions.exclusive === true) {
                 $("[data-type='legend-elem'][data-hidden=0]", self.$container).each(function () {
                     var $elem = $(this);
                     if ($elem.attr('data-id') !== id) {
@@ -2015,7 +2012,7 @@
 
             self.legends[legendType] = {};
             for (var j = 0; j < legendsOptions.length; ++j) {
-                if (legendsOptions[j].display === true  && $.isArray(legendsOptions[j].slices) && legendsOptions[j].slices.length > 0 &&
+                if (legendsOptions[j].display === true && $.isArray(legendsOptions[j].slices) && legendsOptions[j].slices.length > 0 &&
                     legendsOptions[j].cssClass !== "" && $("." + legendsOptions[j].cssClass, self.$container).length !== 0
                 ) {
                     self.legends[legendType][j] = self.drawLegend(legendsOptions[j], legendType, elems, scale, j);
@@ -2106,9 +2103,9 @@
 
                 var tooltipPosition = {
                     "left": Math.min(self.$map.width() - self.$tooltip.outerWidth() - 5,
-                                     mouseX - self.$map.offset().left + offsetLeft),
+                        mouseX - self.$map.offset().left + offsetLeft),
                     "top": Math.min(self.$map.height() - self.$tooltip.outerHeight() - 5,
-                                    mouseY - self.$map.offset().top + offsetTop)
+                        mouseY - self.$map.offset().top + offsetTop)
                 };
 
                 if (typeof elem.options.tooltip.overflow === "object") {
@@ -2424,11 +2421,11 @@
          * in order to be in window context
          */
         // The function to use for requestAnimationFrame
-        requestAnimationFrame: function(callback) {
+        requestAnimationFrame: function (callback) {
             return this._requestAnimationFrameFn.call(window, callback);
         },
         // The function to use for cancelAnimationFrame
-        cancelAnimationFrame: function(id) {
+        cancelAnimationFrame: function (id) {
             this._cancelAnimationFrameFn.call(window, id);
         },
         // The requestAnimationFrame polyfill'd function
@@ -2483,7 +2480,7 @@
          * This avoid using the internal variable paper._viewBox which
          * may not be present in future version of Raphael
          */
-        setViewBox: function(x, y, w, h) {
+        setViewBox: function (x, y, w, h) {
             var self = this;
             // Update current value
             self.currentViewBox.x = x;
@@ -2519,7 +2516,7 @@
          * @param duration Animation duration in ms
          * @param callback Callback to eventually call after animation is done
          */
-        animate: function(element, attrs, duration, callback) {
+        animate: function (element, attrs, duration, callback) {
             var self = this;
             // Check element
             if (!element) return;
@@ -2527,7 +2524,7 @@
                 // Filter out non-animated attributes
                 // Note: we don't need to delete from original attribute (they won't be set anyway)
                 var attrsNonAnimated = {};
-                for (var i=0 ; i < self._nonAnimatedAttrs.length ; i++) {
+                for (var i = 0; i < self._nonAnimatedAttrs.length; i++) {
                     var attrName = self._nonAnimatedAttrs[i];
                     if (attrs[attrName] !== undefined) {
                         attrsNonAnimated[attrName] = attrs[attrName];
@@ -2536,7 +2533,7 @@
                 // Set non-animated attributes
                 element.attr(attrsNonAnimated);
                 // Start animation for all attributes
-                element.animate(attrs, duration, 'linear', function() {
+                element.animate(attrs, duration, 'linear', function () {
                     if (callback) callback();
                 });
             } else {
@@ -2555,7 +2552,7 @@
          * Wants to override this behavior? Use prototype overriding:
          *     $.mapael.prototype.isRaphaelBBoxBugPresent = function() {return false;};
          */
-        isRaphaelBBoxBugPresent: function() {
+        isRaphaelBBoxBugPresent: function () {
             var self = this;
             // Draw text, then get its boundaries
             var textElem = self.paper.text(-50, -50, "TEST");

@@ -15,7 +15,7 @@ import java.io.IOException;
 @Controller
 public class FormController {
     @GetMapping("/form_layouts")
-    public String form_layoutsPage(){
+    public String form_layoutsPage() {
         return "/form/form_layouts";
     }
 
@@ -24,16 +24,16 @@ public class FormController {
                                @RequestParam("username") String username,
                                @RequestPart("headerImg") MultipartFile headerImg,
                                @RequestPart("photos") MultipartFile[] photos) throws IOException {
-        log.info("上传的信息：email={}，username={}，headerImg={}，photos={}", email,username,headerImg.getSize(),photos.length);
+        log.info("上传的信息：email={}，username={}，headerImg={}，photos={}", email, username, headerImg.getSize(), photos.length);
 
-        if(!headerImg.isEmpty()){
+        if (!headerImg.isEmpty()) {
             String originalFilename = headerImg.getOriginalFilename();
-            headerImg.transferTo(new File("D:\\baiduNetdisk\\"+originalFilename));
+            headerImg.transferTo(new File("D:\\baiduNetdisk\\" + originalFilename));
         }
-        if(photos.length>0){
+        if (photos.length > 0) {
             for (MultipartFile photo : photos) {
                 String originalFilename = photo.getOriginalFilename();
-                photo.transferTo(new File("D:\\baiduNetdisk\\"+originalFilename));
+                photo.transferTo(new File("D:\\baiduNetdisk\\" + originalFilename));
             }
         }
 

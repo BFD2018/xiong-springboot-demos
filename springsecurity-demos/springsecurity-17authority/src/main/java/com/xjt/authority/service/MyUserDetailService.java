@@ -24,7 +24,7 @@ public class MyUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("用户不存在");
         }
         List<TRole> roles = userMapper.getUserRoleByUid(user.getId());
-        System.out.println("roles===>"+roles);
+        System.out.println("roles===>" + roles);
         user.setRoleList(roles);
 
         return user;

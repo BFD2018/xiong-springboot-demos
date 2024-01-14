@@ -7,7 +7,7 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        if(beanName.equals("account")) {
+        if (beanName.equals("account")) {
             Account account = (Account) bean;
             account.setName("ffbbb");
             return account;

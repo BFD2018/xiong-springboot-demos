@@ -29,8 +29,9 @@ public class GuiguMessageConverter implements HttpMessageConverter<Person> {
 
     /**
      * 服务器要统计所有MessageConverter都能写出哪些内容类型
-     *
+     * <p>
      * application/x-guigu
+     *
      * @return
      */
     @Override
@@ -46,7 +47,7 @@ public class GuiguMessageConverter implements HttpMessageConverter<Person> {
     @Override
     public void write(Person person, MediaType contentType, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
         //自定义协议数据的写出
-        String data = person.getUserName()+";"+person.getAge()+";"+person.getBirth();
+        String data = person.getUserName() + ";" + person.getAge() + ";" + person.getBirth();
 
 
         //写出去

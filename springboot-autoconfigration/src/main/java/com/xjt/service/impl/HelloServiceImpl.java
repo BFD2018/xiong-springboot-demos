@@ -22,8 +22,8 @@ public class HelloServiceImpl implements HelloService {
         System.out.println("更新结果：" + i);
 
         //在此构造一个除数为0的异常，测试事务是否起作用
-        int a = 10/0;
+        int a = 10 / 0;
 
-        return RespBean.ok("ok",i);
+        return RespBean.ok("ok", i);
     }
 }

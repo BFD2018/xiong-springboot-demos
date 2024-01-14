@@ -8,25 +8,25 @@ Licensed under the MIT license.
 */
 
 /**
-## jquery.flot.navigate.js
+ ## jquery.flot.navigate.js
 
-This flot plugin is used for adding the ability to pan and zoom the plot.
-A higher level overview is available at [interactions](interactions.md) documentation.
+ This flot plugin is used for adding the ability to pan and zoom the plot.
+ A higher level overview is available at [interactions](interactions.md) documentation.
 
-The default behaviour is scrollwheel up/down to zoom in, drag
-to pan. The plugin defines plot.zoom({ center }), plot.zoomOut() and
-plot.pan( offset ) so you easily can add custom controls. It also fires
-"plotpan" and "plotzoom" events, useful for synchronizing plots.
+ The default behaviour is scrollwheel up/down to zoom in, drag
+ to pan. The plugin defines plot.zoom({ center }), plot.zoomOut() and
+ plot.pan( offset ) so you easily can add custom controls. It also fires
+ "plotpan" and "plotzoom" events, useful for synchronizing plots.
 
-The plugin supports these options:
-```js
-    zoom: {
+ The plugin supports these options:
+ ```js
+ zoom: {
         interactive: false,
         active: false,
         amount: 1.5         // 2 = 200% (zoom in), 0.5 = 50% (zoom out)
     }
 
-    pan: {
+ pan: {
         interactive: false,
         active: false,
         cursor: "move",     // CSS mouse cursor value used when dragging, e.g. "pointer"
@@ -34,7 +34,7 @@ The plugin supports these options:
         mode: "smart"       // enable smart pan mode
     }
 
-    xaxis: {
+ xaxis: {
         axisZoom: true, //zoom axis when mouse over it is allowed
         plotZoom: true, //zoom axis is allowed for plot zoom
         axisPan: true, //pan axis when mouse over it is allowed
@@ -43,7 +43,7 @@ The plugin supports these options:
         zoomRange: [undefined, undefined], // no limit on zoom range, or [closest zoom, furthest zoom] in axis units
     }
 
-    yaxis: {
+ yaxis: {
         axisZoom: true, //zoom axis when mouse over it is allowed
         plotZoom: true, //zoom axis is allowed for plot zoom
         axisPan: true, //pan axis when mouse over it is allowed
@@ -51,61 +51,61 @@ The plugin supports these options:
         panRange: [undefined, undefined], // no limit on pan range, or [min, max] in axis units
         zoomRange: [undefined, undefined], // no limit on zoom range, or [closest zoom, furthest zoom] in axis units
     }
-```
-**interactive** enables the built-in drag/click behaviour. If you enable
-interactive for pan, then you'll have a basic plot that supports moving
-around; the same for zoom.
+ ```
+ **interactive** enables the built-in drag/click behaviour. If you enable
+ interactive for pan, then you'll have a basic plot that supports moving
+ around; the same for zoom.
 
-**active** is true after a touch tap on plot. This enables plot navigation.
-Once activated, zoom and pan cannot be deactivated. When the plot becomes active,
-"plotactivated" event is triggered.
+ **active** is true after a touch tap on plot. This enables plot navigation.
+ Once activated, zoom and pan cannot be deactivated. When the plot becomes active,
+ "plotactivated" event is triggered.
 
-**amount** specifies the default amount to zoom in (so 1.5 = 150%) relative to
-the current viewport.
+ **amount** specifies the default amount to zoom in (so 1.5 = 150%) relative to
+ the current viewport.
 
-**cursor** is a standard CSS mouse cursor string used for visual feedback to the
-user when dragging.
+ **cursor** is a standard CSS mouse cursor string used for visual feedback to the
+ user when dragging.
 
-**frameRate** specifies the maximum number of times per second the plot will
-update itself while the user is panning around on it (set to null to disable
-intermediate pans, the plot will then not update until the mouse button is
-released).
+ **frameRate** specifies the maximum number of times per second the plot will
+ update itself while the user is panning around on it (set to null to disable
+ intermediate pans, the plot will then not update until the mouse button is
+ released).
 
-**mode** a string specifies the pan mode for mouse interaction. Accepted values:
-'manual': no pan hint or direction snapping;
-'smart': The graph shows pan hint bar and the pan movement will snap
-to one direction when the drag direction is close to it;
-'smartLock'. The graph shows pan hint bar and the pan movement will always
-snap to a direction that the drag diorection started with.
+ **mode** a string specifies the pan mode for mouse interaction. Accepted values:
+ 'manual': no pan hint or direction snapping;
+ 'smart': The graph shows pan hint bar and the pan movement will snap
+ to one direction when the drag direction is close to it;
+ 'smartLock'. The graph shows pan hint bar and the pan movement will always
+ snap to a direction that the drag diorection started with.
 
-Example API usage:
-```js
-    plot = $.plot(...);
+ Example API usage:
+ ```js
+ plot = $.plot(...);
 
-    // zoom default amount in on the pixel ( 10, 20 )
-    plot.zoom({ center: { left: 10, top: 20 } });
+ // zoom default amount in on the pixel ( 10, 20 )
+ plot.zoom({ center: { left: 10, top: 20 } });
 
-    // zoom out again
-    plot.zoomOut({ center: { left: 10, top: 20 } });
+ // zoom out again
+ plot.zoomOut({ center: { left: 10, top: 20 } });
 
-    // zoom 200% in on the pixel (10, 20)
-    plot.zoom({ amount: 2, center: { left: 10, top: 20 } });
+ // zoom 200% in on the pixel (10, 20)
+ plot.zoom({ amount: 2, center: { left: 10, top: 20 } });
 
-    // pan 100 pixels to the left (changing x-range in a positive way) and 20 down
-    plot.pan({ left: -100, top: 20 })
-```
+ // pan 100 pixels to the left (changing x-range in a positive way) and 20 down
+ plot.pan({ left: -100, top: 20 })
+ ```
 
-Here, "center" specifies where the center of the zooming should happen. Note
-that this is defined in pixel space, not the space of the data points (you can
-use the p2c helpers on the axes in Flot to help you convert between these).
+ Here, "center" specifies where the center of the zooming should happen. Note
+ that this is defined in pixel space, not the space of the data points (you can
+ use the p2c helpers on the axes in Flot to help you convert between these).
 
-**amount** is the amount to zoom the viewport relative to the current range, so
-1 is 100% (i.e. no change), 1.5 is 150% (zoom in), 0.7 is 70% (zoom out). You
-can set the default in the options.
-*/
+ **amount** is the amount to zoom the viewport relative to the current range, so
+ 1 is 100% (i.e. no change), 1.5 is 150% (zoom in), 0.7 is 70% (zoom out). You
+ can set the default in the options.
+ */
 
 /* eslint-enable */
-(function($) {
+(function ($) {
     'use strict';
 
     var options = {
@@ -200,7 +200,7 @@ can set the default in the options.
             panHint = null,
             panTimeout = null,
             plotState,
-            prevDragPosition = { x: 0, y: 0 },
+            prevDragPosition = {x: 0, y: 0},
             isPanAction = false;
 
         function onMouseWheel(e, delta) {
@@ -221,14 +221,16 @@ can set the default in the options.
             }
         }
 
-        plot.navigationState = function(startPageX, startPageY) {
+        plot.navigationState = function (startPageX, startPageY) {
             var axes = this.getAxes();
             var result = {};
-            Object.keys(axes).forEach(function(axisName) {
+            Object.keys(axes).forEach(function (axisName) {
                 var axis = axes[axisName];
                 result[axisName] = {
-                    navigationOffset: { below: axis.options.offset.below || 0,
-                        above: axis.options.offset.above || 0},
+                    navigationOffset: {
+                        below: axis.options.offset.below || 0,
+                        above: axis.options.offset.above || 0
+                    },
                     axisMin: axis.min,
                     axisMax: axis.max,
                     diagMode: false
@@ -319,7 +321,7 @@ can set the default in the options.
 
             if (panTimeout || !frameRate) return;
 
-            panTimeout = setTimeout(function() {
+            panTimeout = setTimeout(function () {
                 if (useSmartPan) {
                     plot.smartPan({
                         x: plotState.startPageX - page.X,
@@ -375,19 +377,23 @@ can set the default in the options.
             plot.activate();
             var o = plot.getOptions()
 
-            if (!o.recenter.interactive) { return; }
+            if (!o.recenter.interactive) {
+                return;
+            }
 
             var axes = plot.getTouchedAxis(e.clientX, e.clientY),
                 event;
 
-            plot.recenter({ axes: axes[0] ? axes : null });
+            plot.recenter({axes: axes[0] ? axes : null});
 
             if (axes[0]) {
-                event = new $.Event('re-center', { detail: {
-                    axisTouched: axes[0]
-                }});
+                event = new $.Event('re-center', {
+                    detail: {
+                        axisTouched: axes[0]
+                    }
+                });
             } else {
-                event = new $.Event('re-center', { detail: e });
+                event = new $.Event('re-center', {detail: e});
             }
             plot.getPlaceholder().trigger(event);
         }
@@ -402,7 +408,7 @@ can set the default in the options.
             return false;
         }
 
-        plot.activate = function() {
+        plot.activate = function () {
             var o = plot.getOptions();
             if (!o.pan.active || !o.zoom.active) {
                 o.pan.active = true;
@@ -429,7 +435,7 @@ can set the default in the options.
             eventHolder.click(onClick);
         }
 
-        plot.zoomOut = function(args) {
+        plot.zoomOut = function (args) {
             if (!args) {
                 args = {};
             }
@@ -442,7 +448,7 @@ can set the default in the options.
             plot.zoom(args);
         };
 
-        plot.zoom = function(args) {
+        plot.zoom = function (args) {
             if (!args) {
                 args = {};
             }
@@ -512,8 +518,9 @@ can set the default in the options.
 
                 var offsetBelow = $.plot.saturated.saturate(navigationOffset.below - (axis.min - min));
                 var offsetAbove = $.plot.saturated.saturate(navigationOffset.above - (axis.max - max));
-                opts.offset = { below: offsetBelow, above: offsetAbove };
-            };
+                opts.offset = {below: offsetBelow, above: offsetAbove};
+            }
+            ;
 
             plot.setupGrid(true);
             plot.draw();
@@ -523,7 +530,7 @@ can set the default in the options.
             }
         };
 
-        plot.pan = function(args) {
+        plot.pan = function (args) {
             var delta = {
                 x: +args.left,
                 y: +args.top
@@ -532,7 +539,7 @@ can set the default in the options.
             if (isNaN(delta.x)) delta.x = 0;
             if (isNaN(delta.y)) delta.y = 0;
 
-            $.each(args.axes || plot.getAxes(), function(_, axis) {
+            $.each(args.axes || plot.getAxes(), function (_, axis) {
                 var opts = axis.options,
                     d = delta[axis.direction];
 
@@ -575,30 +582,30 @@ can set the default in the options.
             }
         };
 
-        plot.recenter = function(args) {
-            $.each(args.axes || plot.getAxes(), function(_, axis) {
+        plot.recenter = function (args) {
+            $.each(args.axes || plot.getAxes(), function (_, axis) {
                 if (args.axes) {
                     if (this.direction === 'x') {
-                        axis.options.offset = { below: 0 };
+                        axis.options.offset = {below: 0};
                     } else if (this.direction === 'y') {
-                        axis.options.offset = { above: 0 };
+                        axis.options.offset = {above: 0};
                     }
                 } else {
-                    axis.options.offset = { below: 0, above: 0 };
+                    axis.options.offset = {below: 0, above: 0};
                 }
             });
             plot.setupGrid(true);
             plot.draw();
         };
 
-        var shouldSnap = function(delta) {
+        var shouldSnap = function (delta) {
             return (Math.abs(delta.y) < SNAPPING_CONSTANT && Math.abs(delta.x) >= SNAPPING_CONSTANT) ||
                 (Math.abs(delta.x) < SNAPPING_CONSTANT && Math.abs(delta.y) >= SNAPPING_CONSTANT);
         }
 
         // adjust delta so the pan action is constrained on the vertical or horizontal direction
         // it the movements in the other direction are small
-        var adjustDeltaToSnap = function(delta) {
+        var adjustDeltaToSnap = function (delta) {
             if (Math.abs(delta.x) < SNAPPING_CONSTANT && Math.abs(delta.y) >= SNAPPING_CONSTANT) {
                 return {x: 0, y: delta.y};
             }
@@ -611,31 +618,31 @@ can set the default in the options.
         }
 
         var lockedDirection = null;
-        var lockDeltaDirection = function(delta) {
+        var lockDeltaDirection = function (delta) {
             if (!lockedDirection && Math.max(Math.abs(delta.x), Math.abs(delta.y)) >= SNAPPING_CONSTANT) {
                 lockedDirection = Math.abs(delta.x) < Math.abs(delta.y) ? 'y' : 'x';
             }
 
             switch (lockedDirection) {
                 case 'x':
-                    return { x: delta.x, y: 0 };
+                    return {x: delta.x, y: 0};
                 case 'y':
-                    return { x: 0, y: delta.y };
+                    return {x: 0, y: delta.y};
                 default:
-                    return { x: 0, y: 0 };
+                    return {x: 0, y: 0};
             }
         }
 
-        var isDiagonalMode = function(delta) {
+        var isDiagonalMode = function (delta) {
             if (Math.abs(delta.x) > 0 && Math.abs(delta.y) > 0) {
                 return true;
             }
             return false;
         }
 
-        var restoreAxisOffset = function(axes, initialState, delta) {
+        var restoreAxisOffset = function (axes, initialState, delta) {
             var axis;
-            Object.keys(axes).forEach(function(axisName) {
+            Object.keys(axes).forEach(function (axisName) {
                 axis = axes[axisName];
                 if (delta[axis.direction] === 0) {
                     axis.options.offset.below = initialState[axisName].navigationOffset.below;
@@ -644,8 +651,8 @@ can set the default in the options.
             });
         }
 
-        var prevDelta = { x: 0, y: 0 };
-        plot.smartPan = function(delta, initialState, panAxes, preventEvent, smartLock) {
+        var prevDelta = {x: 0, y: 0};
+        plot.smartPan = function (delta, initialState, panAxes, preventEvent, smartLock) {
             var snap = smartLock ? true : shouldSnap(delta),
                 axes = plot.getAxes(),
                 opts;
@@ -689,7 +696,7 @@ can set the default in the options.
             }
 
             var axis, axisMin, axisMax, p, d;
-            Object.keys(axes).forEach(function(axisName) {
+            Object.keys(axes).forEach(function (axisName) {
                 axis = axes[axisName];
                 axisMin = axis.min;
                 axisMax = axis.max;
@@ -737,10 +744,10 @@ can set the default in the options.
             }
         };
 
-        plot.smartPan.end = function() {
+        plot.smartPan.end = function () {
             panHint = null;
             lockedDirection = null;
-            prevDelta = { x: 0, y: 0 };
+            prevDelta = {x: 0, y: 0};
             plot.triggerRedrawOverlay();
         }
 
@@ -804,7 +811,7 @@ can set the default in the options.
             }
         }
 
-        plot.getTouchedAxis = function(touchPointX, touchPointY) {
+        plot.getTouchedAxis = function (touchPointX, touchPointY) {
             var ec = plot.getPlaceholder().offset();
             ec.left = touchPointX - ec.left;
             ec.top = touchPointY - ec.top;
@@ -813,7 +820,7 @@ can set the default in the options.
                 var box = axis.box;
                 if (box !== undefined) {
                     return (ec.left > box.left) && (ec.left < box.left + box.width) &&
-                            (ec.top > box.top) && (ec.top < box.top + box.height);
+                        (ec.top > box.top) && (ec.top < box.top + box.height);
                 }
             });
 

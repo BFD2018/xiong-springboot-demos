@@ -4,11 +4,12 @@
 //! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 
 ;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined'
+    && typeof require === 'function' ? factory(require('../moment')) :
+        typeof define === 'function' && define.amd ? define(['../moment'], factory) :
+            factory(global.moment)
+}(this, (function (moment) {
+    'use strict';
 
     //! moment.js locale configuration
 

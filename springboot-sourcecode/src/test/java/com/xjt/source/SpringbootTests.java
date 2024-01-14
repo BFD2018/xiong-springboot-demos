@@ -12,7 +12,7 @@ class SpringbootTests {
     private Account account;
 
     @Test
-    public void tt(){
+    public void tt() {
         System.out.println(account.getName());
     }
 

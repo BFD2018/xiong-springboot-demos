@@ -54,9 +54,9 @@ public class LoginCatpchaFilter extends UsernamePasswordAuthenticationFilter {
         String password = userInfo.get(getPasswordParameter());//用来接收密码
 
         //2.从session中获取验证码
-        String sessionVerifyCode = (String)request.getSession().getAttribute("myCaptcha");
+        String sessionVerifyCode = (String) request.getSession().getAttribute("myCaptcha");
 
-        if(!ObjectUtils.isEmpty(captcha) && !ObjectUtils.isEmpty(sessionVerifyCode) && captcha.equals(sessionVerifyCode)){
+        if (!ObjectUtils.isEmpty(captcha) && !ObjectUtils.isEmpty(sessionVerifyCode) && captcha.equals(sessionVerifyCode)) {
             UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
             setDetails(request, authRequest);
             return this.getAuthenticationManager().authenticate(authRequest);

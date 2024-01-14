@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <style>
-    .tishi{
+    .tishi {
         font-size: 14px;
         font-weight: 700;
         color: red;
@@ -101,18 +101,17 @@
                 console.log("res==============>");
                 console.log(JSON.parse(res.obj));
                 let obj = JSON.parse(res.obj)
-                if(obj.result == null || obj.error_msg != "SUCCESS"){
-                    alert("错误码：" +obj.error_code + "\t 错误消息：" + obj.error_msg );
+                if (obj.result == null || obj.error_msg != "SUCCESS") {
+                    alert("错误码：" + obj.error_code + "\t 错误消息：" + obj.error_msg);
                     alert("重试一次！");
                     setTimeout(function () {
                         location.reload();
-                    },1000);
-                }
-                else if (obj.result.user_list[0].score > 80) {
+                    }, 1000);
+                } else if (obj.result.user_list[0].score > 80) {
                     alert("用户登录成功！");
                     setTimeout(function () {
-                        window.location.href="/face/page/home"
-                    },1000);
+                        window.location.href = "/face/page/home"
+                    }, 1000);
                 } else {
                     console.log(res);
                 }

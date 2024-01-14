@@ -14,7 +14,7 @@ public class TestDemo {
     TMenuService menuService;
 
     @Test
-    public void test01(){
+    public void test01() {
         List<TMenu> allMenu = menuService.getAllMenu();
         System.out.println(allMenu);
     }

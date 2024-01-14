@@ -21,7 +21,7 @@ public class HelloController {
 
     @ResponseBody
     @GetMapping("/test")
-    public Object test01(){
+    public Object test01() {
         //1.代码中获取用户信息
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -35,7 +35,7 @@ public class HelloController {
 
     @ResponseBody
     @GetMapping("/test02")
-    public Object test02(){
+    public Object test02() {
         return "hahha";
     }
 
@@ -48,7 +48,7 @@ public class HelloController {
         captcha.setCharType(Captcha.TYPE_ONLY_NUMBER);
         captcha.setLen(4);
         String text = captcha.text();// 获取验证码的字符
-        request.getSession().setAttribute("myCaptcha",text);        //将验证码存入session
+        request.getSession().setAttribute("myCaptcha", text);        //将验证码存入session
 
         captcha.out(outputStream);  // 输出验证码
     }

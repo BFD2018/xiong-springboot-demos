@@ -1,38 +1,38 @@
 /** ## jquery.flot.composeImages.js
 
-This plugin is used to expose a function used to overlap several canvases and
-SVGs, for the purpose of creating a snaphot out of them.
+ This plugin is used to expose a function used to overlap several canvases and
+ SVGs, for the purpose of creating a snaphot out of them.
 
-### When composeImages is used:
-When multiple canvases and SVGs have to be overlapped into a single image
-and their offset on the page, must be preserved.
+ ### When composeImages is used:
+ When multiple canvases and SVGs have to be overlapped into a single image
+ and their offset on the page, must be preserved.
 
-### Where can be used:
-In creating a downloadable snapshot of the plots, axes, cursors etc of a graph.
+ ### Where can be used:
+ In creating a downloadable snapshot of the plots, axes, cursors etc of a graph.
 
-### How it works:
-The entry point is composeImages function. It expects an array of objects,
-which should be either canvases or SVGs (or a mix). It does a prevalidation
-of them, by verifying if they will be usable or not, later in the flow.
-After selecting only usable sources, it passes them to getGenerateTempImg
-function, which generates temporary images out of them. This function
-expects that some of the passed sources (canvas or SVG) may still have
-problems being converted to an image and makes sure the promises system,
-used by composeImages function, moves forward. As an example, SVGs with
-missing information from header or with unsupported content, may lead to
-failure in generating the temporary image. Temporary images are required
-mostly on extracting content from SVGs, but this is also where the x/y
-offsets are extracted for each image which will be added. For SVGs in
-particular, their CSS rules have to be applied.
-After all temporary images are generated, they are overlapped using
-getExecuteImgComposition function. This is where the destination canvas
-is set to the proper dimensions. It is then output by composeImages.
-This function returns a promise, which can be used to wait for the whole
-composition process. It requires to be asynchronous, because this is how
-temporary images load their data.
-*/
+ ### How it works:
+ The entry point is composeImages function. It expects an array of objects,
+ which should be either canvases or SVGs (or a mix). It does a prevalidation
+ of them, by verifying if they will be usable or not, later in the flow.
+ After selecting only usable sources, it passes them to getGenerateTempImg
+ function, which generates temporary images out of them. This function
+ expects that some of the passed sources (canvas or SVG) may still have
+ problems being converted to an image and makes sure the promises system,
+ used by composeImages function, moves forward. As an example, SVGs with
+ missing information from header or with unsupported content, may lead to
+ failure in generating the temporary image. Temporary images are required
+ mostly on extracting content from SVGs, but this is also where the x/y
+ offsets are extracted for each image which will be added. For SVGs in
+ particular, their CSS rules have to be applied.
+ After all temporary images are generated, they are overlapped using
+ getExecuteImgComposition function. This is where the destination canvas
+ is set to the proper dimensions. It is then output by composeImages.
+ This function returns a promise, which can be used to wait for the whole
+ composition process. It requires to be asynchronous, because this is how
+ temporary images load their data.
+ */
 
-(function($) {
+(function ($) {
     "use strict";
     const GENERALFAILURECALLBACKERROR = -100; //simply a negative number
     const SUCCESSFULIMAGEPREPARATION = 0;
@@ -46,7 +46,7 @@ temporary images load their data.
         var validCanvasOrSvgSources = canvasOrSvgSources.filter(isValidSource);
         pixelRatio = getPixelRatio(destinationCanvas.getContext('2d'));
 
-        var allImgCompositionPromises = validCanvasOrSvgSources.map(function(validCanvasOrSvgSource) {
+        var allImgCompositionPromises = validCanvasOrSvgSources.map(function (validCanvasOrSvgSource) {
             var tempImg = new Image();
             var currentPromise = new Promise(getGenerateTempImg(tempImg, validCanvasOrSvgSource));
             return currentPromise;
@@ -77,18 +77,18 @@ temporary images load their data.
         tempImg.sourceComponent = canvasOrSvgSource;
 
         return function doGenerateTempImg(successCallbackFunc, failureCallbackFunc) {
-            tempImg.onload = function(evt) {
+            tempImg.onload = function (evt) {
                 tempImg.successfullyLoaded = true;
                 successCallbackFunc(tempImg);
             };
 
-            tempImg.onabort = function(evt) {
+            tempImg.onabort = function (evt) {
                 tempImg.successfullyLoaded = false;
                 console.log('Can\'t generate temp image from ' + tempImg.sourceDescription + '. It is possible that it is missing some properties or its content is not supported by this browser. Source component:', tempImg.sourceComponent);
                 successCallbackFunc(tempImg); //call successCallback, to allow snapshot of all working images
             };
 
-            tempImg.onerror = function(evt) {
+            tempImg.onerror = function (evt) {
                 tempImg.successfullyLoaded = false;
                 console.log('Can\'t generate temp image from ' + tempImg.sourceDescription + '. It is possible that it is missing some properties or its content is not supported by this browser. Source component:', tempImg.sourceComponent);
                 successCallbackFunc(tempImg); //call successCallback, to allow snapshot of all working images
@@ -159,7 +159,7 @@ temporary images load their data.
         // Do so by breaking up large strings into smaller substrings; this is necessary to avoid the
         // "maximum call stack size exceeded" exception that can happen when calling 'String.fromCharCode.apply'
         // with a very long array.
-        function buildBinaryString (arrayBuffer) {
+        function buildBinaryString(arrayBuffer) {
             var binaryString = "";
             const utf8Array = new Uint8Array(arrayBuffer);
             const blockSize = 16384;

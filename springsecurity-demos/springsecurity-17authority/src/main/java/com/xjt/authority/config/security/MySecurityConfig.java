@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configurers.UrlAuthori
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true,jsr250Enabled = true,securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true)
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public CustomerSecurityMetaSource customerSecurityMetaSource;

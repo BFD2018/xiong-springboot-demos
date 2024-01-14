@@ -19,14 +19,14 @@ public class UserController {
 
     @ApiOperation("查询1条记录")
     @GetMapping("/get/{id}")
-    public RespBean getUserById(@PathVariable("id") Long id){
+    public RespBean getUserById(@PathVariable("id") Long id) {
         User user = userService.getUserById(id);
-        return RespBean.ok("ok",user);
+        return RespBean.ok("ok", user);
     }
 
     @ApiOperation("数据库新增3条记录")
     @PostMapping("/add")
-    public void addUser(@RequestBody User user){
+    public void addUser(@RequestBody User user) {
         userService.insertUser(user);
     }
 

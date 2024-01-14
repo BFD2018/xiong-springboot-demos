@@ -30,7 +30,7 @@ public class TableController {
     UserService userService;
 
     @GetMapping("/dynamic_table")
-    public String dynamic_table(@RequestParam(value="pn",defaultValue = "1") Integer pn, Model model) {
+    public String dynamic_table(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
         //表格内容的遍历
         //response.sendError
 //        List<User> users = Arrays.asList(
@@ -40,22 +40,22 @@ public class TableController {
 //                new User("hehe ", "aaddd"));
 //        model.addAttribute("users", users);
 
-        Page<User> page = new Page<User>(pn,3);
+        Page<User> page = new Page<User>(pn, 3);
         Page<User> userPage = userService.page(page);
-        log.info("分页查找用户===>{}",userPage);
-        model.addAttribute("userPage",userPage);
+        log.info("分页查找用户===>{}", userPage);
+        model.addAttribute("userPage", userPage);
 
         return "table/dynamic_table";
     }
 
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id,
-                             @RequestParam(value = "pn",defaultValue = "1")Integer pn,
-                             RedirectAttributes ra){
+                             @RequestParam(value = "pn", defaultValue = "1") Integer pn,
+                             RedirectAttributes ra) {
 
         userService.removeById(id);
 
-        ra.addAttribute("pn",pn);
+        ra.addAttribute("pn", pn);
         return "redirect:/dynamic_table";
     }
 

@@ -14,11 +14,11 @@ public class MyInterceptor implements HandlerInterceptor {
         System.out.println("执行MyInterceptor.preHandle==============>");
         HashMap<String, String> loginUser = (HashMap<String, String>) request.getSession().getAttribute("login_user");
 
-        if(ObjectUtils.isEmpty(loginUser)){
-            response.sendRedirect(request.getContextPath()+"/springboot/login");
+        if (ObjectUtils.isEmpty(loginUser)) {
+            response.sendRedirect(request.getContextPath() + "/springboot/login");
             //被拦截
             return false;
-        }else{
+        } else {
             //true:通过
             return true;
         }

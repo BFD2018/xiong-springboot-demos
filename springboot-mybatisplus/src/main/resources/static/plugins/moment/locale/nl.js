@@ -4,16 +4,17 @@
 //! author : Jacob Middag : https://github.com/middagj
 
 ;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined'
+    && typeof require === 'function' ? factory(require('../moment')) :
+        typeof define === 'function' && define.amd ? define(['../moment'], factory) :
+            factory(global.moment)
+}(this, (function (moment) {
+    'use strict';
 
     //! moment.js locale configuration
 
     var monthsShortWithDots = 'jan._feb._mrt._apr._mei_jun._jul._aug._sep._okt._nov._dec.'.split(
-            '_'
+        '_'
         ),
         monthsShortWithoutDots = 'jan_feb_mrt_apr_mei_jun_jul_aug_sep_okt_nov_dec'.split(
             '_'

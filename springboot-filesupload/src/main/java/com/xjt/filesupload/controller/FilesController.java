@@ -29,7 +29,7 @@ public class FilesController {
     public RespBean uploadFile(MultipartFile file,
                                @RequestParam("user_id") String user_id,
                                HttpServletRequest request) throws IOException {
-        if(!StringUtils.hasText(user_id)){
+        if (!StringUtils.hasText(user_id)) {
             return RespBean.warn("未获取到用户id");
         }
 
@@ -49,7 +49,7 @@ public class FilesController {
         if (!dateDirPath.exists()) {
             dateDirPath.mkdirs();
         }
-        logger.warn("上传文件路径："+dateDirPath.toString());
+        logger.warn("上传文件路径：" + dateDirPath.toString());
         //文件新名称
         String newFileName = UUID.randomUUID().toString().replace("-", "") + "-" + originalFilename;
 
@@ -62,14 +62,14 @@ public class FilesController {
                 .setNewFileName(newFileName)
                 .setExt('.' + extension)
                 .setPath(uploadDir + File.separator + newFileName)
-                .setSize(""+size)
+                .setSize("" + size)
                 .setDownCounts(0)
                 .setUserId(Long.valueOf(user_id));
 
         Integer insert = userFilesService.uploadFile(userFile);
-        if(insert >0){
-            return RespBean.ok("上传成功",userFile);
-        }else{
+        if (insert > 0) {
+            return RespBean.ok("上传成功", userFile);
+        } else {
             return RespBean.error("文件上传失败");
         }
 
@@ -77,8 +77,8 @@ public class FilesController {
 
     //获取用户id 获取所有文件
     @GetMapping("/all")
-    public RespBean findAll(@RequestParam("user_id") String user_id){
-        logger.warn("xjt--->findAll user_id:"+user_id);
+    public RespBean findAll(@RequestParam("user_id") String user_id) {
+        logger.warn("xjt--->findAll user_id:" + user_id);
         return userFilesService.getAllFilesByUserId(user_id);
     }
 

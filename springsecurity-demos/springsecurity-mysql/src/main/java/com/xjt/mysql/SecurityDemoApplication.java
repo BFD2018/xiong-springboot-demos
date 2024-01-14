@@ -13,7 +13,7 @@ public class SecurityDemoApplication {
 
         String[] beanDefinitionNames = context.getBeanDefinitionNames();
         for (String bean : beanDefinitionNames) {
-            System.out.println("bean===>"+bean);
+            System.out.println("bean===>" + bean);
         }
     }
 }

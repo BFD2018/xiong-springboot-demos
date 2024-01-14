@@ -3,11 +3,12 @@
 //! author : Javkhlantugs Nyamdorj : https://github.com/javkhaanj7
 
 ;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined'
+    && typeof require === 'function' ? factory(require('../moment')) :
+        typeof define === 'function' && define.amd ? define(['../moment'], factory) :
+            factory(global.moment)
+}(this, (function (moment) {
+    'use strict';
 
     //! moment.js locale configuration
 

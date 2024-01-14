@@ -31,7 +31,7 @@ public class MyGoldApplication {
              * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/pom.xml
              */
             org.apache.http.HttpResponse response = HttpUtils.doGet(host, path, method, headers, querys);
-            String result = EntityUtils.toString(response.getEntity(),"utf-8");
+            String result = EntityUtils.toString(response.getEntity(), "utf-8");
             JSONObject jsonObject = JSONObject.parseObject(result);
             JSONObject result1 = JSONObject.parseObject(jsonObject.get("result").toString());
             HashMap hashMap1 = JSONObject.parseObject(result1.toJSONString(), HashMap.class);

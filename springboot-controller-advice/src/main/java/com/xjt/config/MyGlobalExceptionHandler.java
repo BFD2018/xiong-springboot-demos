@@ -35,6 +35,7 @@ public class MyGlobalExceptionHandler {
     public void b_binder(WebDataBinder binder) {
         binder.setFieldDefaultPrefix("book.");
     }
+
     @InitBinder("author")
     public void a_binder(WebDataBinder binder) {
         binder.setFieldDefaultPrefix("author.");

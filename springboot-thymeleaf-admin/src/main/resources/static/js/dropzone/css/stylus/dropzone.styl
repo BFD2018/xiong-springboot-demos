@@ -17,7 +17,7 @@
   .default.message
     opacity 1
     transition opacity 0.3s ease-in-out
-    
+
     image "../images/spritemap.png" 428px 406px
     background-repeat no-repeat
     background-position 0 0
@@ -29,6 +29,7 @@
     margin-top -(@height / 2)
     top 50%
     left 50%
+
     span
       display none
 
@@ -47,7 +48,9 @@
   &.started
     .message
       display block
-      opacity 0 // Rather fade out nicely
+      opacity 0
+
+// Rather fade out nicely
 
 
 .dropzone
@@ -63,20 +66,20 @@
         width 100px
         height 100px
 
-      // Not implemented yet. This is the CSS definition of the file
-      // content as text.
-      // .content
-      //   font-size 3px
-      //   white-space pre
-      //   position absolute
-      //   top 5px
-      //   left 12px
-      //   right 19px
-      //   bottom 5px
-      //   overflow hidden
-      //   line-height 100%
-      //   cursor default
-      //   word-wrap break-word
+    // Not implemented yet. This is the CSS definition of the file
+    // content as text.
+    // .content
+    //   font-size 3px
+    //   white-space pre
+    //   position absolute
+    //   top 5px
+    //   left 12px
+    //   right 19px
+    //   bottom 5px
+    //   overflow hidden
+    //   line-height 100%
+    //   cursor default
+    //   word-wrap break-word
 
     &.image-preview
       &:hover
@@ -88,9 +91,11 @@
     &.success
       .success-mark
         opacity 1
+
     &.error
       .error-mark
         opacity 1
+
       .progress .upload
         background #EE1E2D
 
@@ -104,11 +109,12 @@
 
       span
         display none
+
     .error-mark
       background-position -268px -123px
+
     .success-mark
       background-position -268px -163px
-
 
 
     .progress
@@ -121,7 +127,7 @@
         left 0
         width 0%
         height 100%
-        
+
         image "../images/spritemap.png" 428px 406px
         background-repeat repeat-x
         background-position 0px -400px

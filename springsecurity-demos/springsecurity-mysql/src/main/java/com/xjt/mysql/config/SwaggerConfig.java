@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
 
     @Bean
-    public Docket webApiConfig(){
+    public Docket webApiConfig() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("webApi")
                 .apiInfo(webApiInfo())
@@ -27,7 +27,7 @@ public class SwaggerConfig {
 
     }
 
-    private ApiInfo webApiInfo(){
+    private ApiInfo webApiInfo() {
 
         return new ApiInfoBuilder()
                 .title("SecurityDemo API文档")

@@ -9,7 +9,7 @@
      */
     c3.generate = function (config) {
 
-        var c3 = { data : {} },
+        var c3 = {data: {}},
             cache = {};
 
         var EXPANDED = '_expanded_', SELECTED = '_selected_', INCLUDED = '_included_';
@@ -17,13 +17,17 @@
         /*-- Handle Config --*/
 
         function checkConfig(key, message) {
-            if (! (key in config)) { throw Error(message); }
+            if (!(key in config)) {
+                throw Error(message);
+            }
         }
 
         function getConfig(keys, defaultValue) {
             var target = config;
             for (var i = 0; i < keys.length; i++) {
-                if (! (keys[i] in target)) { return defaultValue; }
+                if (!(keys[i] in target)) {
+                    return defaultValue;
+                }
                 target = target[keys[i]];
             }
             return target;
@@ -39,15 +43,19 @@
             __zoom_extent = getConfig(['zoom', 'extent'], null),
             __zoom_privileged = getConfig(['zoom', 'privileged'], false);
 
-        var __onenter = getConfig(['onenter'], function () {}),
-            __onleave = getConfig(['onleave'], function () {});
+        var __onenter = getConfig(['onenter'], function () {
+            }),
+            __onleave = getConfig(['onleave'], function () {
+            });
 
         // data - data configuration
         checkConfig('data', 'data is required in config');
 
         var __data_x = getConfig(['data', 'x'], undefined),
             __data_x_format = getConfig(['data', 'x_format'], '%Y-%m-%d'),
-            __data_id_converter = getConfig(['data', 'id_converter'], function (id) { return id; }),
+            __data_id_converter = getConfig(['data', 'id_converter'], function (id) {
+                return id;
+            }),
             __data_names = getConfig(['data', 'names'], {}),
             __data_groups = getConfig(['data', 'groups'], []),
             __data_axes = getConfig(['data', 'axes'], {}),
@@ -56,7 +64,9 @@
             __data_colors = getConfig(['data', 'colors'], {}),
             __data_selection_enabled = getConfig(['data', 'selection', 'enabled'], false),
             __data_selection_grouped = getConfig(['data', 'selection', 'grouped'], false),
-            __data_selection_isselectable = getConfig(['data', 'selection', 'isselectable'], function () { return true; });
+            __data_selection_isselectable = getConfig(['data', 'selection', 'isselectable'], function () {
+                return true;
+            });
 
         // subchart
         var __subchart_show = getConfig(['subchart', 'show'], false),
@@ -68,7 +78,8 @@
         // legend
         var __legend_show = getConfig(['legend', 'show'], true),
             __legend_item_width = getConfig(['legend', 'item', 'width'], 80), // TODO: auto
-            __legend_item_onclick = getConfig(['legend', 'item', 'onclick'], function () {});
+            __legend_item_onclick = getConfig(['legend', 'item', 'onclick'], function () {
+            });
 
         // axis
         var __axis_x_type = getConfig(['axis', 'x', 'type'], 'indexed'),
@@ -83,7 +94,9 @@
             // not used
             //__axis_y_rescale = getConfig(['axis', 'y', 'rescale'], true),
             __axis_y_inner = getConfig(['axis', 'y', 'inner'], false),
-            __axis_y_format = getConfig(['axis', 'y', 'format'], function (d) { return d; }),
+            __axis_y_format = getConfig(['axis', 'y', 'format'], function (d) {
+                return d;
+            }),
             __axis_y_padding = getConfig(['axis', 'y', 'padding'], null),
             __axis_y_ticks = getConfig(['axis', 'y', 'ticks'], 10),
             __axis_y2_show = getConfig(['axis', 'y2', 'show'], false),
@@ -94,7 +107,9 @@
             // __axis_y2_text = getConfig(['axis', 'y2', 'text'], null),
             // __axis_y2_rescale = getConfig(['axis', 'y2', 'rescale'], true),
             __axis_y2_inner = getConfig(['axis', 'y2', 'inner'], false),
-            __axis_y2_format = getConfig(['axis', 'y2', 'format'], function (d) { return d; }),
+            __axis_y2_format = getConfig(['axis', 'y2', 'format'], function (d) {
+                return d;
+            }),
             __axis_y2_padding = getConfig(['axis', 'y2', 'padding'], null),
             __axis_y2_ticks = getConfig(['axis', 'y2', 'ticks'], 10),
             __axis_rotated = getConfig(['axis', 'rotated'], false);
@@ -115,29 +130,32 @@
             __point_focus_expand_enabled = getConfig(['point', 'focus', 'expand', 'enabled'], true),
             __point_focus_expand_r = getConfig(['point', 'focus', 'expand', 'r'], __point_focus_expand_enabled ? 4 : __point_r),
             __point_select_r = getConfig(['point', 'focus', 'select', 'r'], 8),
-            __point_onclick = getConfig(['point', 'onclick'], function () {}),
-            __point_onselected = getConfig(['point', 'onselected'], function () {}),
-            __point_onunselected = getConfig(['point', 'onunselected'], function () {});
+            __point_onclick = getConfig(['point', 'onclick'], function () {
+            }),
+            __point_onselected = getConfig(['point', 'onselected'], function () {
+            }),
+            __point_onunselected = getConfig(['point', 'onunselected'], function () {
+            });
 
         // region - region to change style
         var __regions = getConfig(['regions'], []);
 
         // tooltip - show when mouseover on each data
         var __tooltip_contents = getConfig(['tooltip', 'contents'], function (d) {
-            var date = isTimeSeries ? d[0].x.getFullYear() + '.' + (d[0].x.getMonth() + 1) + '.' + d[0].x.getDate() : isCategorized ? category(d[0].x) : d[0].x,
-                text = "<table class='-tooltip'><tr><th colspan='2'>" + date + "</th></tr>", i, value, name;
-            for (i = 0; i < d.length; i++) {
-                if (isDefined(d[i])) {
-                    value = isDefined(d[i].value) ? (Math.round(d[i].value * 100) / 100).toFixed(2) : '-';
-                    name = d[i].name;
-                } else {
-                    value = '-';
-                    name = '-';
+                var date = isTimeSeries ? d[0].x.getFullYear() + '.' + (d[0].x.getMonth() + 1) + '.' + d[0].x.getDate() : isCategorized ? category(d[0].x) : d[0].x,
+                    text = "<table class='-tooltip'><tr><th colspan='2'>" + date + "</th></tr>", i, value, name;
+                for (i = 0; i < d.length; i++) {
+                    if (isDefined(d[i])) {
+                        value = isDefined(d[i].value) ? (Math.round(d[i].value * 100) / 100).toFixed(2) : '-';
+                        name = d[i].name;
+                    } else {
+                        value = '-';
+                        name = '-';
+                    }
+                    text += "<tr class='-tooltip-name-" + d[i].id + "'><td class='name'><span style='background-color:" + color(d[i].id) + "'></span>" + name + "</td><td class='value'>" + value + "</td></tr>";
                 }
-                text += "<tr class='-tooltip-name-" + d[i].id + "'><td class='name'><span style='background-color:" + color(d[i].id) + "'></span>" + name + "</td><td class='value'>" + value + "</td></tr>";
-            }
-            return text + "</table>";
-        }),
+                return text + "</table>";
+            }),
             __tooltip_init_show = getConfig(['tooltip', 'init', 'show'], false),
             __tooltip_init_x = getConfig(['tooltip', 'init', 'x'], 0),
             __tooltip_init_position = getConfig(['tooltip', 'init', 'position'], {top: '0px', left: '50px'});
@@ -161,25 +179,44 @@
 
         var defaultTimeFormat = (function () {
             var formats = [
-                [d3.time.format("%Y/%-m/%-d"), function () { return true; }],
-                [d3.time.format("%-m/%-d"), function (d) { return d.getMonth(); }],
-                [d3.time.format("%-m/%-d"), function (d) { return d.getDate() !== 1; }],
-                [d3.time.format("%-m/%-d"), function (d) { return d.getDay() && d.getDate() !== 1; }],
-                [d3.time.format("%I %p"), function (d) { return d.getHours(); }],
-                [d3.time.format("%I:%M"), function (d) { return d.getMinutes(); }],
-                [d3.time.format(":%S"), function (d) { return d.getSeconds(); }],
-                [d3.time.format(".%L"), function (d) { return d.getMilliseconds(); }]
+                [d3.time.format("%Y/%-m/%-d"), function () {
+                    return true;
+                }],
+                [d3.time.format("%-m/%-d"), function (d) {
+                    return d.getMonth();
+                }],
+                [d3.time.format("%-m/%-d"), function (d) {
+                    return d.getDate() !== 1;
+                }],
+                [d3.time.format("%-m/%-d"), function (d) {
+                    return d.getDay() && d.getDate() !== 1;
+                }],
+                [d3.time.format("%I %p"), function (d) {
+                    return d.getHours();
+                }],
+                [d3.time.format("%I:%M"), function (d) {
+                    return d.getMinutes();
+                }],
+                [d3.time.format(":%S"), function (d) {
+                    return d.getSeconds();
+                }],
+                [d3.time.format(".%L"), function (d) {
+                    return d.getMilliseconds();
+                }]
             ];
             return function (date) {
                 var i = formats.length - 1, f = formats[i];
-                while (!f[1](date)) { f = formats[--i]; }
+                while (!f[1](date)) {
+                    f = formats[--i];
+                }
                 return f[0](date);
             };
         })();
 
         /*-- Set Chart Params --*/
 
-        var bottom, bottom2, right, left, top2, top3, margin, margin2, margin3, width, height, height2, height3, currentWidth, currentHeight;
+        var bottom, bottom2, right, left, top2, top3, margin, margin2, margin3, width, height, height2, height3,
+            currentWidth, currentHeight;
         var xMin, xMax, yMin, yMax, x, y, y2, subX, subY, subY2, xAxis, yAxis, yAxis2, subXAxis;
 
         var xOrient = __axis_rotated ? "left" : "bottom",
@@ -188,12 +225,24 @@
             subXOrient = "bottom";
 
         var translate = {
-            main : function () { return "translate(" + margin.left + "," + margin.top + ")"; },
-            context : function () { return "translate(" + margin2.left + "," + margin2.top + ")"; },
-            legend : function () { return "translate(" + margin3.left + "," + margin3.top + ")"; },
-            y2 : function () { return "translate(" + (__axis_rotated ? 0 : width) + "," + (__axis_rotated ? 10 : 0) + ")"; },
-            x : function () { return "translate(0," + height + ")"; },
-            subx : function () { return "translate(0," + height2 + ")"; }
+            main: function () {
+                return "translate(" + margin.left + "," + margin.top + ")";
+            },
+            context: function () {
+                return "translate(" + margin2.left + "," + margin2.top + ")";
+            },
+            legend: function () {
+                return "translate(" + margin3.left + "," + margin3.top + ")";
+            },
+            y2: function () {
+                return "translate(" + (__axis_rotated ? 0 : width) + "," + (__axis_rotated ? 10 : 0) + ")";
+            },
+            x: function () {
+                return "translate(0," + height + ")";
+            },
+            subx: function () {
+                return "translate(0," + height2 + ")";
+            }
         };
 
         /*-- Define Functions --*/
@@ -217,16 +266,20 @@
             height2 = currentHeight - margin2.top - margin2.bottom;
             height3 = currentHeight - margin3.top - margin3.bottom;
         }
+
         function getCurrentWidth() {
             return __size_width === null ? getParentWidth() : __size_width;
         }
+
         function getCurrentHeight() {
             var h = __size_height === null ? getParentHeight() : __size_height;
             return h > 0 ? h : 320;
         }
+
         function getParentWidth() {
             return +d3.select(__bindto).style("width").replace('px', ''); // TODO: if rotated, use height
         }
+
         function getParentHeight() {
             return +d3.select(__bindto).style('height').replace('px', ''); // TODO: if rotated, use width
         }
@@ -240,10 +293,14 @@
             yMin = __axis_rotated ? 0 : height;
             yMax = __axis_rotated ? width : 1;
             // update scales
-            x = getX(xMin, xMax, isDefined(x) ? x.domain() : undefined, function () { return xAxis.tickOffset(); });
+            x = getX(xMin, xMax, isDefined(x) ? x.domain() : undefined, function () {
+                return xAxis.tickOffset();
+            });
             y = getY(yMin, yMax, isDefined(y) ? y.domain() : undefined);
             y2 = getY(yMin, yMax, isDefined(y2) ? y2.domain() : undefined);
-            subX = getX(0, width, isDefined(orgXDomain) ? orgXDomain : undefined, function (d) { return d % 1 === 0 ? subXAxis.tickOffset() : 0; });
+            subX = getX(0, width, isDefined(orgXDomain) ? orgXDomain : undefined, function (d) {
+                return d % 1 === 0 ? subXAxis.tickOffset() : 0;
+            });
             subY = getY(height2, 10);
             subY2 = getY(height2, 10);
             // update axes
@@ -256,13 +313,23 @@
         function getX(min, max, domain, offset) {
             var scale = ((isTimeSeries) ? d3.time.scale() : d3.scale.linear()).range([min, max]);
             // Set function and values for c3
-            scale.orgDomain = function () { return scale.domain(); };
-            if (isDefined(domain)) { scale.domain(domain); }
-            if (isUndefined(offset)) { offset = function () { return 0; }; }
+            scale.orgDomain = function () {
+                return scale.domain();
+            };
+            if (isDefined(domain)) {
+                scale.domain(domain);
+            }
+            if (isUndefined(offset)) {
+                offset = function () {
+                    return 0;
+                };
+            }
             // Define customized scale if categorized axis
             if (isCategorized) {
                 var _scale = scale, key;
-                scale = function (d) { return _scale(d) + offset(d); };
+                scale = function (d) {
+                    return _scale(d) + offset(d);
+                };
                 for (key in _scale) {
                     scale[key] = _scale[key];
                 }
@@ -280,12 +347,15 @@
             }
             return scale;
         }
+
         function getY(min, max) {
             return d3.scale.linear().range([min, max]);
         }
+
         function getYScale(id) {
             return getAxisId(id) === 'y2' ? y2 : y;
         }
+
         function getSubYScale(id) {
             return getAxisId(id) === 'y2' ? subY2 : subY;
         }
@@ -295,19 +365,25 @@
         function getXAxis(scale, orient) {
             var axis = (isCategorized ? categoryAxis() : d3.svg.axis()).scale(scale).orient(orient);
             if (isTimeSeries) {
-                axis.tickFormat(__axis_x_tick_format ? function (date) { return d3.time.format(__axis_x_tick_format)(date); } : defaultTimeFormat);
+                axis.tickFormat(__axis_x_tick_format ? function (date) {
+                    return d3.time.format(__axis_x_tick_format)(date);
+                } : defaultTimeFormat);
             }
             if (isCategorized) {
                 axis.categories(__axis_x_categories).tickCentered(__axis_x_tick_centered);
             } else {
                 // TODO: fix
-                axis.tickOffset = function () { return 0; };
+                axis.tickOffset = function () {
+                    return 0;
+                };
             }
             return axis;
         }
+
         function getYAxis(scale, orient) {
             return d3.svg.axis().scale(scale).orient(orient);
         }
+
         function getAxisId(id) {
             return id in __data_axes ? __data_axes[id] : 'y';
         }
@@ -315,8 +391,13 @@
         //-- Domain --//
 
         function getYDomainMin(targets) {
-            return d3.min(targets, function (t) { return d3.min(t.values, function (v) { return v.value; }); });
+            return d3.min(targets, function (t) {
+                return d3.min(t.values, function (v) {
+                    return v.value;
+                });
+            });
         }
+
         function getYDomainMax(targets) {
             var ys = {}, j, k;
 
@@ -328,8 +409,12 @@
             });
             for (j = 0; j < __data_groups.length; j++) {
                 for (k = 1; k < __data_groups[j].length; k++) {
-                    if (! isBarType(__data_groups[j][k])) { continue; }
-                    if (isUndefined(ys[__data_groups[j][k]])) { continue; }
+                    if (!isBarType(__data_groups[j][k])) {
+                        continue;
+                    }
+                    if (isUndefined(ys[__data_groups[j][k]])) {
+                        continue;
+                    }
                     ys[__data_groups[j][k]].forEach(function (v, i) {
                         if (getAxisId(__data_groups[j][k]) === getAxisId(__data_groups[j][0])) {
                             ys[__data_groups[j][0]][i] += v * 1;
@@ -338,10 +423,15 @@
                 }
             }
 
-            return d3.max(Object.keys(ys).map(function (key) { return d3.max(ys[key]); }));
+            return d3.max(Object.keys(ys).map(function (key) {
+                return d3.max(ys[key]);
+            }));
         }
+
         function getYDomain(targets, axisId) {
-            var yTargets = getTargets(function (d) { return getAxisId(d.id) === axisId; }),
+            var yTargets = getTargets(function (d) {
+                    return getAxisId(d.id) === axisId;
+                }),
                 yMin = axisId === 'y2' ? __axis_y2_min : __axis_y_min,
                 yMax = axisId === 'y2' ? __axis_y2_max : __axis_y_max,
                 yDomainMin = (yMin !== null) ? yMin : getYDomainMin(yTargets),
@@ -364,6 +454,7 @@
             }
             return [hasBarType(yTargets) ? 0 : yDomainMin - padding_bottom, yDomainMax + padding_top];
         }
+
         function getXDomainRatio(isSub) {
             var domain, extent;
             if (isSub) {
@@ -375,6 +466,7 @@
             }
             return (domain[1] - domain[0]) / (extent[1] - extent[0]);
         }
+
         function diffDomain(d) {
             return d[1] - d[0];
         }
@@ -383,17 +475,23 @@
 
         function hasCaches(ids) {
             for (var i = 0; i < ids.length; i++) {
-                if (! (ids[i] in cache)) { return false; }
+                if (!(ids[i] in cache)) {
+                    return false;
+                }
             }
             return true;
         }
+
         function addCache(id, target) {
             cache[id] = cloneTarget(target);
         }
+
         function getCaches(ids) {
             var targets = [];
             for (var i = 0; i < ids.length; i++) {
-                if (ids[i] in cache) { targets.push(cloneTarget(cache[ids[i]])); }
+                if (ids[i] in cache) {
+                    targets.push(cloneTarget(cache[ids[i]]));
+                }
             }
             return targets;
         }
@@ -444,30 +542,37 @@
             }
             return new_rows;
         }
+
         function convertDataToTargets(data) {
-            var ids = d3.keys(data[0]).filter(function (key) { return key !== __data_x; });
+            var ids = d3.keys(data[0]).filter(function (key) {
+                return key !== __data_x;
+            });
             var targets, i = 0, parsedDate;
 
             // check __data_x is defined if timeseries
-            if (isTimeSeries && ! __data_x) {
+            if (isTimeSeries && !__data_x) {
                 window.alert('data.x must be specified when axis.x.type == "timeseries"');
                 return [];
             }
 
             data.forEach(function (d) {
                 if (isTimeSeries) {
-                    if (!(__data_x in d)) { throw Error("'" + __data_x + "' must be included in data"); }
+                    if (!(__data_x in d)) {
+                        throw Error("'" + __data_x + "' must be included in data");
+                    }
                     parsedDate = parseDate(d[__data_x]);
-                    if (parsedDate === null) { throw Error("Failed to parse timeseries date in data"); }
+                    if (parsedDate === null) {
+                        throw Error("Failed to parse timeseries date in data");
+                    }
                     d.x = parsedDate;
-                }
-                else if (isCustomX) {
+                } else if (isCustomX) {
                     d.x = d[__data_x];
-                }
-                else {
+                } else {
                     d.x = i++;
                 }
-                if (firstDate === null) { firstDate = new Date(d.x); }
+                if (firstDate === null) {
+                    firstDate = new Date(d.x);
+                }
                 lastDate = new Date(d.x);
             });
 
@@ -489,28 +594,38 @@
 
             return targets;
         }
+
         function cloneTarget(target) {
             return {
-                id : target.id,
-                id_org : target.id_org,
-                values : target.values.map(function (d) {
+                id: target.id,
+                id_org: target.id_org,
+                values: target.values.map(function (d) {
                     return {x: d.x, value: d.value, id: d.id};
                 })
             };
         }
+
         function getPrevX(i) {
             return i > 0 ? c3.data.targets[0].values[i - 1].x : undefined;
         }
+
         function getNextX(i) {
             return i < maxDataCount() - 1 ? c3.data.targets[0].values[i + 1].x : undefined;
         }
+
         function maxDataCount() {
-            return d3.max(c3.data.targets, function (t) { return t.values.length; });
+            return d3.max(c3.data.targets, function (t) {
+                return t.values.length;
+            });
         }
+
         function getTargetIds(targets) {
             targets = isUndefined(targets) ? c3.data.targets : targets;
-            return targets.map(function (d) { return d.id; });
+            return targets.map(function (d) {
+                return d.id;
+            });
         }
+
         function hasTarget(id) {
             var ids = getTargetIds(), i;
             for (i = 0; i < ids.length; i++) {
@@ -520,27 +635,55 @@
             }
             return false;
         }
+
         function getTargets(filter) {
             return isDefined(filter) ? c3.data.targets.filter(filter) : c3.data.targets;
         }
+
         function category(i) {
             return i < __axis_x_categories.length ? __axis_x_categories[i] : i;
         }
-        function classShapes(d) { return "-shapes -shapes-" + d.id; }
-        function classLine(d) { return classShapes(d) + " -line -line-" + d.id; }
-        function classCircles(d) { return classShapes(d) + " -circles -circles-" + d.id; }
-        function classBars(d) { return classShapes(d) + " -bars -bars-" + d.id; }
-        function classShape(d, i) { return "-shape -shape-" + i; }
-        function classCircle(d, i) { return classShape(d, i) + " -circle -circle-" + i; }
-        function classBar(d, i) { return classShape(d, i) + " -bar -bar-" + i; }
-        function classRegion(d, i) { return 'region region-' + i + ' ' + ('classes' in d ? [].concat(d.classes).join(' ') : ''); }
+
+        function classShapes(d) {
+            return "-shapes -shapes-" + d.id;
+        }
+
+        function classLine(d) {
+            return classShapes(d) + " -line -line-" + d.id;
+        }
+
+        function classCircles(d) {
+            return classShapes(d) + " -circles -circles-" + d.id;
+        }
+
+        function classBars(d) {
+            return classShapes(d) + " -bars -bars-" + d.id;
+        }
+
+        function classShape(d, i) {
+            return "-shape -shape-" + i;
+        }
+
+        function classCircle(d, i) {
+            return classShape(d, i) + " -circle -circle-" + i;
+        }
+
+        function classBar(d, i) {
+            return classShape(d, i) + " -bar -bar-" + i;
+        }
+
+        function classRegion(d, i) {
+            return 'region region-' + i + ' ' + ('classes' in d ? [].concat(d.classes).join(' ') : '');
+        }
 
         function xx(d) {
             return x(d.x);
         }
+
         function xv(d) {
             return x(isTimeSeries ? parseDate(d.value) : d.value);
         }
+
         function yv(d) {
             return y(d.value);
         }
@@ -550,6 +693,7 @@
         function circleX(d) {
             return x(d.x);
         }
+
         function circleY(d) {
             return getYScale(d.id)(d.value);
         }
@@ -560,7 +704,9 @@
             var indices = {}, i = 0, j, k;
             getTargets(isBarType).forEach(function (d) {
                 for (j = 0; j < __data_groups.length; j++) {
-                    if (__data_groups[j].indexOf(d.id) < 0) { continue; }
+                    if (__data_groups[j].indexOf(d.id) < 0) {
+                        continue;
+                    }
                     for (k = 0; k < __data_groups[j].length; k++) {
                         if (__data_groups[j][k] in indices) {
                             indices[d.id] = indices[__data_groups[j][k]];
@@ -568,11 +714,14 @@
                         }
                     }
                 }
-                if (isUndefined(indices[d.id])) { indices[d.id] = i++; }
+                if (isUndefined(indices[d.id])) {
+                    indices[d.id] = i++;
+                }
             });
             indices.__max__ = i - 1;
             return indices;
         }
+
         function getBarX(barW, barTargetsNum, barIndices, isSub) {
             var scale = isSub ? subX : x;
             return function (d) {
@@ -580,13 +729,16 @@
                 return scale(d.x) - barW * (barTargetsNum / 2 - barIndex);
             };
         }
+
         function getBarY(barH, barIndices, zeroBased, isSub) {
             var indicesIds = Object.keys(barIndices);
             return function (d, i) {
                 var offset = 0;
                 var scale = isSub ? getSubYScale(d.id) : getYScale(d.id);
                 getTargets(isBarType).forEach(function (t) {
-                    if (t.id === d.id || barIndices[t.id] !== barIndices[d.id]) { return; }
+                    if (t.id === d.id || barIndices[t.id] !== barIndices[d.id]) {
+                        return;
+                    }
                     if (indicesIds.indexOf(t.id) < indicesIds.indexOf(d.id)) {
                         offset += barH(t.values[i]);
                     }
@@ -594,6 +746,7 @@
                 return zeroBased ? offset : scale(d.value) - offset;
             };
         }
+
         function getBarW(axis, barTargetsNum, isSub) {
             var barW;
             if (isCategorized) {
@@ -603,8 +756,13 @@
             }
             return barW;
         }
+
         function getBarH(height, isSub) {
-            var h = height === null ? function (v) { return v; } : function (v) { return height - v; };
+            var h = height === null ? function (v) {
+                return v;
+            } : function (v) {
+                return height - v;
+            };
             return function (d) {
                 var scale = isSub ? getSubYScale(d.id) : getYScale(d.id);
                 return h(scale(d.value));
@@ -615,19 +773,27 @@
 
         function setTargetType(targets, type) {
             var targetIds = isUndefined(targets) ? getTargetIds() : targets;
-            if (typeof targetIds === 'string') { targetIds = [targetIds]; }
+            if (typeof targetIds === 'string') {
+                targetIds = [targetIds];
+            }
             for (var i = 0; i < targetIds.length; i++) {
                 __data_types[targetIds[i]] = type;
             }
         }
+
         function hasType(targets, type) {
             var has = false;
             targets.forEach(function (t) {
-                if (__data_types[t.id] === type) { has = true; }
-                if (!(t.id in __data_types) && type === 'line') { has = true; }
+                if (__data_types[t.id] === type) {
+                    has = true;
+                }
+                if (!(t.id in __data_types) && type === 'line') {
+                    has = true;
+                }
             });
             return has;
         }
+
         /* not used
         function hasLineType(targets) {
             return hasType(targets, 'line');
@@ -636,21 +802,26 @@
         function hasBarType(targets) {
             return hasType(targets, 'bar');
         }
+
         function isLineType(d) {
             var id = (typeof d === 'string') ? d : d.id;
             return !(id in __data_types) || __data_types[id] === 'line' || __data_types[id] === 'spline';
         }
+
         function isSplineType(d) {
             var id = (typeof d === 'string') ? d : d.id;
             return __data_types[id] === 'spline';
         }
+
         function isBarType(d) {
             var id = (typeof d === 'string') ? d : d.id;
             return __data_types[id] === 'bar';
         }
+
         function lineData(d) {
             return isLineType(d) ? d.values : [];
         }
+
         function barData(d) {
             return isBarType(d) ? d.values : [];
         }
@@ -664,7 +835,9 @@
 
             return function (id) {
                 // if specified, choose that color
-                if (id in colors) { return _colors[id]; }
+                if (id in colors) {
+                    return _colors[id];
+                }
 
                 // if not specified, choose from pattern
                 if (ids.indexOf(id) === -1) {
@@ -681,16 +854,20 @@
             var cx = d3_this.attr("cx") * 1, cy = d3_this.attr("cy") * 1;
             return Math.sqrt(Math.pow(cx - mouse[0], 2) + Math.pow(cy - mouse[1], 2)) < _r;
         }
+
         function isWithinBar(_this) {
             var mouse = d3.mouse(_this), d3_this = d3.select(_this);
             var x = d3_this.attr("x") * 1, y = d3_this.attr("y") * 1, w = d3_this.attr("width") * 1;
             var sx = x - 10, ex = x + w + 10, ey = y - 10;
             return sx < mouse[0] && mouse[0] < ex && ey < mouse[1];
         }
+
         function isWithinRegions(x, regions) {
             var i;
             for (i = 0; i < regions.length; i++) {
-                if (regions[i].start < x && x <= regions[i].end) { return true; }
+                if (regions[i].start < x && x <= regions[i].end) {
+                    return true;
+                }
             }
             return false;
         }
@@ -702,36 +879,46 @@
             // add selected-circle on low layer g
             main.select(".selected-circles-" + d.id).selectAll('.selected-circle-' + i)
                 .data([d])
-              .enter().append('circle')
-                .attr("class", function () { return "selected-circle selected-circle-" + i; })
+                .enter().append('circle')
+                .attr("class", function () {
+                    return "selected-circle selected-circle-" + i;
+                })
                 .attr("cx", __axis_rotated ? circleY : circleX)
                 .attr("cy", __axis_rotated ? circleX : circleY)
-                .attr("stroke", function () { return color(d.id); })
+                .attr("stroke", function () {
+                    return color(d.id);
+                })
                 .attr("r", __point_select_r * 1.4)
-              .transition().duration(100)
+                .transition().duration(100)
                 .attr("r", __point_select_r);
         }
+
         function unselectPoint(target, d, i) {
             __point_onunselected(target, d);
             // remove selected-circle from low layer g
             main.select(".selected-circles-" + d.id).selectAll(".selected-circle-" + i)
-              .transition().duration(100).attr('r', 0)
+                .transition().duration(100).attr('r', 0)
                 .remove();
         }
+
         function togglePoint(selected, target, d, i) {
             (selected) ? selectPoint(target, d, i) : unselectPoint(target, d, i);
         }
 
         function selectBar() {
         }
+
         function unselectBar() {
         }
+
         function toggleBar(selected, target, d, i) {
             (selected) ? selectBar(target, d, i) : unselectBar(target, d, i);
         }
 
         function filterRemoveNull(data) {
-            return data.filter(function (d) { return d.value !== null; });
+            return data.filter(function (d) {
+                return d.value !== null;
+            });
         }
 
         //-- Shape --//
@@ -739,8 +926,12 @@
         // For main region
         var lineOnMain = (function () {
             var line = d3.svg.line()
-                .x(__axis_rotated ? function (d) { return getYScale(d.id)(d.value); } : xx)
-                .y(__axis_rotated ? xx : function (d) { return getYScale(d.id)(d.value); });
+                .x(__axis_rotated ? function (d) {
+                    return getYScale(d.id)(d.value);
+                } : xx)
+                .y(__axis_rotated ? xx : function (d) {
+                    return getYScale(d.id)(d.value);
+                });
             return function (d) {
                 var data = filterRemoveNull(d.values), x0, y0;
                 if (isLineType(d)) {
@@ -757,8 +948,12 @@
         // For brush region
         var lineOnSub = (function () {
             var line = d3.svg.line()
-                .x(function (d) { return subX(d.x); })
-                .y(function (d) { return getSubYScale(d.id)(d.value); });
+                .x(function (d) {
+                    return subX(d.x);
+                })
+                .y(function (d) {
+                    return getSubYScale(d.id)(d.value);
+                });
             return function (d) {
                 var data = filterRemoveNull(d.values);
                 return isLineType(d) ? line(data) : "M " + subX(data[0].x) + " " + getSubYScale(d.id)(data[0].value);
@@ -790,8 +985,16 @@
             }
 
             // Set scales
-            xValue = __axis_rotated ? function (d) { return y(d.value); } : function (d) { return x(d.x); };
-            yValue = __axis_rotated ? function (d) { return x(d.x); } : function (d) { return y(d.value); };
+            xValue = __axis_rotated ? function (d) {
+                return y(d.value);
+            } : function (d) {
+                return x(d.x);
+            };
+            yValue = __axis_rotated ? function (d) {
+                return x(d.x);
+            } : function (d) {
+                return y(d.value);
+            };
 
             // Define svg generator function for region
             if (isTimeSeries) {
@@ -810,7 +1013,7 @@
             // Generate
             for (i = 0; i < d.length; i++) {
                 // Draw as normal
-                if (isUndefined(regions) || ! isWithinRegions(d[i].x, regions)) {
+                if (isUndefined(regions) || !isWithinRegions(d[i].x, regions)) {
                     s += " " + xValue(d[i]) + " " + yValue(d[i]);
                 }
                 // Draw with region // TODO: Fix for horizotal charts
@@ -837,11 +1040,15 @@
         //-- Define brush/zoom -//
 
         var brush = d3.svg.brush().on("brush", redrawForBrush);
-        var zoom = d3.behavior.zoom().on("zoomstart", function () { zoom.altDomain = d3.event.sourceEvent.altKey ? x.orgDomain() : null; }).on("zoom", __zoom_enabled ? redrawForZoom : null);
+        var zoom = d3.behavior.zoom().on("zoomstart", function () {
+            zoom.altDomain = d3.event.sourceEvent.altKey ? x.orgDomain() : null;
+        }).on("zoom", __zoom_enabled ? redrawForZoom : null);
 
         // define functions for c3
         brush.update = function () {
-            if (context) { context.select('.x.brush').call(this); }
+            if (context) {
+                context.select('.x.brush').call(this);
+            }
             return this;
         };
         zoom.orgScaleExtent = function () {
@@ -880,7 +1087,9 @@
             updateScales();
 
             // Set domains for each scale
-            x.domain(d3.extent(data.map(function (d) { return d.x; })));
+            x.domain(d3.extent(data.map(function (d) {
+                return d.x;
+            })));
             y.domain(getYDomain(targets, 'y'));
             y2.domain(getYDomain(targets, 'y2'));
             subX.domain(x.domain());
@@ -897,7 +1106,9 @@
 
             // Set initialized scales to brush and zoom
             brush.x(subX);
-            if (__zoom_enabled) { zoom.x(x); }
+            if (__zoom_enabled) {
+                zoom.x(x);
+            }
 
             /*-- Basic Elements --*/
 
@@ -912,20 +1123,20 @@
             defs = svg.append("defs");
             defs.append("clipPath")
                 .attr("id", clipId)
-              .append("rect")
+                .append("rect")
                 .attr("y", margin.top)
                 .attr("width", width)
                 .attr("height", height - margin.top);
             defs.append("clipPath")
                 .attr("id", "xaxis-clip")
-              .append("rect")
+                .append("rect")
                 .attr("x", -1)
                 .attr("y", -1)
                 .attr("width", width + 2)
                 .attr("height", 40);
             defs.append("clipPath")
                 .attr("id", "yaxis-clip")
-              .append("rect")
+                .append("rect")
                 .attr("x", -margin.left + 1)
                 .attr("y", margin.top - 1)
                 .attr("width", margin.left)
@@ -939,7 +1150,7 @@
             // Define tooltip
             tooltip = d3.select(__bindto)
                 .style("position", "relative")
-              .append("div")
+                .append("div")
                 .style("position", "absolute")
                 .style("width", "30%") // TODO: cul actual width when show
                 .style("z-index", "10")
@@ -957,7 +1168,7 @@
                 .attr("class", "y axis")
                 .attr("clip-path", __axis_rotated ? "url(#yaxis-clip)" : "")
                 .call(__axis_rotated ? xAxis : yAxis)
-              .append("text")
+                .append("text")
                 .attr("transform", "rotate(-90)")
                 .attr("dy", "1.4em")
                 .attr("dx", "-.8em")
@@ -983,24 +1194,30 @@
             if (__grid_x_lines) {
                 xgridLine = grid.append('g')
                     .attr("class", "xgrid-lines")
-                  .selectAll('.xgrid-line')
+                    .selectAll('.xgrid-line')
                     .data(__grid_x_lines)
-                  .enter().append('g')
+                    .enter().append('g')
                     .attr("class", "xgrid-line");
                 xgridLine.append('line')
-                    .attr("class", function (d) { return "" + d['class']; });
+                    .attr("class", function (d) {
+                        return "" + d['class'];
+                    });
                 xgridLine.append('text')
-                    .attr("class", function (d) { return "" + d['class']; })
+                    .attr("class", function (d) {
+                        return "" + d['class'];
+                    })
                     .attr("text-anchor", "end")
                     .attr("transform", __axis_rotated ? "" : "rotate(-90)")
                     .attr('dx', __axis_rotated ? 0 : -margin.top)
                     .attr('dy', -6)
-                    .text(function (d) { return d.text; });
+                    .text(function (d) {
+                        return d.text;
+                    });
             }
             if (__point_focus_line_enabled) {
                 grid.append('g')
                     .attr("class", "xgrid-focus")
-                  .append('line')
+                    .append('line')
                     .attr('class', 'xgrid-focus')
                     .attr("x1", __axis_rotated ? 0 : -10)
                     .attr("x2", __axis_rotated ? width : -10)
@@ -1015,10 +1232,12 @@
             if (__grid_y_lines) {
                 grid.append('g')
                     .attr('class', 'ygrid-lines')
-                  .selectAll('ygrid-line')
+                    .selectAll('ygrid-line')
                     .data(__grid_y_lines)
-                  .enter().append('line')
-                    .attr("class", function (d) { return "ygrid-line " + d['class']; });
+                    .enter().append('line')
+                    .attr("class", function (d) {
+                        return "ygrid-line " + d['class'];
+                    });
             }
 
             // Area
@@ -1036,15 +1255,21 @@
                 .attr("class", "event-rects")
                 .style('fill-opacity', 0)
                 .style('cursor', __zoom_enabled ? 'ew-resize' : null)
-              .selectAll(".event-rects")
+                .selectAll(".event-rects")
                 .data(data)
-              .enter().append("rect")
-                .attr("class", function (d, i) { return "event-rect event-rect-" + i; })
+                .enter().append("rect")
+                .attr("class", function (d, i) {
+                    return "event-rect event-rect-" + i;
+                })
                 .style("cursor", __data_selection_enabled && __data_selection_grouped ? "pointer" : null)
                 .on('mouseover', function (d, i) {
-                    if (dragging) { return; } // do nothing if dragging
+                    if (dragging) {
+                        return;
+                    } // do nothing if dragging
 
-                    var selectedData = c3.data.targets.map(function (d) { return addName(d.values[i]); });
+                    var selectedData = c3.data.targets.map(function (d) {
+                        return addName(d.values[i]);
+                    });
                     var j, newData;
 
                     // Sort selectedData as names order
@@ -1082,7 +1307,7 @@
 
                     // Set tooltip
                     tooltip.style("top", (d3.mouse(this)[1] + 30) + "px")
-                           .style("left", ((__axis_rotated ? d3.mouse(this)[0] : x(selectedData[0].x)) + 60) + "px");
+                        .style("left", ((__axis_rotated ? d3.mouse(this)[0] : x(selectedData[0].x)) + 60) + "px");
                     tooltip.html(__tooltip_contents(selectedData));
                     tooltip.style("visibility", "visible");
                 })
@@ -1091,7 +1316,9 @@
                     tooltip.style("visibility", "hidden");
                     // Undo expanded circles
                     main.selectAll('.-circle-' + i)
-                        .filter(function () { return d3.select(this).classed(EXPANDED); })
+                        .filter(function () {
+                            return d3.select(this).classed(EXPANDED);
+                        })
                         .classed(EXPANDED, false)
                         .attr('r', __point_r);
                     // Undo expanded bar
@@ -1099,30 +1326,39 @@
                         .classed(EXPANDED, false);
                 })
                 .on('mousemove', function (d, i) {
-                    if (! __data_selection_enabled || dragging) { return; }
-                    if (__data_selection_grouped) { return; } // nothing to do when grouped
+                    if (!__data_selection_enabled || dragging) {
+                        return;
+                    }
+                    if (__data_selection_grouped) {
+                        return;
+                    } // nothing to do when grouped
 
                     main.selectAll('.-shape-' + i)
-                        .filter(function (d) { return __data_selection_isselectable(d); })
+                        .filter(function (d) {
+                            return __data_selection_isselectable(d);
+                        })
                         .each(function () {
                             var _this = d3.select(this).classed(EXPANDED, true);
-                            if (this.nodeName === 'circle') { _this.attr('r', __point_focus_expand_r); }
+                            if (this.nodeName === 'circle') {
+                                _this.attr('r', __point_focus_expand_r);
+                            }
                             d3.select('.event-rect-' + i).style('cursor', null);
                         })
                         .filter(function () {
                             var _this = d3.select(this);
                             if (this.nodeName === 'circle') {
                                 return isWithinCircle(this, __point_select_r);
-                            }
-                            else if (this.nodeName === 'rect') {
+                            } else if (this.nodeName === 'rect') {
                                 return isWithinBar(this, _this.attr('x'), _this.attr('y'));
                             }
                         })
                         .each(function () {
                             var _this = d3.select(this);
-                            if (! _this.classed(EXPANDED)) {
+                            if (!_this.classed(EXPANDED)) {
                                 _this.classed(EXPANDED, true);
-                                if (this.nodeName === 'circle') { _this.attr('r', __point_select_r); }
+                                if (this.nodeName === 'circle') {
+                                    _this.attr('r', __point_select_r);
+                                }
                             }
                             d3.select('.event-rect-' + i).style('cursor', 'pointer');
                         });
@@ -1139,8 +1375,7 @@
                         if (this.nodeName === 'circle') {
                             isWithin = isWithinCircle(this, __point_select_r * 1.5);
                             toggle = togglePoint;
-                        }
-                        else if (this.nodeName === 'rect') {
+                        } else if (this.nodeName === 'rect') {
                             isWithin = isWithinBar(this);
                             toggle = toggleBar;
                         }
@@ -1155,8 +1390,12 @@
                 })
                 .call(
                     d3.behavior.drag().origin(Object).on('drag', function () {
-                        if (! __data_selection_enabled) { return; } // do nothing if not selectable
-                        if (__zoom_enabled && ! zoom.altDomain) { return; } // skip if zoomable because of conflict drag dehavior
+                        if (!__data_selection_enabled) {
+                            return;
+                        } // do nothing if not selectable
+                        if (__zoom_enabled && !zoom.altDomain) {
+                            return;
+                        } // skip if zoomable because of conflict drag dehavior
 
                         var sx = dragStart[0], sy = dragStart[1],
                             mouse = d3.mouse(this),
@@ -1172,7 +1411,9 @@
                             .attr('width', maxX - minX)
                             .attr('height', maxY - minY);
                         main.selectAll('.-shapes').selectAll('.-shape')
-                            .filter(function (d) { return __data_selection_isselectable(d); })
+                            .filter(function (d) {
+                                return __data_selection_isselectable(d);
+                            })
                             .each(function (d, i) {
                                 var _this = d3.select(this),
                                     isSelected = _this.classed(SELECTED),
@@ -1183,8 +1424,7 @@
                                     _y = _this.attr("cy") * 1;
                                     toggle = togglePoint;
                                     isWithin = minX < _x && _x < maxX && minY < _y && _y < maxY;
-                                }
-                                else if (this.nodeName === 'rect') {
+                                } else if (this.nodeName === 'rect') {
                                     _x = _this.attr("x") * 1;
                                     _y = _this.attr("y") * 1;
                                     _w = _this.attr('width') * 1;
@@ -1199,26 +1439,30 @@
                                 }
                             });
                     })
-                    .on('dragstart', function () {
-                        if (! __data_selection_enabled) { return; } // do nothing if not selectable
-                        dragStart = d3.mouse(this);
-                        main.select('.chart').append('rect')
-                            .attr('class', 'dragarea')
-                            .style('opacity', 0.1);
-                        dragging = true;
-                        // TODO: add callback here
-                    })
-                    .on('dragend', function () {
-                        if (! __data_selection_enabled) { return; } // do nothing if not selectable
-                        main.select('.dragarea')
-                          .transition().duration(100)
-                            .style('opacity', 0)
-                          .remove();
-                        main.selectAll('.-shape')
-                            .classed(INCLUDED, false);
-                        dragging = false;
-                        // TODO: add callback here
-                    })
+                        .on('dragstart', function () {
+                            if (!__data_selection_enabled) {
+                                return;
+                            } // do nothing if not selectable
+                            dragStart = d3.mouse(this);
+                            main.select('.chart').append('rect')
+                                .attr('class', 'dragarea')
+                                .style('opacity', 0.1);
+                            dragging = true;
+                            // TODO: add callback here
+                        })
+                        .on('dragend', function () {
+                            if (!__data_selection_enabled) {
+                                return;
+                            } // do nothing if not selectable
+                            main.select('.dragarea')
+                                .transition().duration(100)
+                                .style('opacity', 0)
+                                .remove();
+                            main.selectAll('.-shape')
+                                .classed(INCLUDED, false);
+                            dragging = false;
+                            // TODO: add callback here
+                        })
                 )
                 .call(zoom).on("dblclick.zoom", null);
 
@@ -1267,7 +1511,7 @@
                     .attr("clip-path", clipPath)
                     .attr("class", "x brush")
                     .call(brush)
-                  .selectAll("rect")
+                    .selectAll("rect")
                     .attr("height", height2);
 
                 // ATTENTION: This must be called AFTER chart added
@@ -1280,7 +1524,9 @@
 
             /*-- Legend Region --*/
 
-            if (__legend_show) { updateLegend(targets); }
+            if (__legend_show) {
+                updateLegend(targets);
+            }
 
             // Set targets
             updateTargets(targets);
@@ -1293,7 +1539,9 @@
                 if (isTimeSeries && typeof __tooltip_init_x === 'string') {
                     __tooltip_init_x = parseDate(__tooltip_init_x);
                     for (i = 0; i < targets[0].values.length; i++) {
-                        if ((targets[0].values[i].x - __tooltip_init_x) === 0) { break; }
+                        if ((targets[0].values[i].x - __tooltip_init_x) === 0) {
+                            break;
+                        }
                     }
                     __tooltip_init_x = i;
                 }
@@ -1301,8 +1549,8 @@
                     return addName(d.values[__tooltip_init_x]);
                 })));
                 tooltip.style("top", __tooltip_init_position.top)
-                       .style("left", __tooltip_init_position.left)
-                       .style("visibility", "visible");
+                    .style("left", __tooltip_init_position.left)
+                    .style("visibility", "visible");
             }
         }
 
@@ -1326,7 +1574,9 @@
             // ATTENTION: call here to update tickOffset
             if (withUpdateXDomain) {
                 x.domain(brush.empty() ? orgXDomain : brush.extent());
-                if (__zoom_enabled) { zoom.x(x).updateScaleExtent(); }
+                if (__zoom_enabled) {
+                    zoom.x(x).updateScaleExtent();
+                }
             }
             y.domain(getYDomain(c3.data.targets, 'y'));
             y2.domain(getYDomain(c3.data.targets, 'y2'));
@@ -1363,8 +1613,12 @@
                 xgrid.enter().append('line').attr("class", "xgrid");
                 xgrid.exit().remove();
                 main.selectAll(".xgrid")
-                    .attr("x1", function (d) { return x(d) - xAxis.tickOffset(); })
-                    .attr("x2", function (d) { return x(d) - xAxis.tickOffset(); })
+                    .attr("x1", function (d) {
+                        return x(d) - xAxis.tickOffset();
+                    })
+                    .attr("x2", function (d) {
+                        return x(d) - xAxis.tickOffset();
+                    })
                     .attr("y1", margin.top)
                     .attr("y2", height);
             }
@@ -1386,12 +1640,12 @@
                 ygrid.enter().append('line')
                     .attr('class', 'ygrid');
                 ygrid.attr("x1", __axis_rotated ? y : 0)
-                     .attr("x2", __axis_rotated ? y : width)
-                     .attr("y1", __axis_rotated ? 0 : y)
-                     .attr("y2", __axis_rotated ? height : y)
-                     .attr("opacity", 0)
-                   .transition()
-                     .attr("opacity", 1);
+                    .attr("x2", __axis_rotated ? y : width)
+                    .attr("y1", __axis_rotated ? 0 : y)
+                    .attr("y2", __axis_rotated ? height : y)
+                    .attr("opacity", 0)
+                    .transition()
+                    .attr("opacity", 1);
                 ygrid.exit().remove();
             }
             if (withY && __grid_y_lines) {
@@ -1419,7 +1673,7 @@
                 .attr("width", __axis_rotated ? barH : barW)
                 .attr("height", __axis_rotated ? barW : barH)
                 .style("opacity", 0)
-              .transition().duration(duration)
+                .transition().duration(duration)
                 .style('opacity', 1);
             mainBar.exit().transition().duration(duration)
                 .style('opacity', 0)
@@ -1427,16 +1681,20 @@
 
             // lines and cricles
             main.selectAll('.-line')
-              .transition().duration(duration)
+                .transition().duration(duration)
                 .attr("d", lineOnMain);
             mainCircle = main.selectAll('.-circles').selectAll('.-circle')
                 .data(lineData);
             mainCircle.transition().duration(duration)
-                .style('opacity', function (d) { return d.value === null ? 0 : 1; })
+                .style('opacity', function (d) {
+                    return d.value === null ? 0 : 1;
+                })
                 .attr("cx", __axis_rotated ? circleY : circleX)
                 .attr("cy", __axis_rotated ? circleX : circleY);
             mainCircle.enter().append("circle")
-                .style('opacity', function (d) { return d.value === null ? 0 : 1; })
+                .style('opacity', function (d) {
+                    return d.value === null ? 0 : 1;
+                })
                 .attr("class", classCircle)
                 .attr("cx", __axis_rotated ? circleY : circleX)
                 .attr("cy", __axis_rotated ? circleX : circleY)
@@ -1455,7 +1713,7 @@
                     // TODO: fix when rotated
                     context.select('.x.axis').transition().duration(__axis_rotated ? duration : 0).call(__axis_rotated ? yAxis : subXAxis);
                     // extent rect
-                    if (! brush.empty()) {
+                    if (!brush.empty()) {
                         brush.extent(x.orgDomain()).update();
                     }
                     // bars
@@ -1471,25 +1729,27 @@
                         .attr("class", classBar)
                         .attr("x", barX).attr("y", barY).attr("width", barW).attr("height", barH)
                         .style("opacity", 0)
-                      .transition()
+                        .transition()
                         .style('opacity', 1);
                     contextBar.exit().transition()
                         .style('opacity', 0)
                         .remove();
                     // lines
                     context.selectAll('.-line')
-                      .transition().duration(duration)
+                        .transition().duration(duration)
                         .attr("d", lineOnSub);
                 }
             }
 
             // circles for select
             main.selectAll('.selected-circles')
-                .filter(function (d) { return isBarType(d); })
+                .filter(function (d) {
+                    return isBarType(d);
+                })
                 .selectAll('circle')
                 .remove();
             main.selectAll('.selected-circle')
-              .transition().duration(duration)
+                .transition().duration(duration)
                 .attr("cx", __axis_rotated ? circleY : circleX)
                 .attr("cy", __axis_rotated ? circleX : circleY);
 
@@ -1505,7 +1765,9 @@
                 };
             } else {
                 rectW = (((__axis_rotated ? height : width) * getXDomainRatio()) / (maxDataCount() - 1));
-                rectX = function (d) { return x(d.x) - (rectW / 2); };
+                rectX = function (d) {
+                    return x(d.x) - (rectW / 2);
+                };
             }
             main.selectAll('.event-rect')
                 .attr("x", __axis_rotated ? 0 : rectX)
@@ -1523,11 +1785,14 @@
                 .attr("y", __axis_rotated ? regionStart : margin.top)
                 .attr("width", __axis_rotated ? width : regionWidth)
                 .attr("height", __axis_rotated ? regionWidth : height)
-                .style("fill-opacity", function (d) { return isDefined(d.opacity) ? d.opacity : 0.1; });
+                .style("fill-opacity", function (d) {
+                    return isDefined(d.opacity) ? d.opacity : 0.1;
+                });
             mainRegion.exit().transition().duration(duration)
                 .style("fill-opacity", 0)
                 .remove();
         }
+
         function redrawForBrush() {
             redraw({
                 withTransition: false,
@@ -1536,6 +1801,7 @@
                 withUpdateXDomain: true
             });
         }
+
         function redrawForZoom() {
             if (d3.event.sourceEvent.type === 'mousemove' && zoom.altDomain) {
                 x.domain(zoom.altDomain);
@@ -1562,7 +1828,9 @@
             // Set x for brush again because of scale update
             brush.x(subX);
             // Set x for zoom again because of scale update
-            if (__zoom_enabled) { zoom.x(x); }
+            if (__zoom_enabled) {
+                zoom.x(x);
+            }
             // Update sizes
             d3.select('svg').attr('width', currentWidth).attr('height', currentHeight);
             d3.select('#' + clipId).select('rect').attr('width', width).attr('height', height);
@@ -1594,39 +1862,57 @@
 
             //-- Bar --//
             mainBarUpdate = main.select('.chart-bars')
-              .selectAll('.chart-bar')
+                .selectAll('.chart-bar')
                 .data(targets);
             mainBarEnter = mainBarUpdate.enter().append('g')
-                .attr('class', function (d) { return 'chart-bar target target-' + d.id; })
+                .attr('class', function (d) {
+                    return 'chart-bar target target-' + d.id;
+                })
                 .style("pointer-events", "none")
                 .style('opacity', 0);
             // Bars for each data
             mainBarEnter.append('g')
                 .attr("class", classBars)
-                .style("fill", function (d) { return color(d.id); })
-                .style("stroke", function (d) { return color(d.id); })
+                .style("fill", function (d) {
+                    return color(d.id);
+                })
+                .style("stroke", function (d) {
+                    return color(d.id);
+                })
                 .style("stroke-width", 0)
-                .style("cursor", function (d) { return __data_selection_isselectable(d) ? "pointer" : null; });
+                .style("cursor", function (d) {
+                    return __data_selection_isselectable(d) ? "pointer" : null;
+                });
 
             //-- Line --//
             mainLineUpdate = main.select('.chart-lines')
-              .selectAll('.chart-line')
+                .selectAll('.chart-line')
                 .data(targets);
             mainLineEnter = mainLineUpdate.enter().append('g')
-                .attr('class', function (d) { return 'chart-line target target-' + d.id; })
+                .attr('class', function (d) {
+                    return 'chart-line target target-' + d.id;
+                })
                 .style("pointer-events", "none")
                 .style('opacity', 0);
             // Lines for each data
             mainLineEnter.append("path")
                 .attr("class", classLine)
-                .style("stroke", function (d) { return color(d.id); });
+                .style("stroke", function (d) {
+                    return color(d.id);
+                });
             // Circles for each data point on lines
             mainLineEnter.append('g')
-                .attr("class", function (d) { return "selected-circles selected-circles-" + d.id; });
+                .attr("class", function (d) {
+                    return "selected-circles selected-circles-" + d.id;
+                });
             mainLineEnter.append('g')
                 .attr("class", classCircles)
-                .style("fill", function (d) { return color(d.id); })
-                .style("cursor", function (d) { return __data_selection_isselectable(d) ? "pointer" : null; });
+                .style("fill", function (d) {
+                    return color(d.id);
+                })
+                .style("cursor", function (d) {
+                    return __data_selection_isselectable(d) ? "pointer" : null;
+                });
             // Update date for selected circles
             targets.forEach(function (t) {
                 main.selectAll('.selected-circles-' + t.id).selectAll('.selected-circle').each(function (d) {
@@ -1639,27 +1925,35 @@
             if (__subchart_show) {
 
                 contextBarUpdate = context.select('.chart-bars')
-                  .selectAll('.chart-bar')
+                    .selectAll('.chart-bar')
                     .data(targets);
                 contextBarEnter = contextBarUpdate.enter().append('g')
-                    .attr('class', function (d) { return 'chart-bar target target-' + d.id; })
+                    .attr('class', function (d) {
+                        return 'chart-bar target target-' + d.id;
+                    })
                     .style('opacity', 0);
                 // Bars for each data
                 contextBarEnter.append('g')
                     .attr("class", classBars)
-                    .style("fill", function (d) { return color(d.id); });
+                    .style("fill", function (d) {
+                        return color(d.id);
+                    });
 
                 //-- Line --//
                 contextLineUpdate = context.select('.chart-lines')
-                  .selectAll('.chart-line')
+                    .selectAll('.chart-line')
                     .data(targets);
                 contextLineEnter = contextLineUpdate.enter().append('g')
-                    .attr('class', function (d) { return 'chart-line target target-' + d.id; })
+                    .attr('class', function (d) {
+                        return 'chart-line target target-' + d.id;
+                    })
                     .style('opacity', 0);
                 // Lines for each data
                 contextLineEnter.append("path")
                     .attr("class", classLine)
-                    .style("stroke", function (d) { return color(d.id); });
+                    .style("stroke", function (d) {
+                        return color(d.id);
+                    });
             }
 
             /*-- Legend --*/
@@ -1712,21 +2006,25 @@
             // Define g for legend area
             l = legend.selectAll('.legend-item')
                 .data(ids)
-              .enter().append('g')
-                .attr('class', function (d) { return 'legend-item legend-item-' + d; })
+                .enter().append('g')
+                .attr('class', function (d) {
+                    return 'legend-item legend-item-' + d;
+                })
                 .style('cursor', 'pointer')
                 .on('click', function (d) {
                     __legend_item_onclick(d);
                 })
                 .on('mouseover', function (d) {
-                    d3.selectAll('.legend-item').filter(function (_d) { return _d !== d; })
-                      .transition().duration(100)
+                    d3.selectAll('.legend-item').filter(function (_d) {
+                        return _d !== d;
+                    })
+                        .transition().duration(100)
                         .style('opacity', 0.3);
                     c3.focus(d);
                 })
                 .on('mouseout', function () {
                     d3.selectAll('.legend-item')
-                      .transition().duration(100)
+                        .transition().duration(100)
                         .style('opacity', 1);
                     c3.revert();
                 });
@@ -1734,35 +2032,51 @@
                 .attr("class", "legend-item-event")
                 .style('fill-opacity', 0)
                 .attr('x', -200)
-                .attr('y', function () { return legendHeight / 2 - 16; })
+                .attr('y', function () {
+                    return legendHeight / 2 - 16;
+                })
                 .attr('width', __legend_item_width)
                 .attr('height', 24);
             l.append('rect')
                 .attr("class", "legend-item-tile")
-                .style('fill', function (d) { return color(d); })
+                .style('fill', function (d) {
+                    return color(d);
+                })
                 .attr('x', -200)
-                .attr('y', function () { return legendHeight / 2 - 9; })
+                .attr('y', function () {
+                    return legendHeight / 2 - 9;
+                })
                 .attr('width', 10)
                 .attr('height', 10);
             l.append('text')
-                .text(function (d) { return isDefined(__data_names[d]) ? __data_names[d] : d; })
+                .text(function (d) {
+                    return isDefined(__data_names[d]) ? __data_names[d] : d;
+                })
                 .attr('x', -200)
-                .attr('y', function () { return legendHeight / 2; });
+                .attr('y', function () {
+                    return legendHeight / 2;
+                });
 
             legend.selectAll('rect.legend-item-event')
                 .data(ids)
-              .transition().duration(withTransition ? 250 : 0)
-                .attr('x', function (d, i) { return padding + __legend_item_width * i; });
+                .transition().duration(withTransition ? 250 : 0)
+                .attr('x', function (d, i) {
+                    return padding + __legend_item_width * i;
+                });
 
             legend.selectAll('rect.legend-item-tile')
                 .data(ids)
-              .transition().duration(withTransition ? 250 : 0)
-                .attr('x', function (d, i) { return padding + __legend_item_width * i; });
+                .transition().duration(withTransition ? 250 : 0)
+                .attr('x', function (d, i) {
+                    return padding + __legend_item_width * i;
+                });
 
             legend.selectAll('text')
                 .data(ids)
-              .transition().duration(withTransition ? 250 : 0)
-                .attr('x', function (d, i) { return padding + __legend_item_width * i + 14; });
+                .transition().duration(withTransition ? 250 : 0)
+                .attr('x', function (d, i) {
+                    return padding + __legend_item_width * i + 14;
+                });
         }
 
         /*-- Event Handling --*/
@@ -1774,7 +2088,9 @@
         c3.focus = function (target) {
             c3.defocus();
             d3.selectAll(getTargetSelector(target))
-                .filter(function (d) { return hasTarget(d.id); })
+                .filter(function (d) {
+                    return hasTarget(d.id);
+                })
                 .classed('focused', true)
                 .transition().duration(100)
                 .style('opacity', 1);
@@ -1782,7 +2098,9 @@
 
         c3.defocus = function (target) {
             d3.selectAll(getTargetSelector(target))
-                .filter(function (d) { return hasTarget(d.id); })
+                .filter(function (d) {
+                    return hasTarget(d.id);
+                })
                 .classed('focused', false)
                 .transition().duration(100)
                 .style('opacity', 0.3);
@@ -1790,7 +2108,9 @@
 
         c3.revert = function (target) {
             d3.selectAll(getTargetSelector(target))
-                .filter(function (d) { return hasTarget(d.id); })
+                .filter(function (d) {
+                    return hasTarget(d.id);
+                })
                 .classed('focused', false)
                 .transition().duration(100)
                 .style('opacity', 1);
@@ -1816,7 +2136,8 @@
         c3.load = function (args) {
             // check args
             if (isUndefined(args.done)) {
-                args.done = function () {};
+                args.done = function () {
+                };
             }
             // update categories if exists
             if ('categories' in args && isCategorized) {
@@ -1831,19 +2152,15 @@
             // load data
             if ('data' in args) {
                 load(convertDataToTargets(args.data), args.done);
-            }
-            else if ('url' in args) {
+            } else if ('url' in args) {
                 d3.csv(args.url, function (error, data) {
                     load(convertDataToTargets(data), args.done);
                 });
-            }
-            else if ('rows' in args) {
+            } else if ('rows' in args) {
                 load(convertDataToTargets(convertRowsToData(args.rows)), args.done);
-            }
-            else if ('columns' in args) {
+            } else if ('columns' in args) {
                 load(convertDataToTargets(convertColumnsToData(args.columns)), args.done);
-            }
-            else {
+            } else {
                 throw Error('url or rows or columns is required.');
             }
         };
@@ -1853,7 +2170,7 @@
                 return d.id !== target;
             });
             d3.selectAll('.target-' + target)
-              .transition()
+                .transition()
                 .style('opacity', 0)
                 .remove();
 
@@ -1862,20 +2179,30 @@
                 updateLegend(c3.data.targets);
             }
 
-            if (c3.data.targets.length > 0) { redraw(); }
+            if (c3.data.targets.length > 0) {
+                redraw();
+            }
         };
 
         c3.selected = function (target) {
             var suffix = isDefined(target) ? '-' + target : '';
             return d3.merge(
                 main.selectAll('.-shapes' + suffix).selectAll('.-shape')
-                    .filter(function () { return d3.select(this).classed(SELECTED); })
-                    .map(function (d) { return d.map(function (_d) { return _d.__data__; }); })
+                    .filter(function () {
+                        return d3.select(this).classed(SELECTED);
+                    })
+                    .map(function (d) {
+                        return d.map(function (_d) {
+                            return _d.__data__;
+                        });
+                    })
             );
         };
 
         c3.select = function (ids, indices, resetOther) {
-            if (! __data_selection_enabled) { return; }
+            if (!__data_selection_enabled) {
+                return;
+            }
             main.selectAll('.-shapes').selectAll('.-shape').each(function (d, i) {
                 var selectShape = (this.nodeName === 'circle') ? selectPoint : selectBar,
                     unselectShape = (this.nodeName === 'circle') ? unselectPoint : unselectBar;
@@ -1890,7 +2217,9 @@
         };
 
         c3.unselect = function (ids, indices) {
-            if (! __data_selection_enabled) { return; }
+            if (!__data_selection_enabled) {
+                return;
+            }
             main.selectAll('.-shapes').selectAll('.-shape').each(function (d, i) {
                 var unselectShape = (this.nodeName === 'circle') ? unselectPoint : unselectBar;
                 if (isUndefined(indices) || indices.indexOf(i) >= 0) {
@@ -1917,20 +2246,26 @@
         };
 
         c3.groups = function (groups) {
-            if (isUndefined(groups)) { return __data_groups; }
+            if (isUndefined(groups)) {
+                return __data_groups;
+            }
             __data_groups = groups;
             redraw();
             return __data_groups;
         };
 
         c3.regions = function (regions) {
-            if (isUndefined(regions)) { return __regions; }
+            if (isUndefined(regions)) {
+                return __regions;
+            }
             __regions = regions;
             redraw();
             return __regions;
         };
         c3.regions.add = function (regions) {
-            if (isUndefined(regions)) { return __regions; }
+            if (isUndefined(regions)) {
+                return __regions;
+            }
             __regions = __regions.concat(regions);
             redraw();
             return __regions;
@@ -1953,25 +2288,28 @@
 
         c3.data.get = function (id) {
             var target = c3.data.getAsTarget(id);
-            return isDefined(target) ? target.values.map(function (d) { return d.value; }) : undefined;
+            return isDefined(target) ? target.values.map(function (d) {
+                return d.value;
+            }) : undefined;
         };
         c3.data.getAsTarget = function (id) {
-            var targets = getTargets(function (d) { return d.id === id; });
+            var targets = getTargets(function (d) {
+                return d.id === id;
+            });
             return targets.length > 0 ? targets[0] : undefined;
         };
 
         /*-- Load data and init chart with defined functions --*/
 
         if ('url' in config.data) {
-            d3.csv(config.data.url, function (error, data) { init(data); });
-        }
-        else if ('rows' in config.data) {
+            d3.csv(config.data.url, function (error, data) {
+                init(data);
+            });
+        } else if ('rows' in config.data) {
             init(convertRowsToData(config.data.rows));
-        }
-        else if ('columns' in config.data) {
+        } else if ('columns' in config.data) {
             init(convertColumnsToData(config.data.columns));
-        }
-        else {
+        } else {
             throw Error('url or rows or columns is required.');
         }
 
@@ -1982,21 +2320,26 @@
     };
 
     function categoryAxis() {
-        var scale = d3.scale.linear(), orient = "bottom", tickMajorSize = 6, /*tickMinorSize = 6,*/ tickEndSize = 6, tickPadding = 3, tickCentered = false, tickTextNum = 10, tickOffset = 0, categories = [];
+        var scale = d3.scale.linear(), orient = "bottom", tickMajorSize = 6, /*tickMinorSize = 6,*/ tickEndSize = 6,
+            tickPadding = 3, tickCentered = false, tickTextNum = 10, tickOffset = 0, categories = [];
+
         function axisX(selection, x) {
             selection.attr("transform", function (d) {
                 return "translate(" + (x(d) + tickOffset) + ", 0)";
             });
         }
+
         function axisY(selection, y) {
             selection.attr("transform", function (d) {
                 return "translate(0," + y(d) + ")";
             });
         }
+
         function scaleExtent(domain) {
             var start = domain[0], stop = domain[domain.length - 1];
-            return start < stop ? [ start, stop ] : [ stop, start ];
+            return start < stop ? [start, stop] : [stop, start];
         }
+
         function generateTicks(domain) {
             var ticks = [];
             for (var i = Math.ceil(domain[0]); i < domain[1]; i++) {
@@ -2007,12 +2350,15 @@
             }
             return ticks;
         }
+
         function shouldShowTickText(ticks, i) {
             return ticks.length < tickTextNum || i % Math.ceil(ticks.length / tickTextNum) === 0;
         }
+
         function category(i) {
             return i < categories.length ? categories[i] : i;
         }
+
         function axis(g) {
             g.each(function () {
                 var g = d3.select(this);
@@ -2024,7 +2370,7 @@
                     tickTransform,
                     tickX;
                 var range = scale.rangeExtent ? scale.rangeExtent() : scaleExtent(scale.range()),
-                    path = g.selectAll(".domain").data([ 0 ]);
+                    path = g.selectAll(".domain").data([0]);
 
                 path.enter().append("path").attr("class", "domain");
 
@@ -2034,63 +2380,67 @@
                 this.__chart__ = scale1;
                 tickEnter.append("line");
                 tickEnter.append("text");
-                var lineEnter = tickEnter.select("line"), lineUpdate = tickUpdate.select("line"), text = tick.select("text"), textEnter = tickEnter.select("text"), textUpdate = tickUpdate.select("text");
+                var lineEnter = tickEnter.select("line"), lineUpdate = tickUpdate.select("line"),
+                    text = tick.select("text"), textEnter = tickEnter.select("text"),
+                    textUpdate = tickUpdate.select("text");
 
                 tickOffset = (scale1(1) - scale1(0)) / 2;
                 tickX = tickCentered ? 0 : tickOffset;
 
                 switch (orient) {
-                case "bottom":
-                    {
+                    case "bottom": {
                         tickTransform = axisX;
                         lineEnter.attr("y2", tickMajorSize);
                         textEnter.attr("y", Math.max(tickMajorSize, 0) + tickPadding);
                         lineUpdate.attr("x1", tickX).attr("x2", tickX).attr("y2", tickMajorSize);
                         textUpdate.attr("x", 0).attr("y", Math.max(tickMajorSize, 0) + tickPadding);
                         text.attr("dy", ".71em").style("text-anchor", "middle");
-                        text.text(function (i) { return shouldShowTickText(ticks, i) ? category(i) : ""; });
+                        text.text(function (i) {
+                            return shouldShowTickText(ticks, i) ? category(i) : "";
+                        });
                         pathUpdate.attr("d", "M" + range[0] + "," + tickEndSize + "V0H" + range[1] + "V" + tickEndSize);
                     }
 
-                    break;
-/* TODO: implement
-                case "top":
-                    {
-                        tickTransform = axisX
-                        lineEnter.attr("y2", -tickMajorSize)
-                        textEnter.attr("y", -(Math.max(tickMajorSize, 0) + tickPadding))
-                        lineUpdate.attr("x2", 0).attr("y2", -tickMajorSize)
-                        textUpdate.attr("x", 0).attr("y", -(Math.max(tickMajorSize, 0) + tickPadding))
-                        text.attr("dy", "0em").style("text-anchor", "middle")
-                        pathUpdate.attr("d", "M" + range[0] + "," + -tickEndSize + "V0H" + range[1] + "V" + -tickEndSize)
-                        break
-                    }
-*/
-                case "left":
-                    {
+                        break;
+                    /* TODO: implement
+                                    case "top":
+                                        {
+                                            tickTransform = axisX
+                                            lineEnter.attr("y2", -tickMajorSize)
+                                            textEnter.attr("y", -(Math.max(tickMajorSize, 0) + tickPadding))
+                                            lineUpdate.attr("x2", 0).attr("y2", -tickMajorSize)
+                                            textUpdate.attr("x", 0).attr("y", -(Math.max(tickMajorSize, 0) + tickPadding))
+                                            text.attr("dy", "0em").style("text-anchor", "middle")
+                                            pathUpdate.attr("d", "M" + range[0] + "," + -tickEndSize + "V0H" + range[1] + "V" + -tickEndSize)
+                                            break
+                                        }
+                    */
+                    case "left": {
                         tickTransform = axisY;
                         lineEnter.attr("x2", -tickMajorSize);
                         textEnter.attr("x", -(Math.max(tickMajorSize, 0) + tickPadding));
                         lineUpdate.attr("x2", -tickMajorSize).attr("y2", 0);
                         textUpdate.attr("x", -(Math.max(tickMajorSize, 0) + tickPadding)).attr("y", tickOffset);
                         text.attr("dy", ".32em").style("text-anchor", "end");
-                        text.text(function (i) { return shouldShowTickText(ticks, i) ? category(i) : ""; });
+                        text.text(function (i) {
+                            return shouldShowTickText(ticks, i) ? category(i) : "";
+                        });
                         pathUpdate.attr("d", "M" + -tickEndSize + "," + range[0] + "H0V" + range[1] + "H" + -tickEndSize);
                         break;
                     }
-/*
-                case "right":
-                    {
-                        tickTransform = axisY
-                        lineEnter.attr("x2", tickMajorSize)
-                        textEnter.attr("x", Math.max(tickMajorSize, 0) + tickPadding)
-                        lineUpdate.attr("x2", tickMajorSize).attr("y2", 0)
-                        textUpdate.attr("x", Math.max(tickMajorSize, 0) + tickPadding).attr("y", 0)
-                        text.attr("dy", ".32em").style("text-anchor", "start")
-                        pathUpdate.attr("d", "M" + tickEndSize + "," + range[0] + "H0V" + range[1] + "H" + tickEndSize)
-                        break
-                    }
-*/
+                    /*
+                                    case "right":
+                                        {
+                                            tickTransform = axisY
+                                            lineEnter.attr("x2", tickMajorSize)
+                                            textEnter.attr("x", Math.max(tickMajorSize, 0) + tickPadding)
+                                            lineUpdate.attr("x2", tickMajorSize).attr("y2", 0)
+                                            textUpdate.attr("x", Math.max(tickMajorSize, 0) + tickPadding).attr("y", 0)
+                                            text.attr("dy", ".32em").style("text-anchor", "start")
+                                            pathUpdate.attr("d", "M" + tickEndSize + "," + range[0] + "H0V" + range[1] + "H" + tickEndSize)
+                                            break
+                                        }
+                    */
                 }
                 if (scale.ticks) {
                     tickEnter.call(tickTransform, scale0);
@@ -2105,28 +2455,39 @@
                 }
             });
         }
+
         axis.scale = function (x) {
-            if (!arguments.length) { return scale; }
+            if (!arguments.length) {
+                return scale;
+            }
             scale = x;
             return axis;
         };
         axis.orient = function (x) {
-            if (!arguments.length) { return orient; }
+            if (!arguments.length) {
+                return orient;
+            }
             orient = x in {top: 1, right: 1, bottom: 1, left: 1} ? x + "" : "bottom";
             return axis;
         };
         axis.categories = function (x) {
-            if (!arguments.length) { return categories; }
+            if (!arguments.length) {
+                return categories;
+            }
             categories = x;
             return axis;
         };
         axis.tickCentered = function (x) {
-            if (!arguments.length) { return tickCentered; }
+            if (!arguments.length) {
+                return tickCentered;
+            }
             tickCentered = x;
             return axis;
         };
         axis.tickTextNum = function (x) {
-            if (!arguments.length) { return tickTextNum; }
+            if (!arguments.length) {
+                return tickTextNum;
+            }
             tickTextNum = x;
             return axis;
         };
@@ -2142,6 +2503,7 @@
     function isUndefined(v) {
         return typeof v === 'undefined';
     }
+
     function isDefined(v) {
         return typeof v !== 'undefined';
     }

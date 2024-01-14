@@ -9,10 +9,10 @@
     <!--根据用户 id 查询角色信息-->
     <select id="getRolesByUid" resultType="com.xjt.mysql.entity.TRole">
         SELECT r.id,r.name,r.name_zh AS nameZh
-            FROM t_user_role AS ur
-            LEFT JOIN t_role AS r
-            ON ur.rid = r.id
-            WHERE ur.uid = #{id}
+        FROM t_user_role AS ur
+        LEFT JOIN t_role AS r
+        ON ur.rid = r.id
+        WHERE ur.uid = #{id}
     </select>
 
     <update id="updatePasswordByUsername">

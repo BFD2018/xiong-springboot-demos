@@ -27,15 +27,15 @@ public class StudentServiceImpl implements StudentService {
         Object arr = redisTemplate.opsForValue().get("studentList");
         System.out.println(arr);
 
-        if(ObjectUtils.isEmpty(arr) || arr == null || arr == "null"){
+        if (ObjectUtils.isEmpty(arr) || arr == null || arr == "null") {
             System.out.println("===============>查询数据库");
             studentList = studentMapper.selectList(null);
-            redisTemplate.opsForValue().set("studentList", JSON.toJSONString(studentList),15, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set("studentList", JSON.toJSONString(studentList), 15, TimeUnit.SECONDS);
 
-            return RespBean.ok("ok",studentList);
+            return RespBean.ok("ok", studentList);
         }
 
         System.out.println("===============>从redis缓存中取值");
-        return RespBean.ok("ok",JSON.parse((String)arr));
+        return RespBean.ok("ok", JSON.parse((String) arr));
     }
 }

@@ -14,7 +14,7 @@ public class ApplicationContextUtils implements ApplicationContextAware {
     }
 
     //根据bean名字获取工厂中指定bean对象
-    public static Object getBean(String beanName){
+    public static Object getBean(String beanName) {
         return context.getBean(beanName);
     }
 }

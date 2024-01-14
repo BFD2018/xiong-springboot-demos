@@ -7,11 +7,12 @@
 //! author : Noureddine LOUAHEDJ : https://github.com/noureddinem
 
 ;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined'
+    && typeof require === 'function' ? factory(require('../moment')) :
+        typeof define === 'function' && define.amd ? define(['../moment'], factory) :
+            factory(global.moment)
+}(this, (function (moment) {
+    'use strict';
 
     //! moment.js locale configuration
 
@@ -19,14 +20,14 @@
             return n === 0
                 ? 0
                 : n === 1
-                ? 1
-                : n === 2
-                ? 2
-                : n % 100 >= 3 && n % 100 <= 10
-                ? 3
-                : n % 100 >= 11
-                ? 4
-                : 5;
+                    ? 1
+                    : n === 2
+                        ? 2
+                        : n % 100 >= 3 && n % 100 <= 10
+                            ? 3
+                            : n % 100 >= 11
+                                ? 4
+                                : 5;
         },
         plurals = {
             s: [

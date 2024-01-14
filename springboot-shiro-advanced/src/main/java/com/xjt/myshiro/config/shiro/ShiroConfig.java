@@ -24,7 +24,7 @@ public class ShiroConfig {
     private String unauthorizedUrl = "/unauth";
 
     @Bean
-    public ShiroDialect shiroDialect(){
+    public ShiroDialect shiroDialect() {
         return new ShiroDialect();
     }
 

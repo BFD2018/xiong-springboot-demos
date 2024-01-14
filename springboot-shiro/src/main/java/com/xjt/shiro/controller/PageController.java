@@ -16,56 +16,57 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PageController {
 
     @GetMapping("/login")
-    public String loginPage(){
+    public String loginPage() {
         return "login";
     }
 
     @GetMapping("/register")
-    public String registerPage(){
+    public String registerPage() {
         return "register";
     }
 
     @RequiresAuthentication     //示当前Subject已经身份验证或者通过记住我登录的
     @GetMapping("/index")
-    public String indexPage(){
+    public String indexPage() {
         return "/index";
     }
 
     @RequiresPermissions("user:*")     //表示当前Subject需要权限 user:*
     @GetMapping("/user/list")
-    public String userListPage(){
-        log.warn("xjt--->{}","进入view.user.list.html");
+    public String userListPage() {
+        log.warn("xjt--->{}", "进入view.user.list.html");
 
         return "/user/list";
 
     }
+
     @RequiresPermissions("user:add")     //表示当前Subject需要权限 user:*
     @GetMapping("/user/add")
-    public String userAddPage(){
-        log.warn("xjt--->{}","进入view.user.add.html");
+    public String userAddPage() {
+        log.warn("xjt--->{}", "进入view.user.add.html");
 
         return "/user/add";
     }
 
     @RequiresPermissions("route:*")
     @GetMapping("/route/list")
-    public String routeListPage(){
-        log.warn("xjt--->{}","进入view.route.list.html");
+    public String routeListPage() {
+        log.warn("xjt--->{}", "进入view.route.list.html");
 
         return "/route/list";
     }
 
     @RequiresPermissions("*:*")
     @GetMapping("/admin/index")
-    public String adminPage(){
-        log.warn("xjt--->{}","进入view.admin.index.html");
+    public String adminPage() {
+        log.warn("xjt--->{}", "进入view.admin.index.html");
         return "/admin/index";
     }
 
     @ResponseBody
-    @RequiresRoles(value = {"userManager","admin"},logical = Logical.OR)    //表示当前Subject需要角色 userManager或admin
+    @RequiresRoles(value = {"userManager", "admin"}, logical = Logical.OR)    //表示当前Subject需要角色 userManager或admin
     @GetMapping("/admin/user/list")
-    public String adminUserPage(){
+    public String adminUserPage() {
         System.out.println("========>/admin/user/list<=========");
         return "/admin/user-list";
     }

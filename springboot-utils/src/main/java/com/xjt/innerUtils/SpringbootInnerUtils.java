@@ -54,7 +54,7 @@ public class SpringbootInnerUtils {
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-class Person{
+class Person {
     private String name;
     private Integer age;
 }

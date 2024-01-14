@@ -68,7 +68,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         // 获取文件类型
         String fileType = originalFilename.substring(originalFilename.lastIndexOf("."));
         // 新文件名称
-        String newFileName = UUID.randomUUID().toString().replace("-","") + fileType;
+        String newFileName = UUID.randomUUID().toString().replace("-", "") + fileType;
 
         // 构建日期路径, 例如：OSS目标文件夹  /2022/10/文件名
         String filePath = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
@@ -92,7 +92,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         meta.setContentType("image/jpg");
 
         try {
-            if(!ossClient.doesBucketExist(bucketName)){
+            if (!ossClient.doesBucketExist(bucketName)) {
                 ossClient.createBucket(bucketName);
                 CreateBucketRequest bucketRequest = new CreateBucketRequest(bucketName);
                 bucketRequest.setCannedACL(CannedAccessControlList.PublicRead);
@@ -112,7 +112,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         // 获取文件上传后的图片返回地址
         returnImgeUrl = "http://" + bucketName + "." + endpoint + "/" + uploadImgeUrl;
 
-        return RespBean.ok("ok",returnImgeUrl);
+        return RespBean.ok("ok", returnImgeUrl);
     }
 
     @Override
@@ -130,7 +130,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 
         ObjectListing objectListing = ossClient.listObjects(bucketName);
 
-        return RespBean.ok("ok",objectListing);
+        return RespBean.ok("ok", objectListing);
 
     }
 
@@ -146,7 +146,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         // 获取文件原名称
         String originalFilename = file.getOriginalFilename();
         // 新文件名称
-        String newFileName = UUID.randomUUID().toString().replace("-","") + "-" + originalFilename;
+        String newFileName = UUID.randomUUID().toString().replace("-", "") + "-" + originalFilename;
 
         // 构建日期路径, 例如：OSS目标文件夹  /2022/10/文件名
         Date date = new Date();
@@ -164,7 +164,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 
         PutObjectResult putObjectResult = null;
         try {
-            if(!ossClient.doesBucketExist(bucketName)){
+            if (!ossClient.doesBucketExist(bucketName)) {
                 ossClient.createBucket(bucketName);
                 CreateBucketRequest bucketRequest = new CreateBucketRequest(bucketName);
                 bucketRequest.setCannedACL(CannedAccessControlList.PublicRead);
@@ -180,14 +180,14 @@ public class FileUploadServiceImpl implements FileUploadService {
             TFile tFile = new TFile().setId(eTag).setFileKey(returnUrl).setFileSize(String.valueOf(file.getSize())).setUpdateTime(date);
             int insert = fileUploadMapper.insert(tFile);
 
-            if(putObjectResult.getResponse().isSuccessful() && insert>0){
-                return RespBean.ok("ok",returnUrl);
-            }else{
+            if (putObjectResult.getResponse().isSuccessful() && insert > 0) {
+                return RespBean.ok("ok", returnUrl);
+            } else {
                 return RespBean.error("error");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return RespBean.error("error",e.getMessage());
+            return RespBean.error("error", e.getMessage());
         }
     }
 
@@ -200,10 +200,10 @@ public class FileUploadServiceImpl implements FileUploadService {
             return RespBean.ok("ok");
         } catch (OSSException e) {
             e.printStackTrace();
-            return RespBean.error("error",e.getMessage());
+            return RespBean.error("error", e.getMessage());
         } catch (ClientException e) {
             e.printStackTrace();
-            return RespBean.error("error",e.getMessage());
+            return RespBean.error("error", e.getMessage());
         }
     }
 
@@ -217,7 +217,7 @@ public class FileUploadServiceImpl implements FileUploadService {
             // 调用ossObject.getObjectContent获取文件输入流，可读取此输入流获取其内容。
             InputStream content = ossObject.getObjectContent();
             if (content != null) {
-                FileUtil.writeFromStream(content,new File(objectName));
+                FileUtil.writeFromStream(content, new File(objectName));
 
                 // 数据读取完成后，获取的流必须关闭，否则会造成连接泄漏，导致请求无连接可用，程序无法正常工作。
                 content.close();

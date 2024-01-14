@@ -26,7 +26,7 @@ public class Information {
     private String updateTime;
 
     //InformationVO转Information
-    public Information(InformationVO informationVO){
+    public Information(InformationVO informationVO) {
         this.id = informationVO.getId();
         this.dataInfo = JSON.toJSONString(informationVO.getDataInfo());
         this.type = informationVO.getType();

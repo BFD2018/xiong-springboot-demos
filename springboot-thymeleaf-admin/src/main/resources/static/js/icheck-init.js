@@ -1,6 +1,6 @@
 //minimal
 
-$(function(){
+$(function () {
     "use strict";
     $('.minimal input').iCheck({
         checkboxClass: 'icheckbox_minimal',
@@ -10,7 +10,7 @@ $(function(){
 });
 
 
-$(function(){
+$(function () {
     $('.minimal-red input').iCheck({
         checkboxClass: 'icheckbox_minimal-red',
         radioClass: 'iradio_minimal-red',
@@ -18,7 +18,7 @@ $(function(){
     });
 });
 
-$(function(){
+$(function () {
     $('.minimal-green input').iCheck({
         checkboxClass: 'icheckbox_minimal-green',
         radioClass: 'iradio_minimal-green',
@@ -26,7 +26,7 @@ $(function(){
     });
 });
 
-$(function(){
+$(function () {
     $('.minimal-blue input').iCheck({
         checkboxClass: 'icheckbox_minimal-blue',
         radioClass: 'iradio_minimal-blue',
@@ -34,7 +34,7 @@ $(function(){
     });
 });
 
-$(function(){
+$(function () {
     $('.minimal-yellow input').iCheck({
         checkboxClass: 'icheckbox_minimal-yellow',
         radioClass: 'iradio_minimal-yellow',
@@ -43,7 +43,7 @@ $(function(){
 });
 
 
-$(function(){
+$(function () {
     $('.minimal-purple input').iCheck({
         checkboxClass: 'icheckbox_minimal-purple',
         radioClass: 'iradio_minimal-purple',
@@ -52,13 +52,10 @@ $(function(){
 });
 
 
-
-
-
 //square
 
 
-$(function(){
+$(function () {
     $('.square input').iCheck({
         checkboxClass: 'icheckbox_square',
         radioClass: 'iradio_square',
@@ -66,7 +63,7 @@ $(function(){
     });
 });
 
-$(function(){
+$(function () {
     $('.square-red input').iCheck({
         checkboxClass: 'icheckbox_square-red',
         radioClass: 'iradio_square-red',
@@ -74,7 +71,7 @@ $(function(){
     });
 });
 
-$(function(){
+$(function () {
     $('.square-green input').iCheck({
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green',
@@ -82,7 +79,7 @@ $(function(){
     });
 });
 
-$(function(){
+$(function () {
     $('.square-blue input').iCheck({
         checkboxClass: 'icheckbox_square-blue',
         radioClass: 'iradio_square-blue',
@@ -90,7 +87,7 @@ $(function(){
     });
 });
 
-$(function(){
+$(function () {
     $('.square-yellow input').iCheck({
         checkboxClass: 'icheckbox_square-yellow',
         radioClass: 'iradio_square-yellow',
@@ -98,7 +95,7 @@ $(function(){
     });
 });
 
-$(function(){
+$(function () {
     $('.square-purple input').iCheck({
         checkboxClass: 'icheckbox_square-purple',
         radioClass: 'iradio_square-purple',
@@ -107,10 +104,9 @@ $(function(){
 });
 
 
-
 //flat
 
-$(function(){
+$(function () {
     $('.flat-red input').iCheck({
         checkboxClass: 'icheckbox_flat-red',
         radioClass: 'iradio_flat-red'
@@ -118,35 +114,35 @@ $(function(){
 });
 
 
-$(function(){
+$(function () {
     $('.flat-grey input').iCheck({
         checkboxClass: 'icheckbox_flat-grey',
         radioClass: 'iradio_flat-grey'
     });
 });
 
-$(function(){
+$(function () {
     $('.flat-green input').iCheck({
         checkboxClass: 'icheckbox_flat-green',
         radioClass: 'iradio_flat-green'
     });
 });
 
-$(function(){
+$(function () {
     $('.flat-blue input').iCheck({
         checkboxClass: 'icheckbox_flat-blue',
         radioClass: 'iradio_flat-blue'
     });
 });
 
-$(function(){
+$(function () {
     $('.flat-yellow input').iCheck({
         checkboxClass: 'icheckbox_flat-yellow',
         radioClass: 'iradio_flat-yellow'
     });
 });
 
-$(function(){
+$(function () {
     $('.flat-purple input').iCheck({
         checkboxClass: 'icheckbox_flat-purple',
         radioClass: 'iradio_flat-purple'

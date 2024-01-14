@@ -5,11 +5,12 @@
 //! Author : Menelion Elensúle : https://github.com/Oire
 
 ;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined'
+    && typeof require === 'function' ? factory(require('../moment')) :
+        typeof define === 'function' && define.amd ? define(['../moment'], factory) :
+            factory(global.moment)
+}(this, (function (moment) {
+    'use strict';
 
     //! moment.js locale configuration
 
@@ -18,9 +19,10 @@
         return num % 10 === 1 && num % 100 !== 11
             ? forms[0]
             : num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20)
-            ? forms[1]
-            : forms[2];
+                ? forms[1]
+                : forms[2];
     }
+
     function relativeTimeWithPlural(number, withoutSuffix, key) {
         var format = {
             ss: withoutSuffix ? 'секунда_секунды_секунд' : 'секунду_секунды_секунд',
@@ -131,8 +133,8 @@
                 case 'w':
                 case 'W':
                     return (number % 10 === 2 || number % 10 === 3) &&
-                        number % 100 !== 12 &&
-                        number % 100 !== 13
+                    number % 100 !== 12 &&
+                    number % 100 !== 13
                         ? number + '-і'
                         : number + '-ы';
                 case 'D':

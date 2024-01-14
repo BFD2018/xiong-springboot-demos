@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+</head>
+<body>
+    <h1>mysql80 database employees</h1>
+    <div class="card">
+        <div class="card-header">
+        <div class="card-title">Responsive Hover Table</div>
+        <div class="card-tools">
+            <div class="input-group">
+                <input type="text" class="form-control float-right">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default"></button>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>员工号</th>
+                        <th>姓</th>
+                        <th>名</th>
+                        <th>邮箱</th>
+                        <th>手机号</th>
+                        <th>入职日期</th>
+                        <th>工作id</th>
+                        <th>薪水</th>
+                        <th>奖金比例</th>
+                        <th>上司id</th>
+                        <th>部门id</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="employee,userStat:${employeeList}">
+                        <td th:text="${employee.employeeId}"></td>
+                        <td th:text="${employee.firstName}"></td>
+                        <td th:text="${employee.lastName}"></td>
+                        <td th:text="${employee.email}"></td>
+                        <td th:text="${employee.phoneNumber}"></td>
+                        <td th:text="${employee.hireDate}"></td>
+                        <td th:text="${employee.jobId}"></td>
+                        <td th:text="${employee.salary}"></td>
+                        <td th:text="${employee.commissionPct}"></td>
+                        <td th:text="${employee.managerId}"></td>
+                        <td th:text="${employee.departmentId}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>

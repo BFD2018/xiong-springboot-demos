@@ -2,21 +2,23 @@
 Morris.Donut({
     element: 'graph-donut',
     data: [
-        {value: 40, label: 'New Visit', formatted: 'at least 70%' },
-        {value: 30, label: 'Unique Visits', formatted: 'approx. 15%' },
-        {value: 20, label: 'Bounce Rate', formatted: 'approx. 10%' },
-        {value: 10, label: 'Up Time', formatted: 'at most 99.99%' }
+        {value: 40, label: 'New Visit', formatted: 'at least 70%'},
+        {value: 30, label: 'Unique Visits', formatted: 'approx. 15%'},
+        {value: 20, label: 'Bounce Rate', formatted: 'approx. 10%'},
+        {value: 10, label: 'Up Time', formatted: 'at most 99.99%'}
     ],
     backgroundColor: false,
     labelColor: '#fff',
     colors: [
-        '#4acacb','#6a8bc0','#5ab6df','#fe8676'
+        '#4acacb', '#6a8bc0', '#5ab6df', '#fe8676'
     ],
-    formatter: function (x, data) { return data.formatted; }
+    formatter: function (x, data) {
+        return data.formatted;
+    }
 });
 
 
-$(function() {
+$(function () {
 
     var d1 = [
         [0, 501],
@@ -73,9 +75,9 @@ $(function() {
     var options = {
         grid: {
             backgroundColor:
-            {
-                colors: ["#ffffff", "#f4f4f6"]
-            },
+                {
+                    colors: ["#ffffff", "#f4f4f6"]
+                },
             hoverable: true,
             clickable: true,
             tickColor: "#eeeeee",

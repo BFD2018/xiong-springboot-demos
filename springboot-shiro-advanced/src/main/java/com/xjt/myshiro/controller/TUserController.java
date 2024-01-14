@@ -104,8 +104,7 @@ public class TUserController {
     }
 
     @GetMapping("/unauth")
-    public String unauth()
-    {
+    public String unauth() {
         return "error/unauth";
     }
 }

@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/bantikyan/icheck-bootstrap/blob/master/LICENSE)
  */
 
- [class*="icheck-"] {
+[class*="icheck-"] {
     min-height: 22px;
     margin-top: 6px !important;
     margin-bottom: 6px !important;
@@ -15,10 +15,10 @@
     display: inline-block;
 }
 
-    .icheck-inline + .icheck-inline {
-        margin-left: .75rem;
-        margin-top: 6px;
-    }
+.icheck-inline + .icheck-inline {
+    margin-left: .75rem;
+    margin-top: 6px;
+}
 
 [class*="icheck-"] > label {
     padding-left: 29px !important;
@@ -38,37 +38,37 @@
     margin: 0;
 }
 
-    [class*="icheck-"] > input:first-child:disabled {
-        cursor: default;
-    }
+[class*="icheck-"] > input:first-child:disabled {
+    cursor: default;
+}
 
-    [class*="icheck-"] > input:first-child + label::before,
-    [class*="icheck-"] > input:first-child + input[type="hidden"] + label::before {
-        content: "";
-        display: inline-block;
-        position: absolute;
-        width: 22px;
-        height: 22px;
-        border: 1px solid #D3CFC8;
-        border-radius: 0px;
-        margin-left: -29px;
-    }
+[class*="icheck-"] > input:first-child + label::before,
+[class*="icheck-"] > input:first-child + input[type="hidden"] + label::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #D3CFC8;
+    border-radius: 0px;
+    margin-left: -29px;
+}
 
-    [class*="icheck-"] > input:first-child:checked + label::after,
-    [class*="icheck-"] > input:first-child:checked + input[type="hidden"] + label::after {
-        content: "";
-        display: inline-block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 7px;
-        height: 10px;
-        border: solid 2px #fff;
-        border-left: none;
-        border-top: none;
-        transform: translate(7.75px, 4.5px) rotate(45deg);
-        -ms-transform: translate(7.75px, 4.5px) rotate(45deg);
-    }
+[class*="icheck-"] > input:first-child:checked + label::after,
+[class*="icheck-"] > input:first-child:checked + input[type="hidden"] + label::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 7px;
+    height: 10px;
+    border: solid 2px #fff;
+    border-left: none;
+    border-top: none;
+    transform: translate(7.75px, 4.5px) rotate(45deg);
+    -ms-transform: translate(7.75px, 4.5px) rotate(45deg);
+}
 
 [class*="icheck-"] > input[type="radio"]:first-child + label::before,
 [class*="icheck-"] > input[type="radio"]:first-child + input[type="hidden"] + label::before {

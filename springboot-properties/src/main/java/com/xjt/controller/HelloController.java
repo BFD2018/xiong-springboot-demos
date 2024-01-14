@@ -21,7 +21,7 @@ public class HelloController {
 
 
     @GetMapping("/test01")
-    public void test01(){
+    public void test01() {
         System.out.println(name);
 
         System.out.println(myPeople);

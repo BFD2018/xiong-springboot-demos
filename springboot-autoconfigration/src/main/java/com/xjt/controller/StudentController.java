@@ -14,7 +14,7 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("all")
-    private RespBean getAllStudent(){
+    private RespBean getAllStudent() {
         return studentService.getAllStudent();
     }
 }

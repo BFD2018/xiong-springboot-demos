@@ -10,25 +10,25 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class IndexController {
-    @GetMapping(path = {"/","/index","index"})
-    public String loginPage(){
+    @GetMapping(path = {"/", "/index", "index"})
+    public String loginPage() {
         return "login";
     }
 
     @PostMapping("/login")
-    public String main(User user, HttpSession session, Model model){
-        if("xiong".equals(user.getUserName()) && "123456".equals(user.getPassword())){
-            session.setAttribute("loginUser",user);
+    public String main(User user, HttpSession session, Model model) {
+        if ("xiong".equals(user.getUserName()) && "123456".equals(user.getPassword())) {
+            session.setAttribute("loginUser", user);
 
             return "redirect:/main.html";
-        }else{
-            model.addAttribute("msg","用户名或密码错误");
+        } else {
+            model.addAttribute("msg", "用户名或密码错误");
             return "loign";
         }
     }
 
     @GetMapping("/main.html")
-    public String mainPage(HttpSession session,Model model){
+    public String mainPage(HttpSession session, Model model) {
         /* //使用拦截器后
         Object loginUser = session.getAttribute("loginUser");
         if(loginUser != null){

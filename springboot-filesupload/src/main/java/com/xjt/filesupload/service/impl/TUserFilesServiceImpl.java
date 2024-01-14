@@ -24,10 +24,10 @@ public class TUserFilesServiceImpl implements TUserFilesService {
     @Override
     public RespBean getAllFilesByUserId(String user_id) {
         List<TUserFile> fileList = userFilesMapper.selectList(new QueryWrapper<TUserFile>().eq("user_id", user_id));
-        if(ObjectUtils.isEmpty(fileList)){
+        if (ObjectUtils.isEmpty(fileList)) {
             return RespBean.error("没找到文件");
-        }else{
-            return RespBean.ok("ok",fileList);
+        } else {
+            return RespBean.ok("ok", fileList);
         }
     }
 }

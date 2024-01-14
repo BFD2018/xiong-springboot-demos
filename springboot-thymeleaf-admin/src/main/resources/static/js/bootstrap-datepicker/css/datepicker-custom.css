@@ -81,7 +81,7 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#42866d', endColorstr='#42866d', GradientType=0);
     border-color: #42866d #42866d #42866d;
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
@@ -116,20 +116,20 @@
 }
 
 /*.datepicker td span.active {*/
-    /*background-color: #42866d;*/
-    /*background-image: -moz-linear-gradient(top, #65CEA7, #65CEA7);*/
-    /*background-image: -ms-linear-gradient(top, #65CEA7, #65CEA7);*/
-    /*background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#65CEA7), to(#65CEA7));*/
-    /*background-image: -webkit-linear-gradient(top, #65CEA7, #65CEA7);*/
-    /*background-image: -o-linear-gradient(top, #65CEA7, #65CEA7);*/
-    /*background-image: linear-gradient(top, #65CEA7, #65CEA7);*/
-    /*background-repeat: repeat-x;*/
-    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#65CEA7', endColorstr='#65CEA7', GradientType=0);*/
-    /*border-color: #65CEA7 #65CEA7 #65CEA7;*/
-    /*border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);*/
-    /*filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);*/
-    /*color: #fff;*/
-    /*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);*/
+/*background-color: #42866d;*/
+/*background-image: -moz-linear-gradient(top, #65CEA7, #65CEA7);*/
+/*background-image: -ms-linear-gradient(top, #65CEA7, #65CEA7);*/
+/*background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#65CEA7), to(#65CEA7));*/
+/*background-image: -webkit-linear-gradient(top, #65CEA7, #65CEA7);*/
+/*background-image: -o-linear-gradient(top, #65CEA7, #65CEA7);*/
+/*background-image: linear-gradient(top, #65CEA7, #65CEA7);*/
+/*background-repeat: repeat-x;*/
+/*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#65CEA7', endColorstr='#65CEA7', GradientType=0);*/
+/*border-color: #65CEA7 #65CEA7 #65CEA7;*/
+/*border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);*/
+/*filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);*/
+/*color: #fff;*/
+/*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);*/
 /*}*/
 
 .datepicker td span.active:hover, .datepicker td span.active:active, .datepicker td span.active.active, .datepicker td span.active.disabled, .datepicker td span.active[disabled] {

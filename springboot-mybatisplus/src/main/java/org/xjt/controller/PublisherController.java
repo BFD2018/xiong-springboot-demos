@@ -17,9 +17,9 @@ public class PublisherController {
     private PublisherService publisherService;
 
     @GetMapping("list")
-    public R getAll(){
-        List<TPublisher> publisherList =  publisherService.list();
-        return R.ok().put("data",publisherList);
+    public R getAll() {
+        List<TPublisher> publisherList = publisherService.list();
+        return R.ok().put("data", publisherList);
     }
 }
 

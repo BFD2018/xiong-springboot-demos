@@ -10,8 +10,7 @@ import java.util.Date;
 
 @TableName(value = "t_user")
 @Data
-public class User
-{
+public class User {
     @TableId(type = IdType.AUTO)
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long id;

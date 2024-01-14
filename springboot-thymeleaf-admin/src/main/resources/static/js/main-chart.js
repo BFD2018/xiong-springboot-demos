@@ -26,26 +26,26 @@ var data7_2 = [
     [1354596000000, 788],
     [1354597000000, 836]
 ];
-$(function() {
+$(function () {
     $.plot($("#visitors-chart #visitors-container"), [{
-        data: data7_1,
-        label: "Page View",
-        lines: {
-            fill: true
-        }
-    }, {
-        data: data7_2,
-        label: "Online User",
+            data: data7_1,
+            label: "Page View",
+            lines: {
+                fill: true
+            }
+        }, {
+            data: data7_2,
+            label: "Online User",
 
-        points: {
-            show: true
-        },
-        lines: {
-            show: true
-        },
-        yaxis: 2
-    }
-    ],
+            points: {
+                show: true
+            },
+            lines: {
+                show: true
+            },
+            yaxis: 2
+        }
+        ],
         {
             series: {
                 lines: {

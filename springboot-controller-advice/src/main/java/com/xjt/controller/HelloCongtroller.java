@@ -20,7 +20,7 @@ public class HelloCongtroller {
     private final static Logger logger = LoggerFactory.getLogger(HelloCongtroller.class);
 
     @GetMapping("test01")
-    public String test01(Model model){
+    public String test01(Model model) {
         Map<String, Object> map = model.asMap();
         System.out.println(map);        //{md={gender=男, age=99}}
 
@@ -31,7 +31,7 @@ public class HelloCongtroller {
 
     @ResponseBody
     @GetMapping("test02")
-    public void test02(Model model){
+    public void test02(Model model) {
         Map<String, Object> map = model.asMap();
         System.out.println(map);        //{md={gender=男, age=99}}
     }

@@ -3,11 +3,12 @@
 //! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 
 ;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined'
+    && typeof require === 'function' ? factory(require('../moment')) :
+        typeof define === 'function' && define.amd ? define(['../moment'], factory) :
+            factory(global.moment)
+}(this, (function (moment) {
+    'use strict';
 
     //! moment.js locale configuration
 
@@ -27,8 +28,8 @@
             return number === 1
                 ? wordKey[0]
                 : number >= 2 && number <= 4
-                ? wordKey[1]
-                : wordKey[2];
+                    ? wordKey[1]
+                    : wordKey[2];
         },
         translate: function (number, withoutSuffix, key) {
             var wordKey = translator.words[key];

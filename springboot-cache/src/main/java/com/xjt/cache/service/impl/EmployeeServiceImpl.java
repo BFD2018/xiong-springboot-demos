@@ -20,9 +20,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeMapper.getEmpById(id);
     }
 
-    @CachePut(value = "emp",key = "#id")            //先调用目标方法，将目标方法的结果缓存起来
+    @CachePut(value = "emp", key = "#id")            //先调用目标方法，将目标方法的结果缓存起来
     @Override
-    public Employee updateEmp(int id){
+    public Employee updateEmp(int id) {
         //先通过id查询
         Employee employee = getEmpById(id);
 
@@ -32,9 +32,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
-    @CacheEvict(value = "emp",key = "#id",beforeInvocation = true)      //在目标方法执行前清除缓存
+    @CacheEvict(value = "emp", key = "#id", beforeInvocation = true)      //在目标方法执行前清除缓存
     @Override
-    public void delEmp(Integer id){
+    public void delEmp(Integer id) {
         employeeMapper.deleteEmpById(id);
     }
 }

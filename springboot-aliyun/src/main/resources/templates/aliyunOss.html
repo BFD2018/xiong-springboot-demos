@@ -11,17 +11,19 @@
     <!--引入axios-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
-        #app{
+        #app {
             width: 100vw;
             height: 100vh;
         }
-        .aliyun-oss{
+
+        .aliyun-oss {
             background-color: #ddd;
             width: 90%;
             margin: auto;
             height: 100%;
         }
-        .file-table-list{
+
+        .file-table-list {
             width: 80%;
             margin: auto;
         }
@@ -76,11 +78,13 @@
                         <el-button
                                 size="mini"
                                 type="success"
-                                @click="handleDownload(scope.row)">下载</el-button>
+                                @click="handleDownload(scope.row)">下载
+                        </el-button>
                         <el-button
                                 size="mini"
                                 type="danger"
-                                @click="handleDelete(scope.$index,scope.row)">删除</el-button>
+                                @click="handleDelete(scope.$index,scope.row)">删除
+                        </el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -93,43 +97,43 @@
     const app = new Vue({
         el: '#app',
         data: {
-            imageUrl:"",
-            tableData:[],
+            imageUrl: "",
+            tableData: [],
         },
-        methods:{
-            handleUploadSuccess(res, file,fileList) {
+        methods: {
+            handleUploadSuccess(res, file, fileList) {
                 console.log(res);
-                if(res.status === 200){
+                if (res.status === 200) {
                     this.$message.success("文件上传成功");
                     this.initTableData();
                 }
             },
 
-            initTableData(){
-                axios.get("/aliyun/oss/list").then(res =>{
+            initTableData() {
+                axios.get("/aliyun/oss/list").then(res => {
                     console.log(res);
-                    if(res.data.status === 200){
+                    if (res.data.status === 200) {
                         this.tableData.splice(0);
                         this.tableData.push(...res.data.obj.objectSummaries);
                     }
                 })
             },
-            handleDownload(row){
+            handleDownload(row) {
                 window.open("http://xiong-test-srt.oss-cn-shenzhen.aliyuncs.com/" + row.key)
                 // axios.get("/aliyun/oss/download?objectName="+row.key)
             },
-            handleDelete(index,row){
-                axios.get("/aliyun/oss/delete?filekey="+row.key).then(res =>{
+            handleDelete(index, row) {
+                axios.get("/aliyun/oss/delete?filekey=" + row.key).then(res => {
                     console.log(res);
-                    if(res.data.status === 200){
+                    if (res.data.status === 200) {
                         this.$message.success("删除成功");
-                        this.tableData.splice(index,1);
+                        this.tableData.splice(index, 1);
                     }
                 })
             },
 
         },
-        created(){
+        created() {
             this.initTableData();
         },
     })

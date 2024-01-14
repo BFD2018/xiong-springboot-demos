@@ -41,7 +41,7 @@ public class InformationServiceImpl implements InformationService {
                 }).collect(Collectors.toList()));
         List<InformationVO> informations = list.get();
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("ok",new JSONObject().put("informations", informations));
+        hashMap.put("ok", new JSONObject().put("informations", informations));
 
         return R.ok(hashMap);
     }
@@ -49,7 +49,7 @@ public class InformationServiceImpl implements InformationService {
     @Transactional
     @Override
     public int insert(InformationVO informationVO) {
-        log.info("informationVO :{}",informationVO);
+        log.info("informationVO :{}", informationVO);
         return informationMapper.insert(new Information(informationVO));
     }
 

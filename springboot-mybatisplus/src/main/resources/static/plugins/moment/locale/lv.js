@@ -4,11 +4,12 @@
 //! author : Jānis Elmeris : https://github.com/JanisE
 
 ;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined'
+    && typeof require === 'function' ? factory(require('../moment')) :
+        typeof define === 'function' && define.amd ? define(['../moment'], factory) :
+            factory(global.moment)
+}(this, (function (moment) {
+    'use strict';
 
     //! moment.js locale configuration
 
@@ -25,6 +26,7 @@
         y: 'gada_gadiem_gads_gadi'.split('_'),
         yy: 'gada_gadiem_gads_gadi'.split('_'),
     };
+
     /**
      * @param withoutSuffix boolean true = a length of time; false = before/after a period of time.
      */
@@ -38,12 +40,15 @@
             return number % 10 === 1 && number % 100 !== 11 ? forms[0] : forms[1];
         }
     }
+
     function relativeTimeWithPlural(number, withoutSuffix, key) {
         return number + ' ' + format(units[key], number, withoutSuffix);
     }
+
     function relativeTimeWithSingular(number, withoutSuffix, key) {
         return format(units[key], number, withoutSuffix);
     }
+
     function relativeSeconds(number, withoutSuffix) {
         return withoutSuffix ? 'dažas sekundes' : 'dažām sekundēm';
     }

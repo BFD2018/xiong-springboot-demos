@@ -57,7 +57,7 @@ class HttpclientDemoApplicationTests {
         // 创建uriBuilder
         URIBuilder uriBuilder = new URIBuilder("http://yun.itheima.com/search");
         // 多个参数，使用连式编程
-        uriBuilder.setParameter("keys","Java");
+        uriBuilder.setParameter("keys", "Java");
 
         // 2.创建HttpGet对象, 设置url访问地址☆
         HttpGet httpGet = new HttpGet(uriBuilder.build());
@@ -67,7 +67,7 @@ class HttpclientDemoApplicationTests {
         // 3.使用 HttpClient 发起请求, 获取 response
         CloseableHttpResponse response = httpClient.execute(httpGet);
         // 4.解析响应
-        if (response.getStatusLine().getStatusCode() == 200){
+        if (response.getStatusLine().getStatusCode() == 200) {
             String content = EntityUtils.toString(response.getEntity(), "utf-8");
             System.out.println(content.length());
             System.out.println(content);
@@ -75,7 +75,7 @@ class HttpclientDemoApplicationTests {
     }
 
     @Test
-    public void testPost(){
+    public void testPost() {
         // 1.创建HttpClient对象
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -88,14 +88,14 @@ class HttpclientDemoApplicationTests {
         try {
             response = httpClient.execute(httpPost);
             // 4.解析响应
-            if (response.getStatusLine().getStatusCode() == 200){
+            if (response.getStatusLine().getStatusCode() == 200) {
                 String content = EntityUtils.toString(response.getEntity(), "utf-8");
                 System.out.println(content.length());
                 System.out.println(content);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             // 5.关闭资源
             if (response != null) {
                 try {
@@ -115,11 +115,11 @@ class HttpclientDemoApplicationTests {
     }
 
     @Test
-    public void test03(){
+    public void test03() {
         HashMap<String, String> headers = new HashMap<>();
-        headers.put("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
-        headers.put("Referer","https://api.vvhan.com/");
-        headers.put("Cookie","__51vcke__JLvourAu9qIUtWYT=63db2934-cd21-5322-8a7f-d5565a8d2dd1; __51vuft__JLvourAu9qIUtWYT=1652106097504; __gads=ID=22807b6ec3dfc152-22ba0bc61dd300b4:T=1652106153:RT=1652106153:S=ALNI_Ma6JbUrrd1xAqGABqjk9ISAs3ii5A; __vtins__JLvourAu9qIUtWYT=%7B%22sid%22%3A%20%22402fb187-a4ff-5faf-9152-21b1bfa1ba70%22%2C%20%22vd%22%3A%201%2C%20%22stt%22%3A%200%2C%20%22dr%22%3A%200%2C%20%22expires%22%3A%201652195504298%2C%20%22ct%22%3A%201652193704298%7D; __51uvsct__JLvourAu9qIUtWYT=4");
+        headers.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
+        headers.put("Referer", "https://api.vvhan.com/");
+        headers.put("Cookie", "__51vcke__JLvourAu9qIUtWYT=63db2934-cd21-5322-8a7f-d5565a8d2dd1; __51vuft__JLvourAu9qIUtWYT=1652106097504; __gads=ID=22807b6ec3dfc152-22ba0bc61dd300b4:T=1652106153:RT=1652106153:S=ALNI_Ma6JbUrrd1xAqGABqjk9ISAs3ii5A; __vtins__JLvourAu9qIUtWYT=%7B%22sid%22%3A%20%22402fb187-a4ff-5faf-9152-21b1bfa1ba70%22%2C%20%22vd%22%3A%201%2C%20%22stt%22%3A%200%2C%20%22dr%22%3A%200%2C%20%22expires%22%3A%201652195504298%2C%20%22ct%22%3A%201652193704298%7D; __51uvsct__JLvourAu9qIUtWYT=4");
 
         HashMap<String, String> params = new HashMap<>();
         params.put("type", "zhihuHot");
@@ -143,8 +143,8 @@ class HttpclientDemoApplicationTests {
             //RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(200000).setSocketTimeout(20000).build();
 //            httpPost = new HttpPost("https://sm.ms/api/v2/upload");
 
-            httpPost.setHeader("Content-Type","multipart/form-data");
-            httpPost.setHeader("Authorization","CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
+            httpPost.setHeader("Content-Type", "multipart/form-data");
+            httpPost.setHeader("Authorization", "CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
             //httpPost.setConfig(requestConfig);
 
             File file = new File("D:\\图片\\logo_xiong.png");
@@ -176,11 +176,11 @@ class HttpclientDemoApplicationTests {
                 httpResponse.close();
             }
 
-            if (httpPost!= null){
+            if (httpPost != null) {
                 httpPost.releaseConnection();
             }
 
-            if (httpClient != null){
+            if (httpClient != null) {
                 httpClient.close();
             }
         }
@@ -190,9 +190,9 @@ class HttpclientDemoApplicationTests {
      * 发送文件
      * multipart/form-data传递文件(及相关信息)
      * 注:如果想要灵活方便的传输文件的话，
-     *    除了引入org.apache.httpcomponents基本的httpclient依赖外
-     *    再引入org.apache.httpcomponents的httpmime依赖。
-     *    追注:即便不引入httpmime依赖，也是能传输文件的，不过功能不够强大。
+     * 除了引入org.apache.httpcomponents基本的httpclient依赖外
+     * 再引入org.apache.httpcomponents的httpmime依赖。
+     * 追注:即便不引入httpmime依赖，也是能传输文件的，不过功能不够强大。
      */
     @Test
     public void test4() {
@@ -252,9 +252,9 @@ class HttpclientDemoApplicationTests {
         HttpPost httpPost = new HttpPost("https://sm.ms/api/v2/upload");
         CloseableHttpResponse response = null;
         try {
-            httpPost.setHeader("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
-            httpPost.setHeader("referer","https://sm.ms/");
-            httpPost.setHeader("Authorization","CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
+            httpPost.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
+            httpPost.setHeader("referer", "https://sm.ms/");
+            httpPost.setHeader("Authorization", "CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
             MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
             multipartEntityBuilder.addBinaryBody("smfile", new File("D:\\图片\\语雀.png"));
 
@@ -290,26 +290,27 @@ class HttpclientDemoApplicationTests {
      * 测试上传历史  https://sm.ms/api/v2/upload_history
      */
     @Test
-    public void testUploadHistory(){
-        CloseableHttpClient httpClient = HttpClientBuilder.create().build();;
+    public void testUploadHistory() {
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+        ;
         HttpGet httpGet = new HttpGet("https://sm.ms/api/v2/upload_history");
         CloseableHttpResponse response = null;
 
         try {
-            httpGet.setHeader("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
-            httpGet.setHeader("referer","https://sm.ms/");
-            httpGet.setHeader("Authorization","CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
-            httpGet.setHeader("Content-Type","multipart/form-data");
+            httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
+            httpGet.setHeader("referer", "https://sm.ms/");
+            httpGet.setHeader("Authorization", "CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
+            httpGet.setHeader("Content-Type", "multipart/form-data");
 
             response = httpClient.execute(httpGet);
 
-            String result = EntityUtils.toString(response.getEntity(),"utf-8");
+            String result = EntityUtils.toString(response.getEntity(), "utf-8");
 
             System.out.println(result);
 
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 // 释放资源
                 if (httpClient != null) {
@@ -328,25 +329,26 @@ class HttpclientDemoApplicationTests {
      * 测试删除图片  https://sm.ms/api/v2//delete/:hash   图片hash值
      */
     @Test
-    public void testDelete(){
-        CloseableHttpClient httpClient = HttpClientBuilder.create().build();;
+    public void testDelete() {
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+        ;
         HttpGet httpGet = new HttpGet("https://sm.ms/api/v2/delete/zwhnYW2XeuxIdaSQqvpDbKisoZ");
         CloseableHttpResponse response = null;
 
         try {
-            httpGet.setHeader("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
-            httpGet.setHeader("referer","https://sm.ms/");
-            httpGet.setHeader("Authorization","CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
+            httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36");
+            httpGet.setHeader("referer", "https://sm.ms/");
+            httpGet.setHeader("Authorization", "CWQjdeMixpUUeSeu4f0tg98OeaTZuToD");
 
             response = httpClient.execute(httpGet);
 
-            String result = EntityUtils.toString(response.getEntity(),"utf-8");
+            String result = EntityUtils.toString(response.getEntity(), "utf-8");
 
             System.out.println(result);
 
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 // 释放资源
                 if (httpClient != null) {

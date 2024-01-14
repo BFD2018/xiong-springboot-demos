@@ -17,9 +17,9 @@ public class TravelNoteController {
     private TravelNoteService travelNoteService;
 
     @GetMapping("/all")
-    private RespBean getAllTravelNote(){
+    private RespBean getAllTravelNote() {
         List<TTravelNote> noteList = travelNoteService.getAllTravelNote();
 
-        return RespBean.success("ok",noteList);
+        return RespBean.success("ok", noteList);
     }
 }

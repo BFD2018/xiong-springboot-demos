@@ -52,6 +52,6 @@ public class ApiController {
         orders.setTotal(goods.getPrice().multiply(BigDecimal.ONE));
 
         goods.setStore(store);
-        return ordersMapper.insert(orders) > 0 &&  goodsMapper.updateById(goods) > 0;
+        return ordersMapper.insert(orders) > 0 && goodsMapper.updateById(goods) > 0;
     }
 }

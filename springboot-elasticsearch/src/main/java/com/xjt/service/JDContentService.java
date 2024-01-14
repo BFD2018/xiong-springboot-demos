@@ -82,13 +82,13 @@ public class JDContentService {
             Map<String, HighlightField> highlightFields = documentFields.getHighlightFields();
             HighlightField name = highlightFields.get("name");
             // 替换
-            if (name != null){
+            if (name != null) {
                 Text[] fragments = name.fragments();
                 StringBuilder new_name = new StringBuilder();
                 for (Text text : fragments) {
                     new_name.append(text);
                 }
-                sourceAsMap.put("name",new_name.toString());
+                sourceAsMap.put("name", new_name.toString());
             }
             results.add(sourceAsMap);
         }

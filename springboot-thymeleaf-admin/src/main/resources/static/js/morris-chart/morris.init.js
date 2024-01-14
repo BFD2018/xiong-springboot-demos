@@ -9,11 +9,10 @@ Morris.Bar({
     xkey: 'x',
     ykeys: ['y', 'z', 'a'],
     labels: ['Y', 'Z', 'A'],
-    barColors:['#414e62','#788ba0','#6dc5a3']
+    barColors: ['#414e62', '#788ba0', '#6dc5a3']
 
 
 });
-
 
 
 var day_data = [
@@ -34,11 +33,9 @@ Morris.Line({
     xkey: 'elapsed',
     ykeys: ['value'],
     labels: ['value'],
-    lineColors:['#1FB5AD'],
+    lineColors: ['#1FB5AD'],
     parseTime: false
 });
-
-
 
 
 // Use Morris.Area instead of Morris.Line
@@ -55,33 +52,30 @@ Morris.Area({
     xkey: 'x',
     ykeys: ['y', 'z'],
     labels: ['Y', 'Z'],
-    lineColors:['#414e62','#6dc5a3']
-
+    lineColors: ['#414e62', '#6dc5a3']
 
 
 });
-
-
-
 
 
 // Use Morris.Area instead of Morris.Line
 Morris.Donut({
     element: 'graph-donut',
     data: [
-        {value: 70, label: 'foo', formatted: 'at least 70%' },
-        {value: 15, label: 'bar', formatted: 'approx. 15%' },
-        {value: 10, label: 'baz', formatted: 'approx. 10%' },
-        {value: 5, label: 'A really really long label', formatted: 'at most 5%' }
+        {value: 70, label: 'foo', formatted: 'at least 70%'},
+        {value: 15, label: 'bar', formatted: 'approx. 15%'},
+        {value: 10, label: 'baz', formatted: 'approx. 10%'},
+        {value: 5, label: 'A really really long label', formatted: 'at most 5%'}
     ],
     backgroundColor: '#fff',
     labelColor: '#1fb5ac',
     colors: [
-        '#414e62','#788ba0','#6dc5a3','#95D7BB'
+        '#414e62', '#788ba0', '#6dc5a3', '#95D7BB'
     ],
-    formatter: function (x, data) { return data.formatted; }
+    formatter: function (x, data) {
+        return data.formatted;
+    }
 });
-
 
 
 // Use Morris.Area instead of Morris.Line
@@ -91,7 +85,7 @@ Morris.Area({
     gridEnabled: false,
     gridLineColor: '#dddddd',
     axes: true,
-    fillOpacity:.7,
+    fillOpacity: .7,
     data: [
         {period: '2010 Q1', iphone: 10, ipad: 10, itouch: 10},
         {period: '2010 Q2', iphone: 1778, ipad: 7294, itouch: 18441},
@@ -106,7 +100,7 @@ Morris.Area({
 
 
     ],
-    lineColors:['#414e62','#788ba0','#6dc5a3'],
+    lineColors: ['#414e62', '#788ba0', '#6dc5a3'],
     xkey: 'period',
     ykeys: ['iphone', 'ipad', 'itouch'],
     labels: ['iPhone', 'iPad', 'iPod Touch'],

@@ -31,7 +31,7 @@ public class AuthorizeMethodController {
         return "hello:" + name;
     }
 
-    @PreFilter(value = "filterObject.id%2!=0",filterTarget = "users")   //filterTarget 必须是 数组  集合类型
+    @PreFilter(value = "filterObject.id%2!=0", filterTarget = "users")   //filterTarget 必须是 数组  集合类型
     @PostMapping("/users")
     public void addUsers(@RequestBody List<User> users) {
         System.out.println("users = " + users);
@@ -54,14 +54,13 @@ public class AuthorizeMethodController {
     }
 
 
-
     @Secured({"ROLE_USER"}) //只能判断角色
     @GetMapping("/secured")
     public User getUserByUsername() {
         return new User(99, "secured");
     }
 
-    @Secured({"ROLE_ADMIN","ROLE_USER"}) //具有其中一个即可
+    @Secured({"ROLE_ADMIN", "ROLE_USER"}) //具有其中一个即可
     @GetMapping("/username")
     public User getUserByUsername2(String username) {
         return new User(99, username);
@@ -80,7 +79,7 @@ public class AuthorizeMethodController {
         return "DenyAll";
     }
 
-    @RolesAllowed({"ROLE_ADMIN","ROLE_USER"}) //具有其中一个角色即可
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_USER"}) //具有其中一个角色即可
     @GetMapping("/rolesAllowed")
     public String rolesAllowed() {
         return "RolesAllowed";

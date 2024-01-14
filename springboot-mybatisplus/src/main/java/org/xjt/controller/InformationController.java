@@ -38,7 +38,7 @@ public class InformationController {
      */
     @RequestMapping("/insert")
     public R insert(@RequestBody InformationVO informationVO) throws ExecutionException, InterruptedException {
-        return R.ok(""+informationService.insert(informationVO));
+        return R.ok("" + informationService.insert(informationVO));
     }
 
     /**
@@ -46,7 +46,7 @@ public class InformationController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody InformationVO informationVO) throws ExecutionException, InterruptedException {
-        Assert.notNull(informationVO.getId(),"修改时id不能为空！");
+        Assert.notNull(informationVO.getId(), "修改时id不能为空！");
         return R.ok("" + informationService.update(informationVO));
     }
 
@@ -55,8 +55,8 @@ public class InformationController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody List<Integer> ids) {
-        log.info("ids:{}",ids);
-        Assert.notEmpty(ids,"id不能为空！");
+        log.info("ids:{}", ids);
+        Assert.notEmpty(ids, "id不能为空！");
         return R.ok("" + informationService.delete(ids));
     }
 }

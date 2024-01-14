@@ -49,7 +49,9 @@
                 </el-checkbox>
 
                 <el-form-item style="width:100%;">
-                    <el-button size="medium" type="primary" style="width:100%;" @click.native.prevent="handleLogin">登 录</el-button>
+                    <el-button size="medium" type="primary" style="width:100%;" @click.native.prevent="handleLogin">登
+                        录
+                    </el-button>
                 </el-form-item>
             </el-form>
         </el-card>
@@ -61,13 +63,13 @@
                     #httpServletRequest.getServerPort() +
                     #httpServletRequest.getContextPath()}]];
     const app = new Vue({
-        el:"#app",
-        data:{
+        el: "#app",
+        data: {
             loginForm: {
                 username: '唐僧',
                 password: '123',
                 rememberMe: false,
-                verify_code:"",
+                verify_code: "",
             },
             loginRules: {
                 username: [{required: true, trigger: 'blur', message: '用户名不能为空'}],
@@ -75,26 +77,26 @@
                 verify_code: [{required: true, trigger: 'change', message: '验证码不能为空'}]
             },
         },
-        methods:{
+        methods: {
             getRefreshCode() {
                 console.log(this);
                 this.$notify.success("更新验证码");
-                document.getElementById("verify_code").setAttribute("src","/user/getCaptcha?time=" + new Date());
+                document.getElementById("verify_code").setAttribute("src", "/user/getCaptcha?time=" + new Date());
             },
 
             handleLogin() {
-                axios.post("/user/toLogin",this.loginForm).then(res =>{
+                axios.post("/user/toLogin", this.loginForm).then(res => {
                     console.log(res);
-                    if(res.data.status === 200){
+                    if (res.data.status === 200) {
                         this.$notify.success("登錄成功");
                         window.location.href = basePath + "/view/index";
-                    }else{
+                    } else {
                         this.$message.error(res.data.msg);
                     }
                 })
             },
         },
-        created(){
+        created() {
 
         }
     })
@@ -105,8 +107,8 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        background-size:100% 100%;
-        background-repeat:no-repeat;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
     }
 
     .login-form {
@@ -115,6 +117,7 @@
         width: 385px;
         padding: 25px 25px 5px 25px;
     }
+
     .el-input {
         height: 38px;
     }

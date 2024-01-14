@@ -8,7 +8,7 @@ import org.springframework.jmx.support.RegistrationPolicy;
 
 @Configuration
 @Import(FdfsClientConfig.class)
-@EnableMBeanExport(registration= RegistrationPolicy.IGNORE_EXISTING)
+@EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
 public class FastClient {       //类名无特定限制
 
 }

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.jmx.support.RegistrationPolicy;
 
 // 解决jmx重复注册bean的问题
-@EnableMBeanExport(registration= RegistrationPolicy.IGNORE_EXISTING)
+@EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
 @Import(FdfsClientConfig.class)
 @SpringBootApplication
 @MapperScan("com.xjt.fdfs.mapper")

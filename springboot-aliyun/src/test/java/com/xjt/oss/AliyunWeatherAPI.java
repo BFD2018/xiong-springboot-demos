@@ -12,7 +12,7 @@ import java.util.Map;
 @SpringBootTest
 public class AliyunWeatherAPI {
     @Test
-    void test01(){
+    void test01() {
         String host = "https://jisutqybmf.market.alicloudapi.com";
         String path = "/weather/query";
         String method = "GET";      //GET/POST 任意

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HelloController {
     @GetMapping("/hello")
     @ResponseBody
-    private void testHello(){
+    private void testHello() {
     }
 
 }

@@ -22,7 +22,7 @@ public class TestDemo {
     public JdbcTemplate jdbcTemplate;
 
     @Test
-    public void test01(){
+    public void test01() {
         UserDetails xiong = myUserDetailService.loadUserByUsername("xiong");
 
         System.out.println(xiong.getUsername());
@@ -30,7 +30,7 @@ public class TestDemo {
     }
 
     @Test
-    public void test02(){
+    public void test02() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         System.out.println(bCryptPasswordEncoder.encode("123"));
 //        String sql = "select * from t_user";

@@ -3,11 +3,12 @@
 //! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 
 ;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined'
+    && typeof require === 'function' ? factory(require('../moment')) :
+        typeof define === 'function' && define.amd ? define(['../moment'], factory) :
+            factory(global.moment)
+}(this, (function (moment) {
+    'use strict';
 
     //! moment.js locale configuration
 
@@ -19,6 +20,7 @@
         };
         return number + ' ' + mutation(format[key], number);
     }
+
     function specialMutationForYears(number) {
         switch (lastNumber(number)) {
             case 1:
@@ -31,18 +33,21 @@
                 return number + ' vloaz';
         }
     }
+
     function lastNumber(number) {
         if (number > 9) {
             return lastNumber(number % 10);
         }
         return number;
     }
+
     function mutation(text, number) {
         if (number === 2) {
             return softMutation(text);
         }
         return text;
     }
+
     function softMutation(text) {
         var mutationTable = {
             m: 'v',
