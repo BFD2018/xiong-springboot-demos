@@ -69,6 +69,7 @@
         <module>free-api</module>
         <module>face-recognition</module>
         <module>springboot-filepreview</module>
+        <module>springboot-valid-params</module>
     </modules>
 
     <!-- 依赖声明 -->
