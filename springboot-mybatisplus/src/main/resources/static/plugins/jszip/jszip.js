@@ -4822,8 +4822,8 @@ https://github.com/nodeca/pako/blob/master/LICENSE
              * new Deflate(options)
              * - options (Object): zlib deflate options.
              *
-             * Creates new deflator instance with specified params. Throws exception
-             * on bad params. Supported options:
+             * Creates new deflator instance with specified hutool. Throws exception
+             * on bad hutool. Supported options:
              *
              * - `level`
              * - `windowBits`
@@ -5214,8 +5214,8 @@ https://github.com/nodeca/pako/blob/master/LICENSE
              * new Inflate(options)
              * - options (Object): zlib inflate options.
              *
-             * Creates new inflator instance with specified params. Throws exception
-             * on bad params. Supported options:
+             * Creates new inflator instance with specified hutool. Throws exception
+             * on bad hutool. Supported options:
              *
              * - `windowBits`
              * - `dictionary`

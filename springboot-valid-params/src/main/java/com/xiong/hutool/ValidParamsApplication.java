@@ -1,4 +1,4 @@
-package com.xiong.params;
+package com.xiong.hutool;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2024/2/25 18:29
  * @version 1.0
  */
-@MapperScan("com.xiong.params.mapper")
+@MapperScan("com.xiong.hutool.mapper")
 @SpringBootApplication
 public class ValidParamsApplication {
 

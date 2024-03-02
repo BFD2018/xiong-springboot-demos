@@ -1,4 +1,4 @@
-package com.xiong.params.utils;
+package com.xiong.hutool.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

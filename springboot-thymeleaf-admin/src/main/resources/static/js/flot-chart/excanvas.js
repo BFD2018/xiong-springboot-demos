@@ -1283,7 +1283,7 @@ if (!document.createElement('canvas').getContext) {
             if (stroke) {
                 appendStroke(this, lineStr);
             } else {
-                // TODO: Fix the min and max params.
+                // TODO: Fix the min and max hutool.
                 appendFill(this, lineStr, {x: -left, y: 0},
                     {x: right, y: fontStyle.size});
             }

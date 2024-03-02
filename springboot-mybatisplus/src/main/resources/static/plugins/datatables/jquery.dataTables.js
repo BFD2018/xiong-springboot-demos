@@ -7324,7 +7324,7 @@
     /**
      * Get the data submitted in the last Ajax request
      */
-    _api_register('ajax.params()', function () {
+    _api_register('ajax.hutool()', function () {
         var ctx = this.context;
 
         if (ctx.length > 0) {

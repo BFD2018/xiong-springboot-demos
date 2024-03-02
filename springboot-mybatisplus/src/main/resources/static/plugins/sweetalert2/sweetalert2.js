@@ -74,7 +74,7 @@
         }
     };
     /**
-     * Show a one-time console warning about deprecated params/methods
+     * Show a one-time console warning about deprecated hutool/methods
      */
 
     const warnAboutDeprecation = (deprecatedParam, useInstead) => {
@@ -226,7 +226,7 @@
         }
     };
     /**
-     * Show relevant warnings for given params
+     * Show relevant warnings for given hutool
      *
      * @param params
      */
@@ -2592,7 +2592,7 @@
     }
 
     /**
-     * Returns an extended version of `Swal` containing `params` as defaults.
+     * Returns an extended version of `Swal` containing `hutool` as defaults.
      * Useful for reusing Swal configuration.
      *
      * For example:
@@ -3091,7 +3091,7 @@
             if (isUpdatableParameter(param)) {
                 validUpdatableParams[param] = params[param];
             } else {
-                warn("Invalid parameter to update: \"".concat(param, "\". Updatable params are listed here: https://github.com/sweetalert2/sweetalert2/blob/master/src/utils/params.js\n\nIf you think this parameter should be updatable, request it here: https://github.com/sweetalert2/sweetalert2/issues/new?template=02_feature_request.md"));
+                warn("Invalid parameter to update: \"".concat(param, "\". Updatable hutool are listed here: https://github.com/sweetalert2/sweetalert2/blob/master/src/utils/params.js\n\nIf you think this parameter should be updatable, request it here: https://github.com/sweetalert2/sweetalert2/issues/new?template=02_feature_request.md"));
             }
         });
         return validUpdatableParams;
@@ -3127,7 +3127,7 @@
     }
 
     const disposeSwal = instance => {
-        disposeWeakMaps(instance); // Unset this.params so GC will dispose it (#1569)
+        disposeWeakMaps(instance); // Unset this.hutool so GC will dispose it (#1569)
 
         delete instance.params; // Unset globalState props so GC will dispose globalState (#1569)
 

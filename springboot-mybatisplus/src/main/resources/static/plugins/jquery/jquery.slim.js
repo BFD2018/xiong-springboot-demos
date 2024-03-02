@@ -8147,7 +8147,7 @@
         } else {
 
             // If traditional, encode the "old" way (the way 1.3.2 or older
-            // did it), otherwise encode params recursively.
+            // did it), otherwise encode hutool recursively.
             for (prefix in a) {
                 buildParams(prefix, a[prefix], traditional, add);
             }

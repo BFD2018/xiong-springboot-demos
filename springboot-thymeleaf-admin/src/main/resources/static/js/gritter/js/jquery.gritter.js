@@ -213,7 +213,7 @@
          * @private
          * @param {Object} e The jQuery element to get rid of
          * @param {Integer} unique_id The id of the element to remove
-         * @param {Object} params An optional list of params to set fade speeds etc.
+         * @param {Object} params An optional list of hutool to set fade speeds etc.
          * @param {Boolean} unbind_events Unbind the mouseenter/mouseleave events if they click (X)
          */
         _fade: function (e, unique_id, params, unbind_events) {

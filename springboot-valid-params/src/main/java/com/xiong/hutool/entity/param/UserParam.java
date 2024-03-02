@@ -1,4 +1,4 @@
-package com.xiong.params.entity.param;
+package com.xiong.hutool.entity.param;
 
 import lombok.Builder;
 import lombok.Data;

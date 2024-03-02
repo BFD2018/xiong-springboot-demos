@@ -1,4 +1,4 @@
-package com.xiong.params.entity;
+package com.xiong.hutool.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

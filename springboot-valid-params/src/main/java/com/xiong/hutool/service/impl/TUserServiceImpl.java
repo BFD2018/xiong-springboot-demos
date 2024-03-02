@@ -1,9 +1,9 @@
-package com.xiong.params.service.impl;
+package com.xiong.hutool.service.impl;
 
-import com.xiong.params.entity.TUser;
-import com.xiong.params.entity.param.UserParam;
-import com.xiong.params.mapper.TUserMapper;
-import com.xiong.params.service.TUserService;
+import com.xiong.hutool.entity.TUser;
+import com.xiong.hutool.entity.param.UserParam;
+import com.xiong.hutool.mapper.TUserMapper;
+import com.xiong.hutool.service.TUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

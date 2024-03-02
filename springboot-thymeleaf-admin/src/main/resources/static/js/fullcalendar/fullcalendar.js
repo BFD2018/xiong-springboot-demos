@@ -3675,7 +3675,7 @@ function enableTextSelection(element) {
             }
             if (opt('allDaySlot')) {
                 renderDaySegs(compileDaySegs(dayEvents), modifiedEventId);
-                setHeight(); // no params means set to viewHeight
+                setHeight(); // no hutool means set to viewHeight
             }
             renderSlotSegs(compileSlotSegs(slotEvents), modifiedEventId);
         }

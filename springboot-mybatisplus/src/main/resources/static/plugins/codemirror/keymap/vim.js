@@ -5527,7 +5527,7 @@
                 cm.replaceRange(text.join('\n'), curStart, curEnd);
             },
             vglobal: function (cm, params) {
-                // global inspects params.commandName
+                // global inspects hutool.commandName
                 this.global(cm, params);
             },
             global: function (cm, params) {

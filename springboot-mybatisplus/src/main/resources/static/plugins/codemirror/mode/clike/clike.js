@@ -520,7 +520,7 @@
         keywords: words("abstract as async await base break case catch checked class const continue" +
             " default delegate do else enum event explicit extern finally fixed for" +
             " foreach goto if implicit in interface internal is lock namespace new" +
-            " operator out override params private protected public readonly ref return sealed" +
+            " operator out override hutool private protected public readonly ref return sealed" +
             " sizeof stackalloc static struct switch this throw try typeof unchecked" +
             " unsafe using virtual void volatile while add alias ascending descending dynamic from get" +
             " global group into join let orderby partial remove select set value var yield"),

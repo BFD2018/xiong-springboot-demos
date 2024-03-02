@@ -1,9 +1,9 @@
-package com.xiong.params.controller;
+package com.xiong.hutool.controller;
 
-import com.xiong.params.entity.TUser;
-import com.xiong.params.entity.param.UserParam;
-import com.xiong.params.service.TUserService;
-import com.xiong.params.utils.RespBean;
+import com.xiong.hutool.entity.TUser;
+import com.xiong.hutool.entity.param.UserParam;
+import com.xiong.hutool.service.TUserService;
+import com.xiong.hutool.utils.RespBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;

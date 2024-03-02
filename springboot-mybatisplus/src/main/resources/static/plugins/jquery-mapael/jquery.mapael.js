@@ -2244,7 +2244,7 @@
         /*
          * Get the legend conf matching with the value
          * @param value the value to match with a slice in the legend
-         * @param legend the legend params object
+         * @param legend the legend hutool object
          * @return the legend slice matching with the value
          */
         getLegendSlice: function (value, legend) {

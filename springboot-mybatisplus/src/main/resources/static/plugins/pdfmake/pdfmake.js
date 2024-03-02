@@ -7816,12 +7816,12 @@
                          * @property {Mode} mode The block mode used in the ciphering operation.
                          * @property {Padding} padding The padding scheme used in the ciphering operation.
                          * @property {number} blockSize The block size of the cipher.
-                         * @property {Format} formatter The default formatting strategy to convert this cipher params object to a string.
+                         * @property {Format} formatter The default formatting strategy to convert this cipher hutool object to a string.
                          */
 
                         var CipherParams = C_lib.CipherParams = Base.extend({
                             /**
-                             * Initializes a newly created cipher params object.
+                             * Initializes a newly created cipher hutool object.
                              *
                              * @param {Object} cipherParams An object with any of the possible cipher parameters.
                              *
@@ -7844,11 +7844,11 @@
                             },
 
                             /**
-                             * Converts this cipher params object to a string.
+                             * Converts this cipher hutool object to a string.
                              *
                              * @param {Format} formatter (Optional) The formatting strategy to use.
                              *
-                             * @return {string} The stringified cipher params.
+                             * @return {string} The stringified cipher hutool.
                              *
                              * @throws Error If neither the formatter nor the default formatter is set.
                              *
@@ -7873,9 +7873,9 @@
 
                         var OpenSSLFormatter = C_format.OpenSSL = {
                             /**
-                             * Converts a cipher params object to an OpenSSL-compatible string.
+                             * Converts a cipher hutool object to an OpenSSL-compatible string.
                              *
-                             * @param {CipherParams} cipherParams The cipher params object.
+                             * @param {CipherParams} cipherParams The cipher hutool object.
                              *
                              * @return {string} The OpenSSL-compatible string.
                              *
@@ -7901,11 +7901,11 @@
                             },
 
                             /**
-                             * Converts an OpenSSL-compatible string to a cipher params object.
+                             * Converts an OpenSSL-compatible string to a cipher hutool object.
                              *
                              * @param {string} openSSLStr The OpenSSL-compatible string.
                              *
-                             * @return {CipherParams} The cipher params object.
+                             * @return {CipherParams} The cipher hutool object.
                              *
                              * @static
                              *
@@ -7935,7 +7935,7 @@
                             }
                         };
                         /**
-                         * A cipher wrapper that returns ciphertext as a serializable cipher params object.
+                         * A cipher wrapper that returns ciphertext as a serializable cipher hutool object.
                          */
 
                         var SerializableCipher = C_lib.SerializableCipher = Base.extend({
@@ -7956,7 +7956,7 @@
                              * @param {WordArray} key The key.
                              * @param {Object} cfg (Optional) The configuration options to use for this operation.
                              *
-                             * @return {CipherParams} A cipher params object.
+                             * @return {CipherParams} A cipher hutool object.
                              *
                              * @static
                              *
@@ -7973,7 +7973,7 @@
                                 var encryptor = cipher.createEncryptor(key, cfg);
                                 var ciphertext = encryptor.finalize(message); // Shortcut
 
-                                var cipherCfg = encryptor.cfg; // Create and return serializable cipher params
+                                var cipherCfg = encryptor.cfg; // Create and return serializable cipher hutool
 
                                 return CipherParams.create({
                                     ciphertext: ciphertext,
@@ -8055,7 +8055,7 @@
                              * @param {number} ivSize The size in words of the IV to generate.
                              * @param {WordArray|string} salt (Optional) A 64-bit salt to use. If omitted, a salt will be generated randomly.
                              *
-                             * @return {CipherParams} A cipher params object with the key, IV, and salt.
+                             * @return {CipherParams} A cipher hutool object with the key, IV, and salt.
                              *
                              * @static
                              *
@@ -8076,7 +8076,7 @@
                                 }).compute(password, salt); // Separate key and IV
 
                                 var iv = WordArray.create(key.words.slice(keySize), ivSize * 4);
-                                key.sigBytes = keySize * 4; // Return params
+                                key.sigBytes = keySize * 4; // Return hutool
 
                                 return CipherParams.create({
                                     key: key,
@@ -8087,7 +8087,7 @@
                         };
                         /**
                          * A serializable cipher wrapper that derives the key from a password,
-                         * and returns ciphertext as a serializable cipher params object.
+                         * and returns ciphertext as a serializable cipher hutool object.
                          */
 
                         var PasswordBasedCipher = C_lib.PasswordBasedCipher = SerializableCipher.extend({
@@ -8108,7 +8108,7 @@
                              * @param {string} password The password.
                              * @param {Object} cfg (Optional) The configuration options to use for this operation.
                              *
-                             * @return {CipherParams} A cipher params object.
+                             * @return {CipherParams} A cipher hutool object.
                              *
                              * @static
                              *
@@ -8119,13 +8119,13 @@
                              */
                             encrypt: function encrypt(cipher, message, password, cfg) {
                                 // Apply config defaults
-                                cfg = this.cfg.extend(cfg); // Derive key and other params
+                                cfg = this.cfg.extend(cfg); // Derive key and other hutool
 
                                 var derivedParams = cfg.kdf.execute(password, cipher.keySize, cipher.ivSize); // Add IV to config
 
                                 cfg.iv = derivedParams.iv; // Encrypt
 
-                                var ciphertext = SerializableCipher.encrypt.call(this, cipher, message, derivedParams.key, cfg); // Mix in derived params
+                                var ciphertext = SerializableCipher.encrypt.call(this, cipher, message, derivedParams.key, cfg); // Mix in derived hutool
 
                                 ciphertext.mixIn(derivedParams);
                                 return ciphertext;
@@ -8152,7 +8152,7 @@
                                 // Apply config defaults
                                 cfg = this.cfg.extend(cfg); // Convert string to CipherParams
 
-                                ciphertext = this._parse(ciphertext, cfg.format); // Derive key and other params
+                                ciphertext = this._parse(ciphertext, cfg.format); // Derive key and other hutool
 
                                 var derivedParams = cfg.kdf.execute(password, cipher.keySize, cipher.ivSize, ciphertext.salt); // Add IV to config
 
@@ -9636,9 +9636,9 @@
                         var C_format = C.format;
                         var HexFormatter = C_format.Hex = {
                             /**
-                             * Converts the ciphertext of a cipher params object to a hexadecimally encoded string.
+                             * Converts the ciphertext of a cipher hutool object to a hexadecimally encoded string.
                              *
-                             * @param {CipherParams} cipherParams The cipher params object.
+                             * @param {CipherParams} cipherParams The cipher hutool object.
                              *
                              * @return {string} The hexadecimally encoded string.
                              *
@@ -9653,11 +9653,11 @@
                             },
 
                             /**
-                             * Converts a hexadecimally encoded ciphertext string to a cipher params object.
+                             * Converts a hexadecimally encoded ciphertext string to a cipher hutool object.
                              *
                              * @param {string} input The hexadecimally encoded string.
                              *
-                             * @return {CipherParams} The cipher params object.
+                             * @return {CipherParams} The cipher hutool object.
                              *
                              * @static
                              *
@@ -20009,7 +20009,7 @@ PDF tiling pattern support. Uncolored only.
                                 Height: this.height,
                                 ColorSpace: this.colorSpace,
                                 Filter: 'DCTDecode'
-                            }); // add extra decode params for CMYK images. By swapping the
+                            }); // add extra decode hutool for CMYK images. By swapping the
                             // min and max values from the default, we invert the colors. See
                             // section 4.8.4 of the spec.
 

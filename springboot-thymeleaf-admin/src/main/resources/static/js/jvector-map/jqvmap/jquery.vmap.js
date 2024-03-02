@@ -521,12 +521,12 @@
         this.bindZoomButtons();
 
         if (params.pins) {
-            /*if(params.pinMode) {
-                if(params.pinMode != "id" && params.pinMode != "content") {
-                    params.pinMode = "content";
+            /*if(hutool.pinMode) {
+                if(hutool.pinMode != "id" && hutool.pinMode != "content") {
+                    hutool.pinMode = "content";
                 }
             } else {
-                params.pinMode = "content";
+                hutool.pinMode = "content";
             }*/
             this.pinHandlers = false;
             this.placePins(params.pins, params.pinMode);

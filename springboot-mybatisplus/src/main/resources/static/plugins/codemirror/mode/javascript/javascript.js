@@ -602,7 +602,7 @@
             } else if (type == "variable" || cx.style == "keyword") {
                 cx.marked = "property";
                 if (value == "get" || value == "set") return cont(getterSetter);
-                var m // Work around fat-arrow-detection complication for detecting typescript typed arrow params
+                var m // Work around fat-arrow-detection complication for detecting typescript typed arrow hutool
                 if (isTS && cx.state.fatArrowAt == cx.stream.start && (m = cx.stream.match(/^\s*:\s*/, false)))
                     cx.state.fatArrowAt = cx.stream.pos + m[0].length
                 return cont(afterprop);

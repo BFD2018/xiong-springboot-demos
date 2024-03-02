@@ -1,4 +1,4 @@
-package com.xiong.params;
+package com.xiong.hutool;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

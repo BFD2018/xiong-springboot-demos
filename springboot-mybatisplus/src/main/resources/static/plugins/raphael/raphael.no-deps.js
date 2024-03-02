@@ -4464,7 +4464,7 @@
      **
      - el (object) element to sync with
      - anim (object) animation to sync with
-     - params (object) #optional final attributes for the element, see also @Element.attr
+     - hutool (object) #optional final attributes for the element, see also @Element.attr
      - ms (number) #optional number of milliseconds for animation to run
      - easing (string) #optional easing type. Accept on of @Raphael.easing_formulas or CSS format: `cubic&#x2010;bezier(XX,&#160;XX,&#160;XX,&#160;XX)`
      - callback (function) #optional callback function. Will be called at the end of animation.
@@ -4493,7 +4493,7 @@
                         return element;
                         //
                         //
-                        // var a = params ? R.animation(params, ms, easing, callback) : anim,
+                        // var a = hutool ? R.animation(hutool, ms, easing, callback) : anim,
                         //     status = element.status(anim);
                         // return this.animate(a).status(a, status * anim.ms / a.ms);
                     };
@@ -4833,7 +4833,7 @@
      **
      > Parameters
      **
-     - params (object) final attributes for the element, see also @Element.attr
+     - hutool (object) final attributes for the element, see also @Element.attr
      - ms (number) number of milliseconds for animation to run
      - easing (string) #optional easing type. Accept one of @Raphael.easing_formulas or CSS format: `cubic&#x2010;bezier(XX,&#160;XX,&#160;XX,&#160;XX)`
      - callback (function) #optional callback function. Will be called at the end of animation.
@@ -4887,7 +4887,7 @@
      **
      > Parameters
      **
-     - params (object) final attributes for the element, see also @Element.attr
+     - hutool (object) final attributes for the element, see also @Element.attr
      - ms (number) number of milliseconds for animation to run
      - easing (string) #optional easing type. Accept one of @Raphael.easing_formulas or CSS format: `cubic&#x2010;bezier(XX,&#160;XX,&#160;XX,&#160;XX)`
      - callback (function) #optional callback function. Will be called at the end of animation.
@@ -6664,12 +6664,12 @@
      - attrName (string) attribute’s name
      - value (string) value
      * or
-     - params (object) object of name/value pairs
+     - hutool (object) object of name/value pairs
      * or
      - attrName (string) attribute’s name
      * or
      - attrNames (array) in this case method returns array of current values for given attribute names
-     = (object) @Element if attrsName & value or params are passed in.
+     = (object) @Element if attrsName & value or hutool are passed in.
      = (...) value of the attribute if only attrsName is passed in.
      = (array) array of values of the attribute if attrsNames is passed in.
      = (object) object of attributes if nothing is passed in.
