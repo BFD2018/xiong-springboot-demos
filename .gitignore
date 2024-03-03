@@ -33,3 +33,13 @@ build/
 .vscode/
 
 **/node_modules
+
+
+### mySecret file not push to github ###
+mysecret.yaml
+mysecret.yml
+mysecret.ini
+mysecret.properties
+application-mysecret.yml
+application-mysecret.yaml
+application-mysecret.properties

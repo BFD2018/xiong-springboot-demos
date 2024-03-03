@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BaiduFaceDemoApplication {
+public class BaiduAIFaceRecognitionApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BaiduFaceDemoApplication.class, args);
+        SpringApplication.run(BaiduAIFaceRecognitionApplication.class, args);
     }
 
 }

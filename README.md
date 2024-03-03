@@ -12,6 +12,12 @@
 - redis
 - mysql8.x（兼容5.7版本）
 
+### 项目说明
+敏感数据建议保存在 application-mysecret.yml  application-mysecret.yaml  application-mysecret.properties
+
+github 上传时会忽略所有项目中的该文件
+
+
 ### 学习参考
 
 - [Spring Boot官网](https://spring.io/projects/spring-boot)

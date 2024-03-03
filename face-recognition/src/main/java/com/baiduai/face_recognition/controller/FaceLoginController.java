@@ -76,5 +76,4 @@ public class FaceLoginController {
         RespBean respBean = baiduAiUtils.faceSearch("https://xiong-test-srt.oss-cn-shenzhen.aliyuncs.com/typoraimages/20220629223736.png", "URL");
         return respBean;
     }
-
 }
