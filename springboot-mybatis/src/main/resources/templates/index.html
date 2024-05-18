@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<!--Thymeleaf 前端框架以 Html 为载体-->
+<div class="container">
+    <div class="row">
+        <h1>用户信息</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <button class="btn btn-success" id="userAdd" type="button" data-toggle="modal" data-target="#myModalAddUser">增加</button>
+        </div>
+
+        <div class="col-md-8">
+            <div class="input-group">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id="userSearch">查询</button>
+            </span>
+                <input type="text" class="searchUser" placeholder="输入用户id/name查询">
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user,userStat:${allUser}">
+                    <th scope="row" th:text="${user.id}"></th>
+                    <td th:text="${user.userName}"> </td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.phoneNumber}"></td>
+                    <td th:text="${user.description}"></td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-warning btn-sm" id="userUpdate" th:onclick="userUpdate(${user.id})" type="button">修改</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-danger btn-sm" id="userDelete" th:onclick="userDelete(${user.id})" type="button">删除</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row mymodal">
+        <!-- Modal -->
+        <div class="modal fade" id="myModalAddUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">增加User</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" id="userAddForm">
+                            <div class="form-group">
+                                <label for="userAdd_username">UserName</label>
+                                <input type="text" class="form-control" id="userAdd_username" placeholder="UserName">
+                            </div>
+                            <div class="form-group">
+                                <label for="userAdd_password">Password</label>
+                                <input type="password" class="form-control" id="userAdd_password" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="userAdd_email">Email</label>
+                                <input type="text" class="form-control" id="userAdd_email" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="userAdd_phone">Phone</label>
+                                <input type="text" class="form-control" id="userAdd_phone" placeholder="Phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="userAdd_description">Description</label>
+                                <input type="text" class="form-control" id="userAdd_description" placeholder="Description">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-loading-text="Submit..." id="userAddSubmitBtn">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#userAddSubmitBtn').click(function () {
+        var username = $("#userAddForm #userAdd_username").val();
+        var password = $("#userAddForm #userAdd_password").val();
+        var phone = $("#userAddForm #userAdd_phone").val();
+        var email = $("#userAddForm #userAdd_email").val();
+        var description = $("#userAddForm #userAdd_description").val();
+
+        $.ajax({
+            type: "post",
+            url: "/user/add",
+            data: {
+                "userName": username,
+                "password": password,
+                "phoneNumber": phone,
+                "email": email,
+                "description": description
+            },
+            beforeSend: function () {
+
+            },
+            success: function(r) {
+                console.log(r);
+                location.href = 'index';
+                $.modal.closeLoading();
+            }
+        });
+    })
+
+    function userUpdate(userid){
+        console.log(userid);
+    }
+
+    function userDelete(userid){
+        console.log(userid);
+    }
+</script>
+</body>
+</html>

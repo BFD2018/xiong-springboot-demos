@@ -17,4 +17,7 @@ public interface IUserService {
 
     User findById(Long id);
 
+    User findUserById(Long id);
+
+    List<User> findAllUser();
 }

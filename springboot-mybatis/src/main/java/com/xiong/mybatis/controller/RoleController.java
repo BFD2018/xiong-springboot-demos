@@ -29,8 +29,8 @@ public class RoleController {
      * @return user list
      */
     @GetMapping("list")
-    public ResponseResult<List<Role>> list(RoleQueryBean roleQueryBean) {
-        List<Role> roleList = roleService.findList(roleQueryBean);
+    public ResponseResult<List<Role>> list() {
+        List<Role> roleList = roleService.findList();
         return ResponseResult.success(roleList);
     }
 

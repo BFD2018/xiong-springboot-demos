@@ -29,14 +29,16 @@ public class UserController {
         return ResponseResult.success(userList);
     }
 
-    @RequestMapping("findById/{id}")
+    @RequestMapping("getById/{id}")
     private ResponseResult<User> getUserById(@PathVariable("id") Long id){
         User user = userService.findById(id);
 
         return ResponseResult.success(user);
     }
 
-    @RequestMapping("byId/{id}")
+
+
+    @RequestMapping("deleteById/{id}")
     private ResponseResult<User> deleteUserById(@PathVariable("id") Long id){
         int i = userService.deleteById(id);
         if(i > 0){
@@ -63,5 +65,21 @@ public class UserController {
     @GetMapping("edit/{userId}")
     public ResponseResult<User> editUser(@PathVariable("userId") Long userId) {
         return ResponseResult.success(userService.findById(userId));
+    }
+
+    // 使用 @Result @Select 注解查询
+    @RequestMapping("findById/{id}")
+    private ResponseResult<User> findUserById(@PathVariable("id") Long id){
+        User user = userService.findUserById(id);
+
+        return ResponseResult.success(user);
+    }
+
+    // 使用 @Result @Select 注解查询
+    @RequestMapping("findAll")
+    private ResponseResult<List<User>> findAllUser(){
+        List<User> userList = userService.findAllUser();
+
+        return ResponseResult.success(userList);
     }
 }

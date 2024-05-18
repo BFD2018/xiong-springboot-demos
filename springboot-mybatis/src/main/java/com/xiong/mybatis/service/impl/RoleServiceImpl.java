@@ -21,7 +21,7 @@ public class RoleServiceImpl implements IRoleService {
     private IRoleMapper roleMapper;
 
     @Override
-    public List<Role> findList(RoleQueryBean roleQueryBean) {
+    public List<Role> findList() {
 
         List<Role> roleList = roleMapper.getAllRole();
         return roleList;

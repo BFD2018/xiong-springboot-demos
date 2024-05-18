@@ -31,17 +31,7 @@
         )
     </insert>
 
-    <select id="getAllRole" parameterType="com.xiong.mybatis.entity.query.RoleQueryBean" resultMap="RoleResult">
+    <select id="getAllRole" resultMap="RoleResult">
         <include refid="selectRoleSql"/>
-        where r.id != 0
-        <if test="name != null and name != ''">
-            AND r.name like concat('%', #{name}, '%')
-        </if>
-        <if test="roleKey != null and roleKey != ''">
-            AND r.role_key = #{roleKey}
-        </if>
-        <if test="description != null and description != ''">
-            AND r.description like concat('%', #{description}, '%')
-        </if>
     </select>
 </mapper>
